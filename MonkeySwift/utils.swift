@@ -7,4 +7,10 @@
 
 import Foundation
 
-Repl.start()
+
+@main
+struct NewApp {
+    static func main() {
+        Repl.start()
+    }
+}

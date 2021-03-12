@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0E20461F25F3827E00BAFDA1"
-               BuildableName = "monkey-swift"
-               BlueprintName = "monkey-swift"
-               ReferencedContainer = "container:monkey-swift.xcodeproj">
+               BlueprintIdentifier = "98BCE7EB25F8F90B00600211"
+               BuildableName = "MonkeySwift"
+               BlueprintName = "MonkeySwift"
+               ReferencedContainer = "container:MonkeySwift.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -44,10 +44,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0E20461F25F3827E00BAFDA1"
-            BuildableName = "monkey-swift"
-            BlueprintName = "monkey-swift"
-            ReferencedContainer = "container:monkey-swift.xcodeproj">
+            BlueprintIdentifier = "98BCE7EB25F8F90B00600211"
+            BuildableName = "MonkeySwift"
+            BlueprintName = "MonkeySwift"
+            ReferencedContainer = "container:MonkeySwift.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -61,10 +61,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0E20461F25F3827E00BAFDA1"
-            BuildableName = "monkey-swift"
-            BlueprintName = "monkey-swift"
-            ReferencedContainer = "container:monkey-swift.xcodeproj">
+            BlueprintIdentifier = "98BCE7EB25F8F90B00600211"
+            BuildableName = "MonkeySwift"
+            BlueprintName = "MonkeySwift"
+            ReferencedContainer = "container:MonkeySwift.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

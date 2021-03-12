@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0E20461F25F3827E00BAFDA1"
-               BuildableName = "monkey-swift"
-               BlueprintName = "monkey-swift"
-               ReferencedContainer = "container:monkey-swift.xcodeproj">
+               BlueprintIdentifier = "98BCE7EB25F8F90B00600211"
+               BuildableName = "MonkeySwift"
+               BlueprintName = "MonkeySwift"
+               ReferencedContainer = "container:MonkeySwift.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -42,20 +42,21 @@
       allowLocationSimulation = "YES">
       <PathRunnable
          runnableDebuggingMode = "0"
+         BundleIdentifier = "com.apple.Terminal"
          FilePath = "/System/Applications/Utilities/Terminal.app">
       </PathRunnable>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0E20461F25F3827E00BAFDA1"
-            BuildableName = "monkey-swift"
-            BlueprintName = "monkey-swift"
-            ReferencedContainer = "container:monkey-swift.xcodeproj">
+            BlueprintIdentifier = "98BCE7EB25F8F90B00600211"
+            BuildableName = "MonkeySwift"
+            BlueprintName = "MonkeySwift"
+            ReferencedContainer = "container:MonkeySwift.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "${BUILT_PRODUCTS_DIR}/${FULL_PRODUCT_NAME}&#10;${BUILT_PRODUCTS_DIR}/${FULL_PRODUCT_NAME}&#10;&#10;${BUILT_PRODUCTS_DIR}/${FULL_PRODUCT_NAME}"
+            argument = "${BUILT_PRODUCTS_DIR}/${FULL_PRODUCT_NAME}&#10;&#10;${BUILT_PRODUCTS_DIR}/${FULL_PRODUCT_NAME}&#10;&#10;${BUILT_PRODUCTS_DIR}/${FULL_PRODUCT_NAME}"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
@@ -70,10 +71,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0E20461F25F3827E00BAFDA1"
-            BuildableName = "monkey-swift"
-            BlueprintName = "monkey-swift"
-            ReferencedContainer = "container:monkey-swift.xcodeproj">
+            BlueprintIdentifier = "98BCE7EB25F8F90B00600211"
+            BuildableName = "MonkeySwift"
+            BlueprintName = "MonkeySwift"
+            ReferencedContainer = "container:MonkeySwift.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

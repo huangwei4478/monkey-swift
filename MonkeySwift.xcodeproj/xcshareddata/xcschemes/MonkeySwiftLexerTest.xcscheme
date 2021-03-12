@@ -16,10 +16,10 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0E20464825F3918E00BAFDA1"
-               BuildableName = "monkey-testing.xctest"
-               BlueprintName = "monkey-testing"
-               ReferencedContainer = "container:monkey-swift.xcodeproj">
+               BlueprintIdentifier = "98BCE80825F8FABC00600211"
+               BuildableName = "MonkeySwiftLexerTest.xctest"
+               BlueprintName = "MonkeySwiftLexerTest"
+               ReferencedContainer = "container:MonkeySwift.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
