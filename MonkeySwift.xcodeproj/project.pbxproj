@@ -7,29 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		98A0AD9B25F9D76E0006FC3D /* Lexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BCE7FB25F8FA7900600211 /* Lexer.swift */; };
-		98A0AD9E25F9D7720006FC3D /* ConsoleIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BCE7FD25F8FA7900600211 /* ConsoleIO.swift */; };
-		98A0ADA125F9D7740006FC3D /* Repl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BCE7FE25F8FA7900600211 /* Repl.swift */; };
-		98A0ADA425F9D7780006FC3D /* TokenType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BCE7F825F8FA7900600211 /* TokenType.swift */; };
-		98A0ADA525F9D77B0006FC3D /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BCE7F925F8FA7900600211 /* Token.swift */; };
+		0E44343825FCCDB3003A97D2 /* LexerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44343725FCCDB3003A97D2 /* LexerTest.swift */; };
+		0E44343B25FCCEAD003A97D2 /* Lexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BCE7FB25F8FA7900600211 /* Lexer.swift */; };
+		0E44343E25FCCEB6003A97D2 /* TokenType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BCE7F825F8FA7900600211 /* TokenType.swift */; };
+		0E44344125FCCEB8003A97D2 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BCE7F925F8FA7900600211 /* Token.swift */; };
+		0E44344525FCD009003A97D2 /* ParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44344425FCD009003A97D2 /* ParserTest.swift */; };
+		0E44344B25FCD321003A97D2 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44344A25FCD321003A97D2 /* Parser.swift */; };
+		0E44345125FCD82F003A97D2 /* Ast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44345025FCD82F003A97D2 /* Ast.swift */; };
+		0E44345425FCE466003A97D2 /* Ast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44345025FCD82F003A97D2 /* Ast.swift */; };
+		0E44345725FCE46E003A97D2 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44344A25FCD321003A97D2 /* Parser.swift */; };
 		98BCE7F025F8F90B00600211 /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BCE7EF25F8F90B00600211 /* utils.swift */; };
 		98BCE7FF25F8FA7900600211 /* TokenType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BCE7F825F8FA7900600211 /* TokenType.swift */; };
 		98BCE80025F8FA7900600211 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BCE7F925F8FA7900600211 /* Token.swift */; };
 		98BCE80125F8FA7900600211 /* Lexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BCE7FB25F8FA7900600211 /* Lexer.swift */; };
 		98BCE80225F8FA7900600211 /* ConsoleIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BCE7FD25F8FA7900600211 /* ConsoleIO.swift */; };
 		98BCE80325F8FA7900600211 /* Repl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BCE7FE25F8FA7900600211 /* Repl.swift */; };
-		98BCE80C25F8FABC00600211 /* MonkeySwiftLexerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BCE80B25F8FABC00600211 /* MonkeySwiftLexerTest.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		98A0AD8B25F9CBEE0006FC3D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 98BCE7E425F8F90B00600211 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 98BCE7EB25F8F90B00600211;
-			remoteInfo = MonkeySwift;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		98BCE7EA25F8F90B00600211 /* CopyFiles */ = {
@@ -44,6 +37,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0E44342D25FCCD83003A97D2 /* MonkeySwiftUnitTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MonkeySwiftUnitTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E44343125FCCD83003A97D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0E44343725FCCDB3003A97D2 /* LexerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexerTest.swift; sourceTree = "<group>"; };
+		0E44344425FCD009003A97D2 /* ParserTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserTest.swift; sourceTree = "<group>"; };
+		0E44344A25FCD321003A97D2 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		0E44345025FCD82F003A97D2 /* Ast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ast.swift; sourceTree = "<group>"; };
 		98BCE7EC25F8F90B00600211 /* MonkeySwift */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MonkeySwift; sourceTree = BUILT_PRODUCTS_DIR; };
 		98BCE7EF25F8F90B00600211 /* utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
 		98BCE7F825F8FA7900600211 /* TokenType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenType.swift; sourceTree = "<group>"; };
@@ -51,20 +50,17 @@
 		98BCE7FB25F8FA7900600211 /* Lexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lexer.swift; sourceTree = "<group>"; };
 		98BCE7FD25F8FA7900600211 /* ConsoleIO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsoleIO.swift; sourceTree = "<group>"; };
 		98BCE7FE25F8FA7900600211 /* Repl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repl.swift; sourceTree = "<group>"; };
-		98BCE80925F8FABC00600211 /* MonkeySwiftLexerTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MonkeySwiftLexerTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		98BCE80B25F8FABC00600211 /* MonkeySwiftLexerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonkeySwiftLexerTest.swift; sourceTree = "<group>"; };
-		98BCE80D25F8FABC00600211 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		98BCE7E925F8F90B00600211 /* Frameworks */ = {
+		0E44342A25FCCD83003A97D2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		98BCE80625F8FABC00600211 /* Frameworks */ = {
+		98BCE7E925F8F90B00600211 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -74,11 +70,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E44342E25FCCD83003A97D2 /* MonkeySwiftUnitTest */ = {
+			isa = PBXGroup;
+			children = (
+				0E44343125FCCD83003A97D2 /* Info.plist */,
+				0E44343725FCCDB3003A97D2 /* LexerTest.swift */,
+				0E44344425FCD009003A97D2 /* ParserTest.swift */,
+			);
+			path = MonkeySwiftUnitTest;
+			sourceTree = "<group>";
+		};
+		0E44344825FCD2EC003A97D2 /* Ast */ = {
+			isa = PBXGroup;
+			children = (
+				0E44345025FCD82F003A97D2 /* Ast.swift */,
+			);
+			path = Ast;
+			sourceTree = "<group>";
+		};
+		0E44344925FCD305003A97D2 /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				0E44344A25FCD321003A97D2 /* Parser.swift */,
+			);
+			path = Parser;
+			sourceTree = "<group>";
+		};
 		98BCE7E325F8F90B00600211 = {
 			isa = PBXGroup;
 			children = (
 				98BCE7EE25F8F90B00600211 /* MonkeySwift */,
-				98BCE80A25F8FABC00600211 /* MonkeySwiftLexerTest */,
+				0E44342E25FCCD83003A97D2 /* MonkeySwiftUnitTest */,
 				98BCE7ED25F8F90B00600211 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -87,7 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				98BCE7EC25F8F90B00600211 /* MonkeySwift */,
-				98BCE80925F8FABC00600211 /* MonkeySwiftLexerTest.xctest */,
+				0E44342D25FCCD83003A97D2 /* MonkeySwiftUnitTest.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -95,6 +117,8 @@
 		98BCE7EE25F8F90B00600211 /* MonkeySwift */ = {
 			isa = PBXGroup;
 			children = (
+				0E44344925FCD305003A97D2 /* Parser */,
+				0E44344825FCD2EC003A97D2 /* Ast */,
 				98BCE7FA25F8FA7900600211 /* Lexer */,
 				98BCE7FC25F8FA7900600211 /* Repl */,
 				98BCE7F725F8FA7900600211 /* Token */,
@@ -129,18 +153,26 @@
 			path = Repl;
 			sourceTree = "<group>";
 		};
-		98BCE80A25F8FABC00600211 /* MonkeySwiftLexerTest */ = {
-			isa = PBXGroup;
-			children = (
-				98BCE80B25F8FABC00600211 /* MonkeySwiftLexerTest.swift */,
-				98BCE80D25F8FABC00600211 /* Info.plist */,
-			);
-			path = MonkeySwiftLexerTest;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		0E44342C25FCCD83003A97D2 /* MonkeySwiftUnitTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0E44343225FCCD83003A97D2 /* Build configuration list for PBXNativeTarget "MonkeySwiftUnitTest" */;
+			buildPhases = (
+				0E44342925FCCD83003A97D2 /* Sources */,
+				0E44342A25FCCD83003A97D2 /* Frameworks */,
+				0E44342B25FCCD83003A97D2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MonkeySwiftUnitTest;
+			productName = MonkeySwiftUnitTest;
+			productReference = 0E44342D25FCCD83003A97D2 /* MonkeySwiftUnitTest.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		98BCE7EB25F8F90B00600211 /* MonkeySwift */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 98BCE7F325F8F90B00600211 /* Build configuration list for PBXNativeTarget "MonkeySwift" */;
@@ -158,24 +190,6 @@
 			productReference = 98BCE7EC25F8F90B00600211 /* MonkeySwift */;
 			productType = "com.apple.product-type.tool";
 		};
-		98BCE80825F8FABC00600211 /* MonkeySwiftLexerTest */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 98BCE80E25F8FABC00600211 /* Build configuration list for PBXNativeTarget "MonkeySwiftLexerTest" */;
-			buildPhases = (
-				98BCE80525F8FABC00600211 /* Sources */,
-				98BCE80625F8FABC00600211 /* Frameworks */,
-				98BCE80725F8FABC00600211 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				98A0AD8C25F9CBEE0006FC3D /* PBXTargetDependency */,
-			);
-			name = MonkeySwiftLexerTest;
-			productName = MonkeySwiftLexerTest;
-			productReference = 98BCE80925F8FABC00600211 /* MonkeySwiftLexerTest.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -185,10 +199,11 @@
 				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
-					98BCE7EB25F8F90B00600211 = {
+					0E44342C25FCCD83003A97D2 = {
 						CreatedOnToolsVersion = 12.4;
+						LastSwiftMigration = 1240;
 					};
-					98BCE80825F8FABC00600211 = {
+					98BCE7EB25F8F90B00600211 = {
 						CreatedOnToolsVersion = 12.4;
 					};
 				};
@@ -207,13 +222,13 @@
 			projectRoot = "";
 			targets = (
 				98BCE7EB25F8F90B00600211 /* MonkeySwift */,
-				98BCE80825F8FABC00600211 /* MonkeySwiftLexerTest */,
+				0E44342C25FCCD83003A97D2 /* MonkeySwiftUnitTest */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		98BCE80725F8FABC00600211 /* Resources */ = {
+		0E44342B25FCCD83003A97D2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -223,6 +238,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0E44342925FCCD83003A97D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E44343E25FCCEB6003A97D2 /* TokenType.swift in Sources */,
+				0E44343B25FCCEAD003A97D2 /* Lexer.swift in Sources */,
+				0E44345425FCE466003A97D2 /* Ast.swift in Sources */,
+				0E44344525FCD009003A97D2 /* ParserTest.swift in Sources */,
+				0E44343825FCCDB3003A97D2 /* LexerTest.swift in Sources */,
+				0E44344125FCCEB8003A97D2 /* Token.swift in Sources */,
+				0E44345725FCE46E003A97D2 /* Parser.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		98BCE7E825F8F90B00600211 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -231,35 +260,55 @@
 				98BCE80225F8FA7900600211 /* ConsoleIO.swift in Sources */,
 				98BCE80025F8FA7900600211 /* Token.swift in Sources */,
 				98BCE7F025F8F90B00600211 /* utils.swift in Sources */,
+				0E44345125FCD82F003A97D2 /* Ast.swift in Sources */,
 				98BCE80125F8FA7900600211 /* Lexer.swift in Sources */,
 				98BCE7FF25F8FA7900600211 /* TokenType.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		98BCE80525F8FABC00600211 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				98A0ADA125F9D7740006FC3D /* Repl.swift in Sources */,
-				98A0AD9E25F9D7720006FC3D /* ConsoleIO.swift in Sources */,
-				98A0AD9B25F9D76E0006FC3D /* Lexer.swift in Sources */,
-				98A0ADA525F9D77B0006FC3D /* Token.swift in Sources */,
-				98BCE80C25F8FABC00600211 /* MonkeySwiftLexerTest.swift in Sources */,
-				98A0ADA425F9D7780006FC3D /* TokenType.swift in Sources */,
+				0E44344B25FCD321003A97D2 /* Parser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		98A0AD8C25F9CBEE0006FC3D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 98BCE7EB25F8F90B00600211 /* MonkeySwift */;
-			targetProxy = 98A0AD8B25F9CBEE0006FC3D /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin XCBuildConfiguration section */
+		0E44343325FCCD83003A97D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = HK4D772C6B;
+				INFOPLIST_FILE = MonkeySwiftUnitTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = room705.MonkeySwiftUnitTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		0E44343425FCCD83003A97D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = HK4D772C6B;
+				INFOPLIST_FILE = MonkeySwiftUnitTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = room705.MonkeySwiftUnitTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		98BCE7F125F8F90B00600211 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -395,47 +444,18 @@
 			};
 			name = Release;
 		};
-		98BCE80F25F8FABC00600211 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = MonkeySwiftLexerTest/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.futu.MonkeySwiftLexerTest;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TEST_HOST = "";
-			};
-			name = Debug;
-		};
-		98BCE81025F8FABC00600211 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = MonkeySwiftLexerTest/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.futu.MonkeySwiftLexerTest;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TEST_HOST = "";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0E44343225FCCD83003A97D2 /* Build configuration list for PBXNativeTarget "MonkeySwiftUnitTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0E44343325FCCD83003A97D2 /* Debug */,
+				0E44343425FCCD83003A97D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		98BCE7E725F8F90B00600211 /* Build configuration list for PBXProject "MonkeySwift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -450,15 +470,6 @@
 			buildConfigurations = (
 				98BCE7F425F8F90B00600211 /* Debug */,
 				98BCE7F525F8F90B00600211 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		98BCE80E25F8FABC00600211 /* Build configuration list for PBXNativeTarget "MonkeySwiftLexerTest" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				98BCE80F25F8FABC00600211 /* Debug */,
-				98BCE81025F8FABC00600211 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

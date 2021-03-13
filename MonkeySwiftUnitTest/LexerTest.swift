@@ -1,15 +1,15 @@
 //
-//  MonkeySwiftLexerTest.swift
-//  MonkeySwiftLexerTest
+//  LexerTest.swift
+//  MonkeySwiftUnitTest
 //
-//  Created by isaiahhuang on 2021/3/10.
+//  Created by huangwei on 2021/3/13.
 //
 
 import XCTest
 
 @testable import MonkeySwift
 
-class MonkeySwiftLexerTest: XCTestCase {
+class LexerTest: XCTestCase {
     
     private struct ExpectedToken {
         let expectedType: TokenType
@@ -245,5 +245,4 @@ class MonkeySwiftLexerTest: XCTestCase {
         
         examine(with: input, testTokens: tests)
     }
-
 }
