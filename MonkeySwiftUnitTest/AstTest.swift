@@ -21,6 +21,7 @@ class AstTest: XCTestCase {
                                                    value: "anotherVar"))
         ])
         
-        XCTAssertEqual(program.string(), "let myVar = anotherVar;", String(format: "program.string() wrong. got=%q", program.string()))
+        XCTAssertEqual(program.string(), "let myVar = anotherVar;",
+                       String(format: "program.string() wrong. got=%q", program.string()))
     }
 }

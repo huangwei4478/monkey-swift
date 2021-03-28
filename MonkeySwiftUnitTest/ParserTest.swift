@@ -112,6 +112,44 @@ class ParserTest: XCTestCase {
         }
     }
     
+    func testIdentifierExpression() {
+        let input = "foobar;"
+        
+        let lexer = Lexer(input: input)
+        var parser = Parser(lexer: lexer)
+        let optionalProgram = parser.parseProgram()
+        checkParserErrors(parser)
+        guard let program = optionalProgram else {
+            XCTFail("parser.parseProgram() is returning nil")
+            return
+        }
+        
+        if program.statements.count != 1 {
+            XCTFail(String(format: "program has not enough statements. got=%d", program.statements.count))
+            return
+        }
+        
+        guard let expressionStatement = program.statements[0] as? Ast.ExpressionStatement else {
+            XCTFail("program.statement[0] is not ast.ExpressionStatement. got=\(type(of: program.statements[0]))")
+            return
+        }
+        
+        guard let identifier = expressionStatement.expression as? Ast.Identifier else {
+            XCTFail("expression not Ast.Identifier. got=\(type(of: expressionStatement.expression))")
+            return
+        }
+        
+        guard identifier.value == "foobar" else {
+            XCTFail("identifier.value not \("foobar"). got=\(identifier.value)")
+            return
+        }
+        
+        guard identifier.tokenLiteral() == "foobar" else {
+            XCTFail("identifier.tokenLiteral() not \("foobar"). got=\(identifier.tokenLiteral())")
+            return
+        }
+    }
+    
     private func checkParserErrors(_ parser: Parser) {
         let errors = parser.errors
         
