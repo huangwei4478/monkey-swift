@@ -62,6 +62,10 @@ struct Parser {
         func tokenLiteral() -> String {
             return "Error, do not use me; just a placeholder"
         }
+        
+        func string() -> String {
+            return "Error, do not use me; just a placeholder"
+        }
     }
     
     private mutating func parseLetStatement() -> Ast.LetStatement? {

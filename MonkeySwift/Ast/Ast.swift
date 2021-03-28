@@ -9,6 +9,7 @@ import Foundation
 
 protocol Node {
     func tokenLiteral() -> String
+    func string() -> String
 }
 
 protocol Statement: Node {
@@ -31,6 +32,12 @@ public struct Ast {
                 return ""
             }
         }
+        
+        func string() -> String {
+            return statements.reduce("") { (resultSoFar, statement) -> String in
+                return resultSoFar + statement.string()
+            }
+        }
     }
     
     struct Identifier: Expression {
@@ -43,10 +50,13 @@ public struct Ast {
         func tokenLiteral() -> String {
             return token.literal
         }
+        
+        func string() -> String {
+            return value
+        }
     }
     
     struct LetStatement: Statement {
-        
         let token: Token                    // the token.LET token
         
         let name: Identifier
@@ -58,6 +68,10 @@ public struct Ast {
         }
         
         func statementNode() {}
+        
+        func string() -> String {
+            return "\(tokenLiteral()) \(name.string()) = \(value.string());"
+        }
     }
     
     struct ReturnStatement: Statement {
@@ -71,5 +85,24 @@ public struct Ast {
             return token.literal
         }
         
+        func string() -> String {
+            return "\(tokenLiteral()) \(returnValue.string());"
+        }
+    }
+    
+    struct ExpressionStatement: Statement {
+        let token: Token                    // the first token of the expression
+        
+        let expression: Expression
+        
+        func statementNode() {}
+        
+        func tokenLiteral() -> String {
+            return token.literal
+        }
+        
+        func string() -> String {
+            return expression.string()
+        }
     }
 }

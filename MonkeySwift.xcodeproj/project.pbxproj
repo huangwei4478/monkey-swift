@@ -16,6 +16,7 @@
 		0E44345125FCD82F003A97D2 /* Ast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44345025FCD82F003A97D2 /* Ast.swift */; };
 		0E44345425FCE466003A97D2 /* Ast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44345025FCD82F003A97D2 /* Ast.swift */; };
 		0E44345725FCE46E003A97D2 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44344A25FCD321003A97D2 /* Parser.swift */; };
+		0E8C04EC261076B300CEFB9D /* AstTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8C04EB261076B300CEFB9D /* AstTest.swift */; };
 		98BCE7F025F8F90B00600211 /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BCE7EF25F8F90B00600211 /* utils.swift */; };
 		98BCE7FF25F8FA7900600211 /* TokenType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BCE7F825F8FA7900600211 /* TokenType.swift */; };
 		98BCE80025F8FA7900600211 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BCE7F925F8FA7900600211 /* Token.swift */; };
@@ -43,6 +44,7 @@
 		0E44344425FCD009003A97D2 /* ParserTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserTest.swift; sourceTree = "<group>"; };
 		0E44344A25FCD321003A97D2 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		0E44345025FCD82F003A97D2 /* Ast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ast.swift; sourceTree = "<group>"; };
+		0E8C04EB261076B300CEFB9D /* AstTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AstTest.swift; sourceTree = "<group>"; };
 		98BCE7EC25F8F90B00600211 /* MonkeySwift */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MonkeySwift; sourceTree = BUILT_PRODUCTS_DIR; };
 		98BCE7EF25F8F90B00600211 /* utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
 		98BCE7F825F8FA7900600211 /* TokenType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenType.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 				0E44343125FCCD83003A97D2 /* Info.plist */,
 				0E44343725FCCDB3003A97D2 /* LexerTest.swift */,
 				0E44344425FCD009003A97D2 /* ParserTest.swift */,
+				0E8C04EB261076B300CEFB9D /* AstTest.swift */,
 			);
 			path = MonkeySwiftUnitTest;
 			sourceTree = "<group>";
@@ -242,6 +245,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E8C04EC261076B300CEFB9D /* AstTest.swift in Sources */,
 				0E44343E25FCCEB6003A97D2 /* TokenType.swift in Sources */,
 				0E44343B25FCCEAD003A97D2 /* Lexer.swift in Sources */,
 				0E44345425FCE466003A97D2 /* Ast.swift in Sources */,

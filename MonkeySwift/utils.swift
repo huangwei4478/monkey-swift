@@ -6,8 +6,6 @@
 //
 
 import Foundation
-
-
 @main
 struct NewApp {
     static func main() {
