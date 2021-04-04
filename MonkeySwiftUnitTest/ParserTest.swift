@@ -23,7 +23,7 @@ class ParserTest: XCTestCase {
         """
         
         let lexer = Lexer(input: input)
-        let parser = Parser(lexer: lexer)
+        var parser = Parser(lexer: lexer)
         
         let optionalProgram = parser.parseProgram()
         checkParserErrors(parser)
@@ -84,7 +84,7 @@ class ParserTest: XCTestCase {
         """
         
         let lexer = Lexer(input: input)
-        let parser = Parser(lexer: lexer)
+        var parser = Parser(lexer: lexer)
         
         let optionalProgram = parser.parseProgram()
         checkParserErrors(parser)
@@ -116,7 +116,7 @@ class ParserTest: XCTestCase {
         let input = "foobar;"
         
         let lexer = Lexer(input: input)
-        let parser = Parser(lexer: lexer)
+        var parser = Parser(lexer: lexer)
         let optionalProgram = parser.parseProgram()
         checkParserErrors(parser)
         guard let program = optionalProgram else {
