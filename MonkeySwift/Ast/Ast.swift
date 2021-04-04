@@ -105,4 +105,22 @@ public struct Ast {
             return expression.string()
         }
     }
+    
+    struct IntegerLiteral: Expression {
+        let token: Token
+        
+        let value: Int64
+        
+        func expressionNode() {}
+        
+        func tokenLiteral() -> String {
+            return token.literal
+        }
+        
+        func string() -> String {
+            return token.literal
+        }
+        
+        
+    }
 }

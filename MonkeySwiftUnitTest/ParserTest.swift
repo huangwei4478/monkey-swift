@@ -23,7 +23,7 @@ class ParserTest: XCTestCase {
         """
         
         let lexer = Lexer(input: input)
-        var parser = Parser(lexer: lexer)
+        let parser = Parser(lexer: lexer)
         
         let optionalProgram = parser.parseProgram()
         checkParserErrors(parser)
@@ -84,7 +84,7 @@ class ParserTest: XCTestCase {
         """
         
         let lexer = Lexer(input: input)
-        var parser = Parser(lexer: lexer)
+        let parser = Parser(lexer: lexer)
         
         let optionalProgram = parser.parseProgram()
         checkParserErrors(parser)
@@ -116,7 +116,7 @@ class ParserTest: XCTestCase {
         let input = "foobar;"
         
         let lexer = Lexer(input: input)
-        var parser = Parser(lexer: lexer)
+        let parser = Parser(lexer: lexer)
         let optionalProgram = parser.parseProgram()
         checkParserErrors(parser)
         guard let program = optionalProgram else {
@@ -150,8 +150,46 @@ class ParserTest: XCTestCase {
         }
     }
     
+    func testIntegerLiteralExpression() {
+        let input = "5;"
+        
+        let lexer = Lexer(input: input)
+        let parser = Parser(lexer: lexer)
+        let optionalProgram = parser.parseProgram()
+        checkParserErrors(parser)
+        
+        guard let program = optionalProgram else {
+            XCTFail("parser.parseProgram() is returning nil")
+            return
+        }
+        
+        if program.statements.count != 1 {
+            XCTFail("program has not enough statements. got=\(program.statements.count)")
+            return
+        }
+        
+        guard let expressionStatement = program.statements[0] as? Ast.ExpressionStatement else {
+            XCTFail("program.statement[0] is not ast.ExpressionStatement. got=\(type(of: program.statements[0]))")
+            return
+        }
+        
+        guard let literal = expressionStatement.expression as? Ast.IntegerLiteral else {
+            XCTFail("expression is not Ast.IntegerLiteral, got=\(type(of: expressionStatement.expression))")
+            return
+        }
+        
+        if literal.value != 5 {
+            XCTFail("literal.value not 5, got=\(literal.value)")
+            return
+        }
+        
+        if literal.tokenLiteral() != "5" {
+            XCTFail("literal.tokenLiteral not 5, got=\(literal.tokenLiteral())")
+        }
+    }
+    
     private func checkParserErrors(_ parser: Parser) {
-        let errors = parser.errors
+        let errors = parser.Errors()
         
         if errors.isEmpty {
             return

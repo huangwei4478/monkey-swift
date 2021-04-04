@@ -17,20 +17,20 @@ private enum Precedence: Int {
     case call
 }
 
-struct Parser {
+final class Parser {
     
     /// () -> Expression
-    private typealias PrefixParseFn = (Self) -> () -> Expression
+    private typealias PrefixParseFn = () -> Expression
 
     /// (Expression) -> Expression
-    private typealias InfixParseFn = (Self) -> (Expression) -> Expression
+    private typealias InfixParseFn = (Expression) -> Expression
     
     var lexer: Lexer
     
     private var curToken: Token
     private var peekToken: Token
     
-    var errors: [String]
+    private var errors: [String]
     
     private var prefixParseFns: [TokenType: PrefixParseFn]
     private var infixParseFns: [TokenType: InfixParseFn]
@@ -43,19 +43,20 @@ struct Parser {
         self.prefixParseFns = [:]
         self.infixParseFns = [:]
 
-        self.registerPrefix(tokenType: .IDENT, fn: Self.parseIdentifier)
+        self.registerPrefix(tokenType: .IDENT, fn: parseIdentifier)
+        self.registerPrefix(tokenType: .INT, fn: parseIntegerLiteral)
 
         // read two tokens, so curToken and peekToken are both set
         self.nextToken()
         self.nextToken()
     }
     
-    private mutating func nextToken() {
+    private func nextToken() {
         curToken = peekToken
         peekToken = lexer.nextToken()
     }
     
-    mutating func parseProgram() -> Ast.Program? {
+    func parseProgram() -> Ast.Program? {
         var program = Ast.Program(statements: [])
         
         while curToken.tokenType != .EOF {
@@ -69,7 +70,7 @@ struct Parser {
     }
     
     /// Monkey has only two types of statements: let and return; the others are Expression Statements
-    private mutating func parseStatement() -> Statement? {
+    private func parseStatement() -> Statement? {
         switch curToken.tokenType {
         case .LET:
             return parseLetStatement()
@@ -85,7 +86,7 @@ struct Parser {
             return nil
         }
         
-        let leftExpression = prefixFn(self)()
+        let leftExpression = prefixFn()
         return leftExpression
     }
     
@@ -102,7 +103,7 @@ struct Parser {
         }
     }
     
-    private mutating func parseLetStatement() -> Ast.LetStatement? {
+    private func parseLetStatement() -> Ast.LetStatement? {
         let prevToken = curToken                    // the LET token
         
         if !expectPeek(TokenType.IDENT) {
@@ -125,7 +126,7 @@ struct Parser {
         return statement
     }
     
-    private mutating func parseReturnStatement() -> Ast.ReturnStatement? {
+    private func parseReturnStatement() -> Ast.ReturnStatement? {
         let statement = Ast.ReturnStatement(token: curToken, returnValue: ExpressionPlaceholder())
         
         nextToken()
@@ -138,7 +139,7 @@ struct Parser {
         return statement
     }
     
-    private mutating func parseExpressionStatement() -> Ast.ExpressionStatement? {
+    private func parseExpressionStatement() -> Ast.ExpressionStatement? {
         guard let expression = parseExpression(precedence: .lowest) else {
             return nil
         }
@@ -157,6 +158,14 @@ struct Parser {
         return Ast.Identifier(token: curToken, value: curToken.literal)
     }
     
+    private func parseIntegerLiteral() -> Expression {
+        guard let value = Int64(curToken.literal) else {
+            errors.append("could not parse \(curToken.literal) as integer")
+            return Ast.Identifier(token: Token(tokenType: .ILLEGAL, literal: "illegal token parsed as Integer"), value: curToken.literal)
+        }
+        return Ast.IntegerLiteral(token: curToken, value: value)
+    }
+    
     private func curTokenIs(_ tokenType: TokenType) -> Bool {
         return curToken.tokenType == tokenType
     }
@@ -165,7 +174,7 @@ struct Parser {
         return peekToken.tokenType == tokenType
     }
     
-    private mutating func expectPeek(_ tokenType: TokenType) -> Bool {
+    private func expectPeek(_ tokenType: TokenType) -> Bool {
         if peekTokenIs(tokenType) {
             nextToken()
             return true
@@ -179,15 +188,15 @@ struct Parser {
         return errors
     }
     
-    private mutating func peekError(_ tokenType: TokenType) {
+    private func peekError(_ tokenType: TokenType) {
         errors.append("expected next token to be \(tokenType), got \(peekToken.tokenType) instead")
     }
     
-    private mutating func registerPrefix(tokenType: TokenType, fn: @escaping PrefixParseFn) {
+    private func registerPrefix(tokenType: TokenType, fn: @escaping PrefixParseFn) {
         prefixParseFns[tokenType] = fn
     }
     
-    private mutating func registerInfix(tokenType: TokenType, fn: @escaping InfixParseFn) {
+    private func registerInfix(tokenType: TokenType, fn: @escaping InfixParseFn) {
         infixParseFns[tokenType] = fn
     }
 }
