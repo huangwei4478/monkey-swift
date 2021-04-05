@@ -123,4 +123,22 @@ public struct Ast {
         
         
     }
+    
+    struct PrefixExpression: Expression {
+        let token: Token
+        
+        let `operator`: String
+        
+        let right: Expression
+        
+        func expressionNode() {}
+        
+        func tokenLiteral() -> String {
+            return token.literal
+        }
+        
+        func string() -> String {
+            return "(\(`operator`)\(right.string()))"
+        }
+    }
 }

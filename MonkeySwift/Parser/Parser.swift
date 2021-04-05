@@ -45,6 +45,8 @@ final class Parser {
 
         self.registerPrefix(tokenType: .IDENT, fn: parseIdentifier)
         self.registerPrefix(tokenType: .INT, fn: parseIntegerLiteral)
+        self.registerPrefix(tokenType: .BANG, fn: parsePrefixExpression)
+        self.registerPrefix(tokenType: .MINUS, fn: parsePrefixExpression)
 
         // read two tokens, so curToken and peekToken are both set
         self.nextToken()
@@ -81,8 +83,13 @@ final class Parser {
         }
     }
     
+    private func noPrefixParseFnError(tokenType: TokenType) {
+        errors.append("no prefix parse function for \(tokenType.rawValue) found")
+    }
+    
     private func parseExpression(precedence: Precedence) -> Expression? {
         guard let prefixFn = prefixParseFns[curToken.tokenType] else {
+            noPrefixParseFnError(tokenType: curToken.tokenType)
             return nil
         }
         
@@ -164,6 +171,20 @@ final class Parser {
             return Ast.Identifier(token: Token(tokenType: .ILLEGAL, literal: "illegal token parsed as Integer"), value: curToken.literal)
         }
         return Ast.IntegerLiteral(token: curToken, value: value)
+    }
+    
+    private func parsePrefixExpression() -> Expression {
+        let prevToken = curToken
+        
+        nextToken()
+        
+        // recursive here!
+        guard let rightExpression = parseExpression(precedence: .prefix) else {
+            return Ast.Identifier(token: Token(tokenType: .ILLEGAL, literal: "failed to parse right expression for prefix expression"), value: curToken.literal)
+        }
+        return Ast.PrefixExpression(token: prevToken,
+                                    operator: prevToken.literal,
+                                    right: rightExpression)
     }
     
     private func curTokenIs(_ tokenType: TokenType) -> Bool {

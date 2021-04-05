@@ -188,6 +188,74 @@ class ParserTest: XCTestCase {
         }
     }
     
+    func testParsingPrefixExpressions() {
+        struct PrefixTest {
+            let input: String
+            let `operator`: String
+            let integerValue: Int64
+        }
+        
+        let prefixTests: [PrefixTest] = [
+            PrefixTest(input: "!5", operator: "!", integerValue: 5),
+            PrefixTest(input: "-15", operator: "-", integerValue: 15)
+        ]
+        
+        for (_, prefixTest) in prefixTests.enumerated() {
+            let lexer = Lexer(input: prefixTest.input)
+            let parser = Parser(lexer: lexer)
+            let optionalProgram = parser.parseProgram()
+            checkParserErrors(parser)
+            
+            guard let program = optionalProgram else {
+                XCTFail("parser.parseProgram() is returning nil")
+                return
+            }
+            
+            if program.statements.count != 1 {
+                XCTFail("program has not enough statements. got=\(program.statements.count)")
+                return
+            }
+            
+            guard let expressionStatement = program.statements[0] as? Ast.ExpressionStatement else {
+                XCTFail("program.statement[0] is not ast.ExpressionStatement. got=\(type(of: program.statements[0]))")
+                return
+            }
+            
+            guard let expression = expressionStatement.expression as? Ast.PrefixExpression else {
+                XCTFail("expression is not Ast.InfixExpression, got=\(type(of: expressionStatement.expression))")
+                return
+            }
+            
+            if expression.`operator` != prefixTest.`operator` {
+                XCTFail("expression.operator is not \(prefixTest.`operator`), got=\(expression.`operator`)")
+                return
+            }
+            
+            if !testIntegerLiteral(expression.right, prefixTest.integerValue) {
+                return
+            }
+        }
+    }
+    
+    private func testIntegerLiteral(_ expression: Expression, _ value: Int64) -> Bool {
+        guard let integer = expression as? Ast.IntegerLiteral else {
+            XCTFail("expression is not Ast.IntegerLiteral. got=\(type(of: expression))")
+            return false
+        }
+        
+        if integer.value != value {
+            XCTFail("integer.value not \(value). got=\(integer.value)")
+            return false
+        }
+        
+        if integer.tokenLiteral() != "\(value)" {
+            XCTFail("integer.tokenLiteral() not \(value). got=\(integer.tokenLiteral())")
+            return false
+        }
+        
+        return true
+    }
+    
     private func checkParserErrors(_ parser: Parser) {
         let errors = parser.Errors()
         
