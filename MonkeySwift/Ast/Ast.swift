@@ -141,4 +141,26 @@ public struct Ast {
             return "(\(`operator`)\(right.string()))"
         }
     }
+    
+    struct InfixExpression: Expression {
+        let token: Token                            // the operator token, e.g. +
+        
+        let left: Expression
+        
+        let `operator`: String
+        
+        let right: Expression
+        
+        func expressionNode() {}
+        
+        func tokenLiteral() -> String {
+            return token.literal
+        }
+        
+        func string() -> String {
+            return "(\(left.string()) \(`operator`) \(right.string()))"
+        }
+    }
+    
+    
 }

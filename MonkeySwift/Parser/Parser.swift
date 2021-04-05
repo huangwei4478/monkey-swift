@@ -7,7 +7,7 @@
 
 import Foundation
 
-private enum Precedence: Int {
+private enum Precedence: Int, Comparable {
     case lowest = 1
     case equals
     case lessgreater
@@ -15,7 +15,22 @@ private enum Precedence: Int {
     case product
     case prefix
     case call
+    
+    static func < (lhs: Precedence, rhs: Precedence) -> Bool {
+        return lhs.rawValue < rhs.rawValue
+    }
 }
+
+private let precedences: [TokenType: Precedence] = [
+    .EQ:        .equals,
+    .NOT_EQ:    .equals,
+    .LT:        .lessgreater,
+    .GT:        .lessgreater,
+    .PLUS:      .sum,
+    .MINUS:     .sum,
+    .SLASH:     .product,
+    .ASTERISK:  .product,
+]
 
 final class Parser {
     
@@ -47,6 +62,15 @@ final class Parser {
         self.registerPrefix(tokenType: .INT, fn: parseIntegerLiteral)
         self.registerPrefix(tokenType: .BANG, fn: parsePrefixExpression)
         self.registerPrefix(tokenType: .MINUS, fn: parsePrefixExpression)
+        
+        self.registerInfix(tokenType: .PLUS, fn: parseInfixExpression)
+        self.registerInfix(tokenType: .MINUS, fn: parseInfixExpression)
+        self.registerInfix(tokenType: .SLASH, fn: parseInfixExpression)
+        self.registerInfix(tokenType: .ASTERISK, fn: parseInfixExpression)
+        self.registerInfix(tokenType: .EQ, fn: parseInfixExpression)
+        self.registerInfix(tokenType: .NOT_EQ, fn: parseInfixExpression)
+        self.registerInfix(tokenType: .LT, fn: parseInfixExpression)
+        self.registerInfix(tokenType: .GT, fn: parseInfixExpression)
 
         // read two tokens, so curToken and peekToken are both set
         self.nextToken()
@@ -87,13 +111,26 @@ final class Parser {
         errors.append("no prefix parse function for \(tokenType.rawValue) found")
     }
     
+    // The heart of Pratt Parser!
     private func parseExpression(precedence: Precedence) -> Expression? {
         guard let prefixFn = prefixParseFns[curToken.tokenType] else {
             noPrefixParseFnError(tokenType: curToken.tokenType)
             return nil
         }
         
-        let leftExpression = prefixFn()
+        var leftExpression = prefixFn()
+        
+        while !peekTokenIs(.SEMICOLON) && precedence < peekPrecedence() {
+            guard let infixFn = infixParseFns[peekToken.tokenType] else {
+                return leftExpression
+            }
+            
+            nextToken()
+            
+            // What the hell?
+            leftExpression = infixFn(leftExpression)
+        }
+        
         return leftExpression
     }
     
@@ -187,6 +224,19 @@ final class Parser {
                                     right: rightExpression)
     }
     
+    private func parseInfixExpression(left: Expression) -> Expression {
+        let prevToken = curToken // curToken: the operator of the infix expression
+        let prevPrecedence = curPrecedence()    // the precedence of the operator
+        
+        nextToken()
+        
+        // recursive here!
+        guard let rightExpression = parseExpression(precedence: prevPrecedence) else {
+            return Ast.Identifier(token: Token(tokenType: .ILLEGAL, literal: "failed to parse right expression for infix expression"), value: curToken.literal)
+        }
+        return Ast.InfixExpression(token: prevToken, left: left, operator: prevToken.literal, right: rightExpression)
+    }
+    
     private func curTokenIs(_ tokenType: TokenType) -> Bool {
         return curToken.tokenType == tokenType
     }
@@ -211,6 +261,20 @@ final class Parser {
     
     private func peekError(_ tokenType: TokenType) {
         errors.append("expected next token to be \(tokenType), got \(peekToken.tokenType) instead")
+    }
+    
+    private func peekPrecedence() -> Precedence {
+        guard let precedence = precedences[peekToken.tokenType] else {
+            return .lowest
+        }
+        return precedence
+    }
+    
+    private func curPrecedence() -> Precedence {
+        guard let precedence = precedences[curToken.tokenType] else {
+            return .lowest
+        }
+        return precedence
     }
     
     private func registerPrefix(tokenType: TokenType, fn: @escaping PrefixParseFn) {

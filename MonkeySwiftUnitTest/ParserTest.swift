@@ -222,7 +222,7 @@ class ParserTest: XCTestCase {
             }
             
             guard let expression = expressionStatement.expression as? Ast.PrefixExpression else {
-                XCTFail("expression is not Ast.InfixExpression, got=\(type(of: expressionStatement.expression))")
+                XCTFail("expression is not Ast.PrefixExpression, got=\(type(of: expressionStatement.expression))")
                 return
             }
             
@@ -254,6 +254,117 @@ class ParserTest: XCTestCase {
         }
         
         return true
+    }
+    
+    func testParsingInfixExpressions() {
+        struct InfixTest {
+            let input: String
+            let leftValue: Int64
+            let `operator`: String
+            let rightValue: Int64
+            
+            init(_ input: String, _ leftValue: Int64, _ `operator`: String, _ rightValue: Int64) {
+                self.input = input
+                self.leftValue = leftValue
+                self.`operator` = `operator`
+                self.rightValue = rightValue
+            }
+        }
+        
+        let infixTests: [InfixTest] = [
+            InfixTest("5 + 5;", 5, "+", 5),
+            InfixTest("5 - 5;", 5, "-", 5),
+            InfixTest("5 * 5;", 5, "*", 5),
+            InfixTest("5 / 5;", 5, "/", 5),
+            InfixTest("5 > 5;", 5, ">", 5),
+            InfixTest("5 < 5;", 5, "<", 5),
+            InfixTest("5 == 5;", 5, "==", 5),
+            InfixTest("5 != 5;", 5, "!=", 5),
+        ]
+        
+        for (_, infixTest) in infixTests.enumerated() {
+            let lexer = Lexer(input: infixTest.input)
+            let parser = Parser(lexer: lexer)
+            let optionalProgram = parser.parseProgram()
+            checkParserErrors(parser)
+            
+            guard let program = optionalProgram else {
+                XCTFail("parser.parseProgram() is returning nil")
+                return
+            }
+            
+            if program.statements.count != 1 {
+                XCTFail("program has not enough statements. got=\(program.statements.count)")
+                return
+            }
+            
+            guard let expressionStatement = program.statements[0] as? Ast.ExpressionStatement else {
+                XCTFail("program.statement[0] is not ast.ExpressionStatement. got=\(type(of: program.statements[0]))")
+                return
+            }
+            
+            guard let expression = expressionStatement.expression as? Ast.InfixExpression else {
+                XCTFail("expression is not Ast.InfixExpression, got=\(type(of: expressionStatement.expression))")
+                return
+            }
+            
+            if !testIntegerLiteral(expression.left, infixTest.leftValue) {
+                return
+            }
+            
+            if expression.`operator` != infixTest.`operator` {
+                XCTFail("expression.operator is not \(infixTest.`operator`). got=\(expression.`operator`)")
+                return
+            }
+            
+            if !testIntegerLiteral(expression.right, infixTest.rightValue) {
+                return
+            }
+        }
+    }
+    
+    func testOperatorPrecedenceParsing() {
+        struct Test {
+            let input: String
+            let expected: String
+            
+            init(_ input: String, _ expected: String) {
+                self.input = input
+                self.expected = expected
+            }
+        }
+        
+        let tests: [Test] = [
+            Test("-a * b","((-a) * b)"),
+            Test("!-a","(!(-a))"),
+            Test("a + b + c","((a + b) + c)"),
+            Test("a + b - c", "((a + b) - c)"),
+            Test("a * b * c", "((a * b) * c)"),
+            Test("a * b / c", "((a * b) / c)"),
+            Test("a + b / c","(a + (b / c))"),
+            Test("a + b * c + d / e - f", "(((a + (b * c)) + (d / e)) - f)"),
+            Test("3 + 4; -5 * 5","(3 + 4)((-5) * 5)"),
+            Test("5 > 4 == 3 < 4", "((5 > 4) == (3 < 4))"),
+            Test("5 < 4 != 3 > 4", "((5 < 4) != (3 > 4))"),
+            Test("3 + 4 * 5 == 3 * 1 + 4 * 5", "((3 + (4 * 5)) == ((3 * 1) + (4 * 5)))")
+        ]
+        
+        for (_, test) in tests.enumerated() {
+            let lexer = Lexer(input: test.input)
+            let parser = Parser(lexer: lexer)
+            let optionalProgram = parser.parseProgram()
+            checkParserErrors(parser)
+            
+            guard let program = optionalProgram else {
+                XCTFail("parser.parseProgram() is returning nil")
+                return
+            }
+            
+            let actual = program.string()
+            if actual != test.expected {
+                XCTFail("expected=\(test.expected), got=\(actual)")
+            }
+        }
     }
     
     private func checkParserErrors(_ parser: Parser) {
