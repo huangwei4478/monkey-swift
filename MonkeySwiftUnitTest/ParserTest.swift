@@ -192,12 +192,20 @@ class ParserTest: XCTestCase {
         struct PrefixTest {
             let input: String
             let `operator`: String
-            let integerValue: Int64
+            let value: Any
+            
+            init(_ input: String, _ `operator`: String, _ value: Any) {
+                self.input = input
+                self.`operator` = `operator`
+                self.value = value
+            }
         }
         
         let prefixTests: [PrefixTest] = [
-            PrefixTest(input: "!5", operator: "!", integerValue: 5),
-            PrefixTest(input: "-15", operator: "-", integerValue: 15)
+            PrefixTest("!5", "!", 5),
+            PrefixTest("-15", "-", 15),
+            PrefixTest("!true;", "!", true),
+            PrefixTest("!false;", "!", false)
         ]
         
         for (_, prefixTest) in prefixTests.enumerated() {
@@ -231,7 +239,7 @@ class ParserTest: XCTestCase {
                 return
             }
             
-            if !testIntegerLiteral(expression.right, prefixTest.integerValue) {
+            if !testLiteralExpression(expression: expression.right, expected: prefixTest.value) {
                 return
             }
         }
@@ -259,11 +267,11 @@ class ParserTest: XCTestCase {
     func testParsingInfixExpressions() {
         struct InfixTest {
             let input: String
-            let leftValue: Int64
+            let leftValue: Any
             let `operator`: String
-            let rightValue: Int64
+            let rightValue: Any
             
-            init(_ input: String, _ leftValue: Int64, _ `operator`: String, _ rightValue: Int64) {
+            init(_ input: String, _ leftValue: Any, _ `operator`: String, _ rightValue: Any) {
                 self.input = input
                 self.leftValue = leftValue
                 self.`operator` = `operator`
@@ -280,6 +288,9 @@ class ParserTest: XCTestCase {
             InfixTest("5 < 5;", 5, "<", 5),
             InfixTest("5 == 5;", 5, "==", 5),
             InfixTest("5 != 5;", 5, "!=", 5),
+            InfixTest("true == true", true, "==", true),
+            InfixTest("true != false", true, "!=", false),
+            InfixTest("false == false", false, "==", false)
         ]
         
         for (_, infixTest) in infixTests.enumerated() {
@@ -308,16 +319,7 @@ class ParserTest: XCTestCase {
                 return
             }
             
-            if !testIntegerLiteral(expression.left, infixTest.leftValue) {
-                return
-            }
-            
-            if expression.`operator` != infixTest.`operator` {
-                XCTFail("expression.operator is not \(infixTest.`operator`). got=\(expression.`operator`)")
-                return
-            }
-            
-            if !testIntegerLiteral(expression.right, infixTest.rightValue) {
+            if !testInfixExpression(expression: expression, left: infixTest.leftValue, operator: infixTest.`operator`, right: infixTest.rightValue) {
                 return
             }
         }
@@ -346,7 +348,11 @@ class ParserTest: XCTestCase {
             Test("3 + 4; -5 * 5","(3 + 4)((-5) * 5)"),
             Test("5 > 4 == 3 < 4", "((5 > 4) == (3 < 4))"),
             Test("5 < 4 != 3 > 4", "((5 < 4) != (3 > 4))"),
-            Test("3 + 4 * 5 == 3 * 1 + 4 * 5", "((3 + (4 * 5)) == ((3 * 1) + (4 * 5)))")
+            Test("3 + 4 * 5 == 3 * 1 + 4 * 5", "((3 + (4 * 5)) == ((3 * 1) + (4 * 5)))"),
+            Test("true", "true"),
+            Test("false", "false"),
+            Test("3 > 5 == false", "((3 > 5) == false)"),
+            Test("3 < 5 == true", "((3 < 5) == true)")
         ]
         
         for (_, test) in tests.enumerated() {
@@ -365,6 +371,127 @@ class ParserTest: XCTestCase {
                 XCTFail("expected=\(test.expected), got=\(actual)")
             }
         }
+    }
+    
+    func testBooleanExpression() {
+        struct Test {
+            let input: String
+            
+            let expectedBoolean: Bool
+            
+            init(_ input: String, _ expectedBoolean: Bool) {
+                self.input = input
+                self.expectedBoolean = expectedBoolean
+            }
+        }
+        
+        let tests: [Test] = [
+            Test("true;", true),
+            Test("false;", false)
+        ]
+        
+        for (_, test) in tests.enumerated() {
+            let lexer = Lexer(input: test.input)
+            let parser = Parser(lexer: lexer)
+            let optionalProgram = parser.parseProgram()
+            
+            checkParserErrors(parser)
+            
+            guard let program = optionalProgram else {
+                XCTFail("parser.parseProgram() is returning nil")
+                return
+            }
+            
+            if program.statements.count != 1 {
+                XCTFail("program has not enough statements. got=\(program.statements.count)")
+                return
+            }
+            
+            guard let expressionStatement = program.statements[0] as? Ast.ExpressionStatement else {
+                XCTFail("program.statement[0] is not ast.ExpressionStatement. got=\(type(of: program.statements[0]))")
+                return
+            }
+            
+            guard let boolean = expressionStatement.expression as? Ast.Boolean else {
+                XCTFail("expression not Ast.Boolean. got=\(type(of: expressionStatement.expression))")
+                return
+            }
+            
+            if boolean.value != test.expectedBoolean {
+                XCTFail("boolean value not \(test.expectedBoolean). got=\(boolean.value)")
+                return
+            }
+        }
+        
+        
+    }
+    
+    private func testIdentifier(expression: Expression, value: String) -> Bool {
+        guard let identifier = expression as? Ast.Identifier else {
+            XCTFail("expression not Ast.Expression. got=\(type(of: expression))")
+            return false;
+        }
+        
+        if identifier.value != value {
+            XCTFail("identifier.value not \(value). got=\(identifier.value)")
+            return false
+        }
+        
+        if identifier.tokenLiteral() != value {
+            XCTFail("identifier.tokenLiteral() not \(value). got=\(identifier.tokenLiteral())")
+            return false
+        }
+        
+        return true
+    }
+    
+    private func testBooleanLiteral(expression: Expression, value: Bool) -> Bool {
+        guard let boolean = expression as? Ast.Boolean else {
+            XCTFail("expression not Ast.Boolean. got=\(type(of: expression))")
+            return false
+        }
+        
+        if boolean.value != value {
+            XCTFail("boolean.value not \(value). got=\(boolean.value)")
+            return false
+        }
+        
+        if boolean.tokenLiteral() != "\(value)" {
+            XCTFail("boolean.tokenLiteral() not \(value). got=\(boolean.tokenLiteral())")
+            return false
+        }
+        
+        return true
+    }
+    
+    private func testLiteralExpression(expression: Expression, expected: Any) -> Bool {
+        switch expected {
+        case let intValue as Int:           return testIntegerLiteral(expression, Int64(intValue))
+        case let int64Value as Int64:       return testIntegerLiteral(expression, int64Value)
+        case let stringValue as String:     return testIdentifier(expression: expression, value: stringValue)
+        case let boolValue as Bool:         return testBooleanLiteral(expression: expression, value: boolValue)
+        default:
+            XCTFail("type of expression not handled. got=\(type(of: expected))")
+            return false
+        }
+    }
+    
+    private func testInfixExpression(expression: Expression, left: Any, operator: String, right: Any) -> Bool {
+        guard let infixExpression = expression as? Ast.InfixExpression else {
+            XCTFail("expression is not Ast.InfixExpression. got=\(type(of: expression))(\(expression))")
+            return false
+        }
+        
+        if !testLiteralExpression(expression: infixExpression.left, expected: left) { return false; }
+        
+        if infixExpression.`operator` != `operator` {
+            XCTFail("infixExpression.operator not \(`operator`). got=\(infixExpression.`operator`)")
+            return false
+        }
+        
+        if !testLiteralExpression(expression: infixExpression.right, expected: right) { return false; }
+        
+        return true;
     }
     
     private func checkParserErrors(_ parser: Parser) {

@@ -62,6 +62,8 @@ final class Parser {
         self.registerPrefix(tokenType: .INT, fn: parseIntegerLiteral)
         self.registerPrefix(tokenType: .BANG, fn: parsePrefixExpression)
         self.registerPrefix(tokenType: .MINUS, fn: parsePrefixExpression)
+        self.registerPrefix(tokenType: .TRUE, fn: parseBoolean)
+        self.registerPrefix(tokenType: .FALSE, fn: parseBoolean)
         
         self.registerInfix(tokenType: .PLUS, fn: parseInfixExpression)
         self.registerInfix(tokenType: .MINUS, fn: parseInfixExpression)
@@ -235,6 +237,10 @@ final class Parser {
             return Ast.Identifier(token: Token(tokenType: .ILLEGAL, literal: "failed to parse right expression for infix expression"), value: curToken.literal)
         }
         return Ast.InfixExpression(token: prevToken, left: left, operator: prevToken.literal, right: rightExpression)
+    }
+    
+    private func parseBoolean() -> Expression {
+        return Ast.Boolean(token: curToken, value: curTokenIs(.TRUE))
     }
     
     private func curTokenIs(_ tokenType: TokenType) -> Bool {

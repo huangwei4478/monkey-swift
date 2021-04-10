@@ -162,5 +162,22 @@ public struct Ast {
         }
     }
     
+    struct Boolean: Expression {
+        let token: Token
+        
+        let value: Bool
+        
+        func expressionNode() {}
+        
+        func tokenLiteral() -> String {
+            return token.literal
+        }
+        
+        func string() -> String {
+            return token.literal
+        }
+    }
+
+    
     
 }
