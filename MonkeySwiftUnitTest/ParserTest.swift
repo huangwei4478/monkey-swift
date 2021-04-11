@@ -352,7 +352,11 @@ class ParserTest: XCTestCase {
             Test("true", "true"),
             Test("false", "false"),
             Test("3 > 5 == false", "((3 > 5) == false)"),
-            Test("3 < 5 == true", "((3 < 5) == true)")
+            Test("3 < 5 == true", "((3 < 5) == true)"),
+            Test("1 + (2 + 3) + 4", "((1 + (2 + 3)) + 4)"),
+            Test("2 / (5 + 5)", "(2 / (5 + 5))"),
+            Test("- (5 + 5)", "(-(5 + 5))"),
+            Test("!(true == true)", "(!(true == true))")
         ]
         
         for (_, test) in tests.enumerated() {

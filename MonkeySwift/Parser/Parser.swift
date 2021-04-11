@@ -64,6 +64,7 @@ final class Parser {
         self.registerPrefix(tokenType: .MINUS, fn: parsePrefixExpression)
         self.registerPrefix(tokenType: .TRUE, fn: parseBoolean)
         self.registerPrefix(tokenType: .FALSE, fn: parseBoolean)
+        self.registerPrefix(tokenType: .LPAREN, fn: parseGroupedExpression)
         
         self.registerInfix(tokenType: .PLUS, fn: parseInfixExpression)
         self.registerInfix(tokenType: .MINUS, fn: parseInfixExpression)
@@ -241,6 +242,22 @@ final class Parser {
     
     private func parseBoolean() -> Expression {
         return Ast.Boolean(token: curToken, value: curTokenIs(.TRUE))
+    }
+    
+    private func parseGroupedExpression() -> Expression {
+        nextToken()
+                
+        guard let expression = parseExpression(precedence: .lowest) else {
+            return Ast.Identifier(token: Token(tokenType: .ILLEGAL,
+                                               literal: "failed to parse expression for grouped expression"), value: curToken.literal)
+        }
+        
+        if !expectPeek(.RPAREN) {
+            return Ast.Identifier(token: Token(tokenType: .ILLEGAL,
+                                               literal: "failed to parse expression for grouped expression, next token not .RPAREN"), value: curToken.literal)
+        }
+        
+        return expression
     }
     
     private func curTokenIs(_ tokenType: TokenType) -> Bool {
