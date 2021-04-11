@@ -430,6 +430,102 @@ class ParserTest: XCTestCase {
         
     }
     
+    func testIfExpression() {
+        let input = "if (x < y) { x }"
+        let lexer = Lexer(input: input)
+        let parser = Parser(lexer: lexer)
+        let optionalProgram = parser.parseProgram()
+        checkParserErrors(parser)
+        
+        guard let program = optionalProgram else {
+            XCTFail("parser.parseProgram() is returning nil")
+            return
+        }
+        
+        guard let expressionStatement = program.statements[0] as? Ast.ExpressionStatement else {
+            XCTFail("program.statement[0] is not ast.ExpressionStatement. got=\(type(of: program.statements[0]))")
+            return
+        }
+        
+        guard let ifExpression = expressionStatement.expression as? Ast.IfExpression else {
+            XCTFail("expression not Ast.IfExpression. got=\(type(of: expressionStatement.expression))")
+            return
+        }
+        
+        if !testInfixExpression(expression: ifExpression.condition, left: "x", operator: "<", right: "y") {
+            return
+        }
+        
+        if ifExpression.consequence.statements.count != 1 {
+            XCTFail("consequence is not 1 statements. got=\(ifExpression.consequence.statements.count)")
+            return
+        }
+        
+        guard let consequence = ifExpression.consequence.statements[0] as? Ast.ExpressionStatement else {
+            XCTFail("statements[0] is not Ast.ExpressionStatement. got=\(type(of: ifExpression.consequence.statements[0]))")
+            return
+        }
+        
+        if !testIdentifier(expression: consequence.expression, value: "x") {
+            return
+        }
+        
+        if let _ = ifExpression.alternative {
+            XCTFail("ifExpression.Alternative was not nil. got=\(String(describing: ifExpression.alternative))")
+            return
+        }
+    }
+    
+    func testIfElseExpression() {
+        let input = "if (x < y) { x } else { y }"
+        let lexer = Lexer(input: input)
+        let parser = Parser(lexer: lexer)
+        let optionalProgram = parser.parseProgram()
+        checkParserErrors(parser)
+        
+        guard let program = optionalProgram else {
+            XCTFail("parser.parseProgram() is returning nil")
+            return
+        }
+        
+        guard let expressionStatement = program.statements[0] as? Ast.ExpressionStatement else {
+            XCTFail("program.statement[0] is not ast.ExpressionStatement. got=\(type(of: program.statements[0]))")
+            return
+        }
+        
+        guard let ifExpression = expressionStatement.expression as? Ast.IfExpression else {
+            XCTFail("expression not Ast.IfExpression. got=\(type(of: expressionStatement.expression))")
+            return
+        }
+        
+        if !testInfixExpression(expression: ifExpression.condition, left: "x", operator: "<", right: "y") {
+            return
+        }
+        
+        if ifExpression.consequence.statements.count != 1 {
+            XCTFail("consequence is not 1 statements. got=\(ifExpression.consequence.statements.count)")
+            return
+        }
+        
+        guard let consequence = ifExpression.consequence.statements[0] as? Ast.ExpressionStatement else {
+            XCTFail("consequence.statements[0] is not Ast.ExpressionStatement. got=\(type(of: ifExpression.consequence.statements[0]))")
+            return
+        }
+        
+        if !testIdentifier(expression: consequence.expression, value: "x") {
+            return
+        }
+        
+        guard let alternative = ifExpression.alternative?.statements[0] as? Ast.ExpressionStatement else {
+            XCTFail("alternative.statements[0] is not Ast.ExpressionStatement. got=\(type(of: String(describing: ifExpression.alternative?.statements[0])))")
+            return
+        }
+        
+        if !testIdentifier(expression: alternative.expression, value: "y") {
+            return
+        }
+    }
+    
     private func testIdentifier(expression: Expression, value: String) -> Bool {
         guard let identifier = expression as? Ast.Identifier else {
             XCTFail("expression not Ast.Expression. got=\(type(of: expression))")

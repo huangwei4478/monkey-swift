@@ -65,6 +65,7 @@ final class Parser {
         self.registerPrefix(tokenType: .TRUE, fn: parseBoolean)
         self.registerPrefix(tokenType: .FALSE, fn: parseBoolean)
         self.registerPrefix(tokenType: .LPAREN, fn: parseGroupedExpression)
+        self.registerPrefix(tokenType: .IF, fn: parseIfExpression)
         
         self.registerInfix(tokenType: .PLUS, fn: parseInfixExpression)
         self.registerInfix(tokenType: .MINUS, fn: parseInfixExpression)
@@ -201,6 +202,21 @@ final class Parser {
         return statement
     }
     
+    private func parseBlockStatement() -> Ast.BlockStatement {
+        let prevToken = curToken
+        
+        var statements: [Statement] = []
+        
+        while !curTokenIs(.RBRACE) && !curTokenIs(.EOF) {
+            if let statement = parseStatement() {
+                statements.append(statement)
+            }
+            nextToken()
+        }
+        
+        return Ast.BlockStatement(token: prevToken, statements: statements)
+    }
+    
     private func parseIdentifier() -> Expression {
         return Ast.Identifier(token: curToken, value: curToken.literal)
     }
@@ -258,6 +274,51 @@ final class Parser {
         }
         
         return expression
+    }
+    
+    private func parseIfExpression() -> Expression {
+        let prevToken = curToken
+
+        if !expectPeek(.LPAREN) {
+            return Ast.Identifier(token: Token(tokenType: .ILLEGAL,
+                                               literal: "failed to parse if expression. next Token not .LPAREN, got=\(peekToken)"), value: peekToken.literal)
+        }
+
+        nextToken()
+
+        guard let condition = parseExpression(precedence: .lowest) else {
+            return Ast.Identifier(token: Token(tokenType: .ILLEGAL,
+                                               literal: "failed to parse condition expression for ifExpression"), value: curToken.literal)
+        }
+
+        if !expectPeek(.RPAREN) {
+            return Ast.Identifier(token: Token(tokenType: .ILLEGAL,
+                                               literal: "failed to parse if expression. next token not .RPAREN, got=\(peekToken)"), value: peekToken.literal)
+        }
+        
+        if !expectPeek(.LBRACE) {
+            return Ast.Identifier(token: Token(tokenType: .ILLEGAL, literal: "failed to parse if expression. next token not .LBRACE, got=\(peekToken)"), value: peekToken.literal)
+        }
+
+        let consequence = parseBlockStatement()
+        
+        let alternative: Ast.BlockStatement?
+        if peekTokenIs(.ELSE) {
+            nextToken()
+            
+            if !expectPeek(.LBRACE) {
+                return Ast.Identifier(token: Token(tokenType: .ILLEGAL, literal: "failed to parse if expression. next token not .LBRACE, got=\(peekToken)"), value: peekToken.literal)
+            }
+            
+            alternative = parseBlockStatement()
+        } else {
+            alternative = nil
+        }
+        
+        return Ast.IfExpression(token: prevToken,
+                                condition: condition,
+                                consequence: consequence,
+                                alternative: alternative)
     }
     
     private func curTokenIs(_ tokenType: TokenType) -> Bool {

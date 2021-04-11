@@ -177,7 +177,48 @@ public struct Ast {
             return token.literal
         }
     }
-
     
+    struct BlockStatement: Statement {
+        let token: Token                    // the { token
+        
+        let statements: [Statement]
+        
+        func statementNode() {}
+        
+        func tokenLiteral() -> String {
+            return token.literal
+        }
+        
+        func string() -> String {
+            return statements.reduce("") { $0 + $1.string() }
+        }
+    }
+
+    struct IfExpression: Expression {
+        let token: Token
+        
+        let condition: Expression
+
+        let consequence: BlockStatement
+        
+        let alternative: BlockStatement?
+        
+        func expressionNode() {}
+        
+        func tokenLiteral() -> String {
+            return token.literal
+        }
+        
+        func string() -> String {
+            var string = "if \(condition.string()) \(consequence.string()))"
+            
+            if let alternative = alternative {
+                string += " else "
+                string += alternative.string()
+            }
+            
+            return string
+        }
+    }
     
 }
