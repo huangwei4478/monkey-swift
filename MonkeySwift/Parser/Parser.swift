@@ -207,6 +207,8 @@ final class Parser {
         
         var statements: [Statement] = []
         
+        nextToken()
+        
         while !curTokenIs(.RBRACE) && !curTokenIs(.EOF) {
             if let statement = parseStatement() {
                 statements.append(statement)
