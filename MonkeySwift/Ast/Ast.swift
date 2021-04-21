@@ -221,4 +221,27 @@ public struct Ast {
         }
     }
     
+    struct FunctionLiteral: Expression {
+        
+        let token: Token                    // the 'fn' token
+        
+        let parameters: [Ast.Identifier]
+        
+        let body: BlockStatement
+        
+        func expressionNode() {}
+        
+        func tokenLiteral() -> String {
+            return token.literal
+        }
+        
+        func string() -> String {
+            let params = parameters.map{ $0.string() }.joined(separator: ", ")
+            
+            return "\(tokenLiteral())(\(params))\(body.string())"
+        }
+        
+        
+    }
+    
 }

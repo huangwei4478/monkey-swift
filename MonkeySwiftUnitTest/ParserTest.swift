@@ -594,6 +594,52 @@ class ParserTest: XCTestCase {
         return true;
     }
     
+    func testFunctionLiteralParsing() {
+        let input = "fn(x, y) { x + y; }"
+        
+        let lexer = Lexer(input: input)
+        let parser = Parser(lexer: lexer)
+        let optionalProgram = parser.parseProgram()
+        checkParserErrors(parser)
+        
+        guard let program = optionalProgram else {
+            XCTFail("parser.parseProgram() is returning nil")
+            return
+        }
+        
+        guard let expressionStatement = program.statements[0] as? Ast.ExpressionStatement else {
+            XCTFail("program.statement[0] is not ast.ExpressionStatement. got=\(type(of: program.statements[0]))")
+            return
+        }
+        
+        guard let function = expressionStatement.expression as? Ast.FunctionLiteral else {
+            XCTFail("expressionStatement.expression is not Ast.FunctionLiteral. got=\(type(of: expressionStatement.expression))")
+            return
+        }
+        
+        if function.parameters.count != 2 {
+            XCTFail("function literal parameters wrong. want 2, got=\(function.parameters.count)")
+            return
+        }
+        
+        testLiteralExpression(expression: function.parameters[0], expected: "x")
+        testLiteralExpression(expression: function.parameters[1], expected: "y")
+        
+        if function.body.statements.count != 1 {
+            XCTFail("function.body.statements has not 1 statement. got=\(function.body.statements.count)")
+            return
+        }
+        
+        guard let bodyStatement = function.body.statements[0] as? Ast.ExpressionStatement else {
+            XCTFail("function body statement is not Ast.ExpressionStatement. got=\(type(of: function.body.statements[0]))")
+            return
+        }
+        
+        if !testInfixExpression(expression: bodyStatement.expression, left: "x", operator: "+", right: "y") {
+            return
+        }
+    }
+    
     private func checkParserErrors(_ parser: Parser) {
         let errors = parser.Errors()
         
