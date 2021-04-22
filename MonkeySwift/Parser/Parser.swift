@@ -66,6 +66,7 @@ final class Parser {
         self.registerPrefix(tokenType: .FALSE, fn: parseBoolean)
         self.registerPrefix(tokenType: .LPAREN, fn: parseGroupedExpression)
         self.registerPrefix(tokenType: .IF, fn: parseIfExpression)
+        self.registerPrefix(tokenType: .FUNCTION, fn: parseFunctionLiteral)
         
         self.registerInfix(tokenType: .PLUS, fn: parseInfixExpression)
         self.registerInfix(tokenType: .MINUS, fn: parseInfixExpression)
@@ -321,6 +322,54 @@ final class Parser {
                                 condition: condition,
                                 consequence: consequence,
                                 alternative: alternative)
+    }
+    
+    private func parseFunctionLiteral() -> Expression {
+        let prevToken = curToken
+        
+        if !expectPeek(.LPAREN) {
+            return Ast.Identifier(token: Token(tokenType: .ILLEGAL, literal: "failed to parse function literald  next token not .LPAREN, got=\(peekToken)"), value: peekToken.literal)
+        }
+        
+        let parameters = parseFunctionParameters()
+        
+        if !expectPeek(.LBRACE) {
+            return Ast.Identifier(token: Token(tokenType: .ILLEGAL, literal: "failed to parse function literald  next token not .LBRACE, got=\(peekToken)"), value: peekToken.literal)
+        }
+        
+        let body = parseBlockStatement()
+        
+        return Ast.FunctionLiteral(token: prevToken,
+                                   parameters: parameters,
+                                   body: body)
+    }
+    
+    private func parseFunctionParameters() -> [Ast.Identifier] {
+        var identifiers: [Ast.Identifier] = []
+        
+        if peekTokenIs(.RPAREN) {
+            nextToken()
+            return identifiers
+        }
+        
+        nextToken()
+        
+        let identifier = Ast.Identifier(token: curToken, value: curToken.literal)
+        identifiers.append(identifier)
+        
+        while peekTokenIs(.COMMA) {
+            nextToken()
+            nextToken()
+            
+            let identifier = Ast.Identifier(token: curToken, value: curToken.literal)
+            identifiers.append(identifier)
+        }
+        
+        if !expectPeek(.RPAREN) {
+            return [Ast.Identifier(token: Token(tokenType: .ILLEGAL, literal: "failed to parse function literald  next token not .RPAREN, got=\(peekToken)"), value: peekToken.literal)]
+        }
+        
+        return identifiers
     }
     
     private func curTokenIs(_ tokenType: TokenType) -> Bool {

@@ -622,8 +622,8 @@ class ParserTest: XCTestCase {
             return
         }
         
-        testLiteralExpression(expression: function.parameters[0], expected: "x")
-        testLiteralExpression(expression: function.parameters[1], expected: "y")
+        let _ = testLiteralExpression(expression: function.parameters[0], expected: "x")
+        let _ = testLiteralExpression(expression: function.parameters[1], expected: "y")
         
         if function.body.statements.count != 1 {
             XCTFail("function.body.statements has not 1 statement. got=\(function.body.statements.count)")
@@ -639,6 +639,50 @@ class ParserTest: XCTestCase {
             return
         }
     }
+    
+    func testFunctionParameterParsing() {
+        struct Test {
+            let input: String
+            let expectedParams: [String]
+        }
+        
+        let tests: [Test] = [
+            Test(input: "fn() {};", expectedParams: []),
+            Test(input: "fn(x) {};", expectedParams: ["x"]),
+            Test(input: "fn(x, y, z) {};", expectedParams: ["x", "y", "z"])
+        ]
+        
+        for test in tests {
+            let lexer = Lexer(input: test.input)
+            let parser = Parser(lexer: lexer)
+            let optionalProgram = parser.parseProgram()
+            
+            guard let program = optionalProgram else {
+                XCTFail("parser.parseProgram() is returning nil")
+                return
+            }
+            
+            guard let statement = program.statements[0] as? Ast.ExpressionStatement else {
+                XCTFail("program.statement[0] is not ast.ExpressionStatement. got=\(type(of: program.statements[0]))")
+                return
+            }
+            
+            guard let function = statement.expression as? Ast.FunctionLiteral else {
+                XCTFail("statement.expression is not Ast.FunctionLiteral. got=\(type(of: statement.expression))")
+                return
+            }
+            
+            if function.parameters.count != test.expectedParams.count {
+                XCTFail("length parameter wrong. want \(test.expectedParams.count), got=\(function.parameters.count)")
+                return
+            }
+            
+            for (index, identifier) in test.expectedParams.enumerated() {
+                let _ = testLiteralExpression(expression: function.parameters[index], expected: identifier)
+            }
+        }
+    }
+    
     
     private func checkParserErrors(_ parser: Parser) {
         let errors = parser.Errors()
