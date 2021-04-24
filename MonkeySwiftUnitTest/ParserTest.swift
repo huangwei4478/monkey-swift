@@ -356,7 +356,10 @@ class ParserTest: XCTestCase {
             Test("1 + (2 + 3) + 4", "((1 + (2 + 3)) + 4)"),
             Test("2 / (5 + 5)", "(2 / (5 + 5))"),
             Test("- (5 + 5)", "(-(5 + 5))"),
-            Test("!(true == true)", "(!(true == true))")
+            Test("!(true == true)", "(!(true == true))"),
+            Test("a + add(b * c) + d", "((a + add((b * c))) + d)"),
+            Test("add(a, b, 1, 2 * 3, 4 + 5, add(6, 7 * 8))", "add(a, b, 1, (2 * 3), (4 + 5), add(6, (7 * 8)))"),
+            Test("add(a + b + c * d / f + g)", "add((((a + b) + ((c * d) / f)) + g))")
         ]
         
         for (_, test) in tests.enumerated() {
@@ -683,6 +686,42 @@ class ParserTest: XCTestCase {
         }
     }
     
+    func testCallExpressionParsing() {
+        let input = "add(1, 2 * 3, 4 + 5);"
+        
+        let lexer = Lexer(input: input)
+        let parser = Parser(lexer: lexer)
+        let optionalProgram = parser.parseProgram()
+        checkParserErrors(parser)
+        
+        guard let program = optionalProgram else {
+            XCTFail("parser.parseProgram() is returning nil")
+            return
+        }
+        
+        guard let statement = program.statements[0] as? Ast.ExpressionStatement else {
+            XCTFail("program.statement[0] is not ast.ExpressionStatement. got=\(type(of: program.statements[0]))")
+            return
+        }
+        
+        guard let callExpression = statement.expression as? Ast.CallExpression else {
+            XCTFail("statement.expression is not Ast.CallExpression. got=\(type(of: statement.expression))")
+            return
+        }
+        
+        if !testIdentifier(expression: callExpression.function, value: "add") {
+            return
+        }
+        
+        if callExpression.arguments.count != 3 {
+            XCTFail("wrong length of arguments. got=\(callExpression.arguments.count)")
+            return
+        }
+        
+        let _ = testLiteralExpression(expression: callExpression.arguments[0], expected: 1)
+        let _ = testInfixExpression(expression: callExpression.arguments[1], left: 2, operator: "*", right: 3)
+        let _ = testInfixExpression(expression: callExpression.arguments[2], left: 4, operator: "+", right: 5)
+    }
     
     private func checkParserErrors(_ parser: Parser) {
         let errors = parser.Errors()

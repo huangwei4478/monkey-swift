@@ -244,4 +244,23 @@ public struct Ast {
         
     }
     
+    struct CallExpression: Expression {
+        let token: Token                    // the '(' token
+        
+        let function: Expression            // Identifier or FunctionLiteral
+        
+        let arguments: [Expression]
+        
+        func expressionNode() {}
+        
+        func tokenLiteral() -> String {
+            return token.literal
+        }
+        
+        func string() -> String {
+            let args = arguments.map{ $0.string() }.joined(separator: ", ")
+            return "\(function.string())(\(args))"
+        }
+    }
+    
 }

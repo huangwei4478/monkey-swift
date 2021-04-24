@@ -30,6 +30,7 @@ private let precedences: [TokenType: Precedence] = [
     .MINUS:     .sum,
     .SLASH:     .product,
     .ASTERISK:  .product,
+    .LPAREN:    .call
 ]
 
 final class Parser {
@@ -76,6 +77,7 @@ final class Parser {
         self.registerInfix(tokenType: .NOT_EQ, fn: parseInfixExpression)
         self.registerInfix(tokenType: .LT, fn: parseInfixExpression)
         self.registerInfix(tokenType: .GT, fn: parseInfixExpression)
+        self.registerInfix(tokenType: .LPAREN, fn: parseCallExpression)
 
         // read two tokens, so curToken and peekToken are both set
         self.nextToken()
@@ -370,6 +372,45 @@ final class Parser {
         }
         
         return identifiers
+    }
+    
+    private func parseCallExpression(function: Expression) -> Expression {
+        let prevToken = curToken
+        let arguments = parseCallArguments()
+        return Ast.CallExpression(token: prevToken,
+                                  function: function,
+                                  arguments: arguments)
+    }
+    
+    private func parseCallArguments() -> [Expression] {
+        var args:[Expression] = []
+        if peekTokenIs(.RPAREN) {
+            nextToken()
+            return args
+        }
+        
+        nextToken()
+        
+        // recursive here!
+        if let expression = parseExpression(precedence: .lowest) {
+            args.append(expression)
+        }
+
+        while peekTokenIs(.COMMA) {
+            nextToken()
+            nextToken()
+            
+            // recursive here!
+            if let expression = parseExpression(precedence: .lowest) {
+                args.append(expression)
+            }
+        }
+        
+        if !expectPeek(.RPAREN) {
+            return [Ast.Identifier(token: Token(tokenType: .ILLEGAL, literal: "failed to parse function literald  next token not .RPAREN, got=\(peekToken)"), value: peekToken.literal)]
+        }
+        
+        return args
     }
     
     private func curTokenIs(_ tokenType: TokenType) -> Bool {
