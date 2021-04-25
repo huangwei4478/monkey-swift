@@ -20,13 +20,18 @@ struct Repl {
             
             switch option {
                 case .input(let string):
-                    var lexer = Lexer(input: string)
+                    let lexer = Lexer(input: string)
+                    let parser = Parser(lexer: lexer)
                     
-                    var token = lexer.nextToken()
-                    while (token.tokenType != .EOF) {
-                        ConsoleIO.shared.writeMessage(String(describing: token))
-                        token = lexer.nextToken()
+                    let optionalProgram = parser.parseProgram()
+                    if !parser.Errors().isEmpty {
+                        printParserErrors(errors: parser.Errors())
+                        continue
                     }
+                    
+                    guard let program = optionalProgram else { continue }
+                    
+                    ConsoleIO.shared.writeMessage(program.string())
                     ConsoleIO.shared.writeMessage("\n")
                 case .quit:
                     shouldQuit = true
@@ -35,4 +40,9 @@ struct Repl {
     }
     
     
+    private static func printParserErrors(errors: [String]) {
+        for message in errors {
+            ConsoleIO.shared.writeMessage(message)
+        }
+    }
 }

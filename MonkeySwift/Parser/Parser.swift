@@ -141,53 +141,49 @@ final class Parser {
         return leftExpression
     }
     
-    // TODO: just to sooth the compiler; expression is a to-do
-    private struct ExpressionPlaceholder: Expression {
-        func expressionNode() {}
-        
-        func tokenLiteral() -> String {
-            return "Error, do not use me; just a placeholder"
-        }
-        
-        func string() -> String {
-            return "Error, do not use me; just a placeholder"
-        }
-    }
-    
     private func parseLetStatement() -> Ast.LetStatement? {
-        let prevToken = curToken                    // the LET token
+        let letToken = curToken                    // the LET token
         
         if !expectPeek(TokenType.IDENT) {
             return nil
         }
         
-        let name = Ast.Identifier(token: curToken, value: curToken.literal)
-        
-        let statement = Ast.LetStatement(token: prevToken, name: name, value: ExpressionPlaceholder())
-        
+        let nameToken = curToken
+                
         if !expectPeek(TokenType.ASSIGN) {
             return nil
         }
         
-        // TODO: we're skipping the expression until we encounter a semicolon
-        while !curTokenIs(TokenType.SEMICOLON) {
+        nextToken()
+        
+        guard let value = parseExpression(precedence: .lowest) else {
+            return nil
+        }
+        
+        if peekTokenIs(.SEMICOLON) {
             nextToken()
         }
         
-        return statement
+        return Ast.LetStatement(token: letToken,
+                                name: Ast.Identifier(token: nameToken, value: nameToken.literal),
+                                value: value)
     }
     
-    private func parseReturnStatement() -> Ast.ReturnStatement? {
-        let statement = Ast.ReturnStatement(token: curToken, returnValue: ExpressionPlaceholder())
+    private func parseReturnStatement() -> Ast.ReturnStatement? {        
+        let returnToken = curToken
         
         nextToken()
         
-        // TODO: we're skipping the expression until we encounter a semicolon
-        while !curTokenIs(TokenType.SEMICOLON) {
+        guard let returnValue = parseExpression(precedence: .lowest) else {
+            return nil
+        }
+        
+        if peekTokenIs(.SEMICOLON) {
             nextToken()
         }
         
-        return statement
+        return Ast.ReturnStatement(token: returnToken,
+                                   returnValue: returnValue)
     }
     
     private func parseExpressionStatement() -> Ast.ExpressionStatement? {
