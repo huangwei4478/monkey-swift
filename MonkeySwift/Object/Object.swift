@@ -10,6 +10,7 @@ import Foundation
 enum ObjectType: String {
     case integer_obj = "INTEGER"
     case boolean_obj = "BOOLEAN"
+    case null_obj    = "NULL"
 }
 
 
@@ -43,3 +44,12 @@ struct Boolean: Object {
     }
 }
 
+struct Null: Object {
+    func type() -> ObjectType {
+        return .null_obj
+    }
+    
+    func inspect() -> String {
+        return "null"
+    }
+}
