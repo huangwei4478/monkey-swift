@@ -20,6 +20,24 @@ protocol Object {
     func inspect() -> String
 }
 
+// TODO: maybe Applicative could help?
+func == (lhs: Object, rhs: Object) -> Bool {
+    switch (lhs, rhs) {
+    case let (lhs, rhs) where lhs is Object_t.Integer && rhs is Object_t.Integer:
+        return (lhs as! Object_t.Integer).value == (rhs as! Object_t.Integer).value
+    case let (lhs, rhs) where lhs is Object_t.Boolean && rhs is Object_t.Boolean:
+        return (lhs as! Object_t.Boolean).value == (rhs as! Object_t.Boolean).value
+    case let (lhs, rhs) where lhs is Object_t.Null && rhs is Object_t.Null:
+        return true
+    default:
+        return false
+    }
+}
+
+func != (lhs: Object, rhs: Object) -> Bool {
+    return !(lhs == rhs)
+}
+
 struct Object_t {
     struct Integer: Object {
         let value: Int64

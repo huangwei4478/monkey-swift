@@ -22,11 +22,14 @@ struct Evaluator {
         case let node as Ast.IntegerLiteral:
             return Object_t.Integer(value: node.value)
         case let node as Ast.Boolean:
-            return node.value ? Object_t.Boolean(value: true) :
-                Object_t.Boolean(value: false)
+            return nativeBoolToBooleanObject(input: node.value)
         case let node as Ast.PrefixExpression:
             guard let right = eval(node.right) else { return nil }
             return evalPrefixExpression(operator: node.operator, right: right)
+        case let node as Ast.InfixExpression:
+            guard let left = eval(node.left) else { return nil }
+            guard let right = eval(node.right) else { return nil }
+            return evalInfixExpression(operator: node.operator, left: left, right: right)
         default:
             return nil
         }
@@ -54,6 +57,19 @@ struct Evaluator {
         }
     }
     
+    private static func evalInfixExpression(operator: String, left: Object, right: Object) -> Object {
+        switch (`operator`, left, right) {
+        case let (_, left, right) where left.type() == .integer_obj && right.type() == .integer_obj:
+            return evalIntegerInfixExpression(operator: `operator`, left: left, right: right)
+        case let (`operator`, _, _) where `operator` == "==":
+            return nativeBoolToBooleanObject(input: left == right)
+        case let (`operator`, _, _) where `operator` == "!=":
+            return nativeBoolToBooleanObject(input: left != right)
+        default:
+            return Object_t.Null()
+        }
+    }
+    
     private static func evalBangOperatorExpression(right: Object) -> Object {
         switch right {
         case let object as Object_t.Boolean:
@@ -69,6 +85,40 @@ struct Evaluator {
         guard right.type() == .integer_obj else { return Object_t.Null() }
         guard let integer = right as? Object_t.Integer else { return Object_t.Null() }
         return Object_t.Integer(value: -integer.value)
+    }
+    
+    private static func evalIntegerInfixExpression(operator: String, left: Object, right: Object) -> Object {
+        guard let left = left as? Object_t.Integer else { return Object_t.Null() }
+        guard let right = right as? Object_t.Integer else { return Object_t.Null() }
+        
+        let leftValue = left.value
+        let rightValue = right.value
+        
+        switch `operator` {
+        case "+":
+            return Object_t.Integer(value: leftValue + rightValue)
+        case "-":
+            return Object_t.Integer(value: leftValue - rightValue)
+        case "*":
+            return Object_t.Integer(value: leftValue * rightValue)
+        case "/":
+            return Object_t.Integer(value: leftValue / rightValue)
+        case "<":
+            return nativeBoolToBooleanObject(input: leftValue < rightValue)
+        case ">":
+            return nativeBoolToBooleanObject(input: leftValue > rightValue)
+        case "==":
+            return nativeBoolToBooleanObject(input: leftValue == rightValue)
+        case "!=":
+            return nativeBoolToBooleanObject(input: leftValue != rightValue)
+        default:
+            return Object_t.Null()
+        }
+    }
+    
+    private static func nativeBoolToBooleanObject(input: Bool) -> Object_t.Boolean {
+        return input ? Object_t.Boolean(value: true) :
+            Object_t.Boolean(value: false)
     }
 }
 
