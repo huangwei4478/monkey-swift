@@ -17,19 +17,29 @@ struct Evaluator {
         
         case let node as Ast.ExpressionStatement:
             return eval(node.expression)
+            
+        case let node as Ast.BlockStatement:
+            return evalStatements(statements: node.statements)
         
         // Expressions
         case let node as Ast.IntegerLiteral:
             return Object_t.Integer(value: node.value)
+            
         case let node as Ast.Boolean:
             return nativeBoolToBooleanObject(input: node.value)
+            
         case let node as Ast.PrefixExpression:
             guard let right = eval(node.right) else { return nil }
             return evalPrefixExpression(operator: node.operator, right: right)
+            
         case let node as Ast.InfixExpression:
             guard let left = eval(node.left) else { return nil }
             guard let right = eval(node.right) else { return nil }
             return evalInfixExpression(operator: node.operator, left: left, right: right)
+            
+        case let node as Ast.IfExpression:
+            return evalIfExpression(ifExpression: node)
+            
         default:
             return nil
         }
@@ -119,6 +129,37 @@ struct Evaluator {
     private static func nativeBoolToBooleanObject(input: Bool) -> Object_t.Boolean {
         return input ? Object_t.Boolean(value: true) :
             Object_t.Boolean(value: false)
+    }
+    
+    private static func evalIfExpression(ifExpression: Ast.IfExpression) -> Object {
+        guard let condition = eval(ifExpression.condition) else {
+            return Object_t.Null()
+        }
+        
+        if isTruthy(object: condition) {
+            guard let consequence = eval(ifExpression.consequence) else {
+                return Object_t.Null()
+            }
+            return consequence
+        } else if ifExpression.alternative != nil {
+            guard let alternative = eval(ifExpression.alternative!) else {
+                return Object_t.Null()
+            }
+            return alternative
+        } else {
+            return Object_t.Null()
+        }
+    }
+    
+    private static func isTruthy(object: Object) -> Bool {
+        switch object {
+        case is Object_t.Null:
+            return false
+        case let object as Object_t.Boolean:
+            return object.value
+        default:
+            return true
+        }
     }
 }
 

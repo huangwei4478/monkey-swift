@@ -91,6 +91,27 @@ class EvaluatorTest: XCTestCase {
         }
     }
     
+    func testIfElseExpressions() {
+        let tests: [TestCase<Int64?>] = [
+            TestCase("if (true) { 10 }", 10),
+            TestCase("if (false) { 10 }", nil),
+            TestCase("if (1) { 10 }", 10),
+            TestCase("if (1 < 2) { 10 }", 10),
+            TestCase("if (1 > 2) { 10 }", nil),
+            TestCase("if (1 > 2) { 10 } else { 20 }", 20),
+            TestCase("if (1 < 2) { 10 } else { 20 }", 10),
+        ]
+        
+        for (_, test) in tests.enumerated() {
+            let evaluated = testEval(input: test.input)
+            if let expectedInteger = test.expected {
+                let _ = testIntegerObject(object: evaluated, expected: expectedInteger)
+            } else {
+                let _ = testNullObject(object: evaluated)
+            }
+        }
+    }
+    
     private func testEval(input: String) -> Object {
         let lexer = Lexer(input: input)
         let parser = Parser(lexer: lexer)
@@ -127,6 +148,14 @@ class EvaluatorTest: XCTestCase {
             return false
         }
         
+        return true
+    }
+    
+    private func testNullObject(object: Object) -> Bool {
+        guard object is Object_t.Null else {
+            XCTFail("object is not NULL. got=\(type(of: object))")
+            return false
+        }
         return true
     }
 }
