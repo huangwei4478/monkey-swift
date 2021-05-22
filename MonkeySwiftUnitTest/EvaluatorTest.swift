@@ -10,24 +10,55 @@ import XCTest
 @testable import MonkeySwift
 
 class EvaluatorTest: XCTestCase {
-    func testEvalIntegerExpression() {
-        struct Test {
-            let input: String
-            let expected: Int64
-            init(_ input: String, _ expected: Int64) {
-                self.input = input
-                self.expected = expected
-            }
+    
+    struct TestCase<T> {
+        let input: String
+        let expected: T
+        init(_ input: String, _ expected: T) {
+            self.input = input
+            self.expected = expected
         }
-        
-        let tests: [Test] = [
-            Test("5", 5),
-            Test("10", 10)
+    }
+    
+    func testEvalIntegerExpression() {
+        let tests: [TestCase<Int64>] = [
+            TestCase("5", 5),
+            TestCase("10", 10),
+            TestCase("-5", -5),
+            TestCase("-10", -10),
         ]
         
         for (_, test) in tests.enumerated() {
             let evaluated = testEval(input: test.input)
             let _ = testIntegerObject(object: evaluated, expected: test.expected)
+        }
+    }
+    
+    func testEvalBooleanExpression() {
+        let tests: [TestCase<Bool>] = [
+            TestCase("true", true),
+            TestCase("false", false),
+        ]
+        
+        for (_, test) in tests.enumerated() {
+            let evaluated = testEval(input: test.input)
+            let _ = testBooleanObject(object: evaluated, expected: test.expected)
+        }
+    }
+    
+    func testBangOperator() {
+        let tests: [TestCase<Bool>] = [
+            TestCase("!true", false),
+            TestCase("!false", true),
+            TestCase("!5", false),
+            TestCase("!!true", true),
+            TestCase("!!false", false),
+            TestCase("!!5", true),
+        ]
+        
+        for (_, test) in tests.enumerated() {
+            let evaluated = testEval(input: test.input)
+            let _ = testBooleanObject(object: evaluated, expected: test.expected)
         }
     }
     
@@ -55,5 +86,18 @@ class EvaluatorTest: XCTestCase {
         return true
     }
     
-    
+    // TODO: try to refactor this into Generics function
+    private func testBooleanObject(object: Object, expected: Bool) -> Bool {
+        guard let result = object as? Object_t.Boolean else {
+            XCTFail("object is not Boolean. got=\(type(of: object))")
+            return false
+        }
+        
+        if result.value != expected {
+            XCTFail("object has wrong value. got=\(result.value), expected=\(expected)")
+            return false
+        }
+        
+        return true
+    }
 }
