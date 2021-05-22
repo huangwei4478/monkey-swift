@@ -7,31 +7,38 @@
 
 import Foundation
 
-func Eval(_ node: Node) -> Object {
-    switch node {
+struct Evaluator {
+    static func eval(_ node: Node) -> Object? {
+        switch node {
+        
+        // Statements
+        case let node as Ast.Program:
+            return evalStatements(statements: node.statements)
+        
+        case let node as Ast.ExpressionStatement:
+            return eval(node.expression)
+        
+        // Expressions
+        case let node as Ast.IntegerLiteral:
+            return Object_t.Integer(value: node.value)
+        
+        default:
+            return nil
+        }
+    }
     
-    // Statements
-    case let node as Ast.Program:
-        return evalStatements(statements: node.statements)
-    
-    case let node as Ast.ExpressionStatement:
-        return Eval(node.expression)
-    
-    // Expressions
-    case let node as Ast.IntegerLiteral:
-        return Object_t.Integer(value: node.value)
-    
-    default:
-        return Object_t.Null()
+    private static func evalStatements(statements: [Statement]) -> Object {
+        var result: Object = Object_t.Null()
+        
+        for (_, statement) in statements.enumerated() {
+            guard let evaluated = eval(statement) else { continue }
+            result = evaluated
+        }
+        
+        return result
     }
 }
 
-fileprivate func evalStatements(statements: [Statement]) -> Object {
-    var result: Object = Object_t.Null()
-    
-    for (_, statement) in statements.enumerated() {
-        result = Eval(statement)
-    }
-    
-    return result
-}
+
+
+

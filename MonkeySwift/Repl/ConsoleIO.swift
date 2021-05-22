@@ -34,20 +34,21 @@ struct ConsoleIO {
     func writeMessage(_ message: String, to: OutputType = .standard) {
         switch to {
             case .standard:
-                print("\u{001B}[;m\(message)")
+                fputs("\u{001B}[;m\(message)", stdout)
             case .error:
-                fputs("\u{001B}[0;31m\(message)\n", stderr)
+                fputs("\u{001B}[0;31m\(message)", stderr)
         }
     }
     
     func printUsage() {
         let userName = NSFullUserName()
-        writeMessage("Hello \(userName)! This is the Monkey Programming Language!")
-        writeMessage("Feel free to type in commands")
-        writeMessage("Type 'q' to quit")
+        writeMessage("Hello \(userName)! This is the Monkey Programming Language!\n")
+        writeMessage("Feel free to type in commands\n")
+        writeMessage("Type 'q' to quit\n")
     }
     
     func getInput() -> String {
+        writeMessage(">>> ")
         let keyboard = FileHandle.standardInput
         let inputData = keyboard.availableData
         let strData = String(data: inputData, encoding: String.Encoding.utf8)!

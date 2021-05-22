@@ -38,7 +38,7 @@ class EvaluatorTest: XCTestCase {
             return Object_t.Null()
         }
         
-       return Eval(program)
+        return Evaluator.eval(program) ?? Object_t.Null()
     }
 
     private func testIntegerObject(object: Object, expected: Int64) -> Bool {

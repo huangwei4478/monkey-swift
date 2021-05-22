@@ -12,9 +12,8 @@ let prompt = ">> "
 struct Repl {
     static func start() {
         var shouldQuit = false
-        
+        ConsoleIO.shared.printUsage()
         while !shouldQuit {
-            ConsoleIO.shared.printUsage()
             
             let option = OptionType(value: ConsoleIO.shared.getInput())
             
@@ -31,7 +30,8 @@ struct Repl {
                     
                     guard let program = optionalProgram else { continue }
                     
-                    ConsoleIO.shared.writeMessage(program.string())
+                    guard let evaluated = Evaluator.eval(program) else { continue }
+                    ConsoleIO.shared.writeMessage(evaluated.inspect())
                     ConsoleIO.shared.writeMessage("\n")
                 case .quit:
                     shouldQuit = true
