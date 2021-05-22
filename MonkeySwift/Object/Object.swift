@@ -20,36 +20,39 @@ protocol Object {
     func inspect() -> String
 }
 
-struct Integer: Object {
-    let value: Int64
-    
-    func type() -> ObjectType {
-        return .integer_obj
+struct Object_t {
+    struct Integer: Object {
+        let value: Int64
+        
+        func type() -> ObjectType {
+            return .integer_obj
+        }
+        
+        func inspect() -> String {
+            return String(format: "%d", value)
+        }
     }
-    
-    func inspect() -> String {
-        return String(format: "%d", value)
+
+    struct Boolean: Object {
+        let value: Bool
+        
+        func type() -> ObjectType {
+            return .boolean_obj
+        }
+        
+        func inspect() -> String {
+            return "\(value)"
+        }
+    }
+
+    struct Null: Object {
+        func type() -> ObjectType {
+            return .null_obj
+        }
+        
+        func inspect() -> String {
+            return "null"
+        }
     }
 }
 
-struct Boolean: Object {
-    let value: Bool
-    
-    func type() -> ObjectType {
-        return .boolean_obj
-    }
-    
-    func inspect() -> String {
-        return "\(value)"
-    }
-}
-
-struct Null: Object {
-    func type() -> ObjectType {
-        return .null_obj
-    }
-    
-    func inspect() -> String {
-        return "null"
-    }
-}

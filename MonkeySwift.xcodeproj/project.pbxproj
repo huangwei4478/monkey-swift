@@ -15,6 +15,9 @@
 		0E44344B25FCD321003A97D2 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44344A25FCD321003A97D2 /* Parser.swift */; };
 		0E44345125FCD82F003A97D2 /* Ast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44345025FCD82F003A97D2 /* Ast.swift */; };
 		0E44345425FCE466003A97D2 /* Ast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44345025FCD82F003A97D2 /* Ast.swift */; };
+		0E6B51D7264816670042ED5B /* Evaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6B51D6264816670042ED5B /* Evaluator.swift */; };
+		0E6B51D9264816810042ED5B /* EvaluatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6B51D8264816810042ED5B /* EvaluatorTest.swift */; };
+		0E6B51DA264828EA0042ED5B /* Evaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6B51D6264816670042ED5B /* Evaluator.swift */; };
 		0E8C04EC261076B300CEFB9D /* AstTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8C04EB261076B300CEFB9D /* AstTest.swift */; };
 		0EA41FF92639B82F00CDC676 /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA41FF82639B82F00CDC676 /* Object.swift */; };
 		0EA41FFA2639B82F00CDC676 /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA41FF82639B82F00CDC676 /* Object.swift */; };
@@ -46,6 +49,8 @@
 		0E44344425FCD009003A97D2 /* ParserTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserTest.swift; sourceTree = "<group>"; };
 		0E44344A25FCD321003A97D2 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		0E44345025FCD82F003A97D2 /* Ast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ast.swift; sourceTree = "<group>"; };
+		0E6B51D6264816670042ED5B /* Evaluator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Evaluator.swift; sourceTree = "<group>"; };
+		0E6B51D8264816810042ED5B /* EvaluatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluatorTest.swift; sourceTree = "<group>"; };
 		0E8C04EB261076B300CEFB9D /* AstTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AstTest.swift; sourceTree = "<group>"; };
 		0EA41FF82639B82F00CDC676 /* Object.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Object.swift; sourceTree = "<group>"; };
 		98BCE7EC25F8F90B00600211 /* MonkeySwift */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MonkeySwift; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,6 +87,7 @@
 				0E44343725FCCDB3003A97D2 /* LexerTest.swift */,
 				0E44344425FCD009003A97D2 /* ParserTest.swift */,
 				0E8C04EB261076B300CEFB9D /* AstTest.swift */,
+				0E6B51D8264816810042ED5B /* EvaluatorTest.swift */,
 			);
 			path = MonkeySwiftUnitTest;
 			sourceTree = "<group>";
@@ -100,6 +106,14 @@
 				0E44344A25FCD321003A97D2 /* Parser.swift */,
 			);
 			path = Parser;
+			sourceTree = "<group>";
+		};
+		0E6B51D52648163A0042ED5B /* Evaluator */ = {
+			isa = PBXGroup;
+			children = (
+				0E6B51D6264816670042ED5B /* Evaluator.swift */,
+			);
+			path = Evaluator;
 			sourceTree = "<group>";
 		};
 		0EA41FF72639B81400CDC676 /* Object */ = {
@@ -131,6 +145,7 @@
 		98BCE7EE25F8F90B00600211 /* MonkeySwift */ = {
 			isa = PBXGroup;
 			children = (
+				0E6B51D52648163A0042ED5B /* Evaluator */,
 				0EA41FF72639B81400CDC676 /* Object */,
 				0E44344925FCD305003A97D2 /* Parser */,
 				0E44344825FCD2EC003A97D2 /* Ast */,
@@ -258,11 +273,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E8C04EC261076B300CEFB9D /* AstTest.swift in Sources */,
+				0E6B51D9264816810042ED5B /* EvaluatorTest.swift in Sources */,
 				0E44343E25FCCEB6003A97D2 /* TokenType.swift in Sources */,
 				0E44343B25FCCEAD003A97D2 /* Lexer.swift in Sources */,
 				0E44345425FCE466003A97D2 /* Ast.swift in Sources */,
 				0EA41FFA2639B82F00CDC676 /* Object.swift in Sources */,
 				0EA41FFB2639B84F00CDC676 /* Parser.swift in Sources */,
+				0E6B51DA264828EA0042ED5B /* Evaluator.swift in Sources */,
 				0E44344525FCD009003A97D2 /* ParserTest.swift in Sources */,
 				0E44343825FCCDB3003A97D2 /* LexerTest.swift in Sources */,
 				0E44344125FCCEB8003A97D2 /* Token.swift in Sources */,
@@ -278,6 +295,7 @@
 				98BCE80025F8FA7900600211 /* Token.swift in Sources */,
 				98BCE7F025F8F90B00600211 /* utils.swift in Sources */,
 				0EA41FF92639B82F00CDC676 /* Object.swift in Sources */,
+				0E6B51D7264816670042ED5B /* Evaluator.swift in Sources */,
 				0E44345125FCD82F003A97D2 /* Ast.swift in Sources */,
 				98BCE80125F8FA7900600211 /* Lexer.swift in Sources */,
 				98BCE7FF25F8FA7900600211 /* TokenType.swift in Sources */,
