@@ -13,7 +13,7 @@ struct Evaluator {
         
         // Statements
         case let node as Ast.Program:
-        return evalProgram(program: node)
+            return evalProgram(program: node)
         
         case let node as Ast.ExpressionStatement:
             return eval(node.expression)
@@ -23,8 +23,9 @@ struct Evaluator {
             
         case let node as Ast.ReturnStatement:
             guard let value = eval(node.returnValue) else { return nil }
+            if isError(object: value) { return value }
             return Object_t.ReturnValue(value: value)
-        
+            
         // Expressions
         case let node as Ast.IntegerLiteral:
             return Object_t.Integer(value: node.value)
@@ -34,11 +35,14 @@ struct Evaluator {
             
         case let node as Ast.PrefixExpression:
             guard let right = eval(node.right) else { return nil }
+            if isError(object: right) { return right }
             return evalPrefixExpression(operator: node.operator, right: right)
             
         case let node as Ast.InfixExpression:
             guard let left = eval(node.left) else { return nil }
             guard let right = eval(node.right) else { return nil }
+            if isError(object: left) { return left }
+            if isError(object: right) { return right }
             return evalInfixExpression(operator: node.operator, left: left, right: right)
             
         case let node as Ast.IfExpression:
@@ -55,11 +59,14 @@ struct Evaluator {
         for (_, statement) in program.statements.enumerated() {
             guard let evaluated = eval(statement) else { continue }
             
-            if let returnValue = evaluated as? Object_t.ReturnValue {
-                return returnValue.value
+            switch evaluated {
+            case let node as Object_t.ReturnValue:
+                return node.value
+            case let node as Object_t.Error:
+                return node
+            default:
+                result = evaluated
             }
-            
-            result = evaluated
         }
         
         return result
@@ -71,11 +78,13 @@ struct Evaluator {
         for (_, statement) in block.statements.enumerated() {
             guard let evaluated = eval(statement) else { continue }
             
-            if evaluated.type() == .return_value_obj {
+            if evaluated.type() == .return_value_obj ||
+                evaluated.type() == .error_obj {
+                // stop the evaluation
                 return evaluated
+            } else {
+                result = evaluated
             }
-            
-            result = evaluated
         }
         
         return result
@@ -88,7 +97,7 @@ struct Evaluator {
         case "-":
             return evalMinusPrefixOperatorExpression(right: right)
         default:
-            return Object_t.Null()
+            return Object_t.Error(message: "unknown operator: \(`operator`)\(right.type().rawValue)")
         }
     }
     
@@ -100,8 +109,10 @@ struct Evaluator {
             return nativeBoolToBooleanObject(input: left == right)
         case let (`operator`, _, _) where `operator` == "!=":
             return nativeBoolToBooleanObject(input: left != right)
+        case let (_, left, right) where left.type() != right.type():
+            return Object_t.Error(message: "type mismatch: \(left.type().rawValue) \(`operator`) \(right.type().rawValue)")
         default:
-            return Object_t.Null()
+            return Object_t.Error(message: "unknown operator: \(left.type().rawValue) \(`operator`) \(right.type().rawValue)")
         }
     }
     
@@ -117,7 +128,9 @@ struct Evaluator {
     }
     
     private static func evalMinusPrefixOperatorExpression(right: Object) -> Object {
-        guard right.type() == .integer_obj else { return Object_t.Null() }
+        guard right.type() == .integer_obj else {
+            return Object_t.Error(message: "unknown operator: -\(right.type().rawValue)")
+        }
         guard let integer = right as? Object_t.Integer else { return Object_t.Null() }
         return Object_t.Integer(value: -integer.value)
     }
@@ -147,7 +160,7 @@ struct Evaluator {
         case "!=":
             return nativeBoolToBooleanObject(input: leftValue != rightValue)
         default:
-            return Object_t.Null()
+            return Object_t.Error(message: "unknown operator: \(left.type().rawValue) \(`operator`) \(right.type().rawValue)")
         }
     }
     
@@ -160,6 +173,7 @@ struct Evaluator {
         guard let condition = eval(ifExpression.condition) else {
             return Object_t.Null()
         }
+        if isError(object: condition) { return condition }
         
         if isTruthy(object: condition) {
             guard let consequence = eval(ifExpression.consequence) else {
@@ -184,6 +198,14 @@ struct Evaluator {
             return object.value
         default:
             return true
+        }
+    }
+    
+    private static func isError(object: Object?) -> Bool {
+        if let object = object {
+            return object.type() == .error_obj
+        } else {
+            return false
         }
     }
 }

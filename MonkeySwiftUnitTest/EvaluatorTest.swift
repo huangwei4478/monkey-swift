@@ -136,6 +136,47 @@ class EvaluatorTest: XCTestCase {
         }
     }
     
+    func testErrorHandling() {
+        let tests: [TestCase<String>] = [
+            TestCase("5 + true;",
+                     "type mismatch: INTEGER + BOOLEAN"),
+            TestCase("5 + true; 5;",
+                     "type mismatch: INTEGER + BOOLEAN"),
+            TestCase("-true",
+                     "unknown operator: -BOOLEAN"),
+            TestCase("true + false;",
+                     "unknown operator: BOOLEAN + BOOLEAN"),
+            TestCase("true + false + true + false;",
+                     "unknown operator: BOOLEAN + BOOLEAN"),
+            TestCase("5; true + false; 5",
+                     "unknown operator: BOOLEAN + BOOLEAN"),
+            TestCase("if (10 > 1) { true + false; }",
+                     "unknown operator: BOOLEAN + BOOLEAN"),
+            TestCase("""
+                    if (10 > 1) {
+                      if (10 > 1) {
+                        return true + false;
+                      }
+
+                      return 1;
+                    }
+                    """, "unknown operator: BOOLEAN + BOOLEAN"),
+        ]
+        
+        for test in tests {
+            let evaluated = testEval(input: test.input)
+            
+            guard let errorObject = evaluated as? Object_t.Error else {
+                XCTFail("no error object returned. got=\(type(of: evaluated))(\(evaluated))")
+                continue
+            }
+            
+            if errorObject.message != test.expected {
+                XCTFail("wrong error message. expected=\(test.expected), got=\(errorObject.message)")
+            }
+        }
+    }
+    
     private func testEval(input: String) -> Object {
         let lexer = Lexer(input: input)
         let parser = Parser(lexer: lexer)

@@ -8,10 +8,11 @@
 import Foundation
 
 enum ObjectType: String {
-    case integer_obj = "INTEGER"
-    case boolean_obj = "BOOLEAN"
-    case null_obj    = "NULL"
-    case return_value_obj = "RETURN_VALUE"
+    case integer_obj        = "INTEGER"
+    case boolean_obj        = "BOOLEAN"
+    case null_obj           = "NULL"
+    case return_value_obj   = "RETURN_VALUE"
+    case error_obj          = "ERROR"
 }
 
 
@@ -83,6 +84,18 @@ struct Object_t {
         
         func inspect() -> String {
             return value.inspect()
+        }
+    }
+    
+    struct Error: Object {
+        let message: String
+        
+        func type() -> ObjectType {
+            return .error_obj
+        }
+        
+        func inspect() -> String {
+            return "ERROR: \(message)"
         }
     }
 }
