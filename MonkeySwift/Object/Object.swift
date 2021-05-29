@@ -11,6 +11,7 @@ enum ObjectType: String {
     case integer_obj = "INTEGER"
     case boolean_obj = "BOOLEAN"
     case null_obj    = "NULL"
+    case return_value_obj = "RETURN_VALUE"
 }
 
 
@@ -70,6 +71,18 @@ struct Object_t {
         
         func inspect() -> String {
             return "null"
+        }
+    }
+    
+    struct ReturnValue: Object {
+        let value: Object
+        
+        func type() -> ObjectType {
+            return .return_value_obj
+        }
+        
+        func inspect() -> String {
+            return value.inspect()
         }
     }
 }

@@ -13,13 +13,17 @@ struct Evaluator {
         
         // Statements
         case let node as Ast.Program:
-            return evalStatements(statements: node.statements)
+        return evalProgram(program: node)
         
         case let node as Ast.ExpressionStatement:
             return eval(node.expression)
             
         case let node as Ast.BlockStatement:
-            return evalStatements(statements: node.statements)
+            return evalBlockStatement(block: node)
+            
+        case let node as Ast.ReturnStatement:
+            guard let value = eval(node.returnValue) else { return nil }
+            return Object_t.ReturnValue(value: value)
         
         // Expressions
         case let node as Ast.IntegerLiteral:
@@ -45,11 +49,32 @@ struct Evaluator {
         }
     }
     
-    private static func evalStatements(statements: [Statement]) -> Object {
+    private static func evalProgram(program: Ast.Program) -> Object {
         var result: Object = Object_t.Null()
         
-        for (_, statement) in statements.enumerated() {
+        for (_, statement) in program.statements.enumerated() {
             guard let evaluated = eval(statement) else { continue }
+            
+            if let returnValue = evaluated as? Object_t.ReturnValue {
+                return returnValue.value
+            }
+            
+            result = evaluated
+        }
+        
+        return result
+    }
+    
+    private static func evalBlockStatement(block: Ast.BlockStatement) -> Object {
+        var result: Object = Object_t.Null()
+        
+        for (_, statement) in block.statements.enumerated() {
+            guard let evaluated = eval(statement) else { continue }
+            
+            if evaluated.type() == .return_value_obj {
+                return evaluated
+            }
+            
             result = evaluated
         }
         
