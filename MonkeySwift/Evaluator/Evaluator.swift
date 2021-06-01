@@ -8,23 +8,28 @@
 import Foundation
 
 struct Evaluator {
-    static func eval(_ node: Node) -> Object? {
+    static func eval(_ node: Node, _ environment: Environment) -> Object? {
         switch node {
         
         // Statements
         case let node as Ast.Program:
-            return evalProgram(program: node)
+            return evalProgram(program: node, environment: environment)
         
         case let node as Ast.ExpressionStatement:
-            return eval(node.expression)
+            return eval(node.expression, environment)
             
         case let node as Ast.BlockStatement:
-            return evalBlockStatement(block: node)
+            return evalBlockStatement(block: node, environment: environment)
             
         case let node as Ast.ReturnStatement:
-            guard let value = eval(node.returnValue) else { return nil }
+            guard let value = eval(node.returnValue, environment) else { return nil }
             if isError(object: value) { return value }
             return Object_t.ReturnValue(value: value)
+            
+        case let node as Ast.LetStatement:
+            guard let value = eval(node.value, environment) else { return nil }
+            if isError(object: value) { return value }
+            return environment.set(name: node.name.value, value: value)
             
         // Expressions
         case let node as Ast.IntegerLiteral:
@@ -34,30 +39,33 @@ struct Evaluator {
             return nativeBoolToBooleanObject(input: node.value)
             
         case let node as Ast.PrefixExpression:
-            guard let right = eval(node.right) else { return nil }
+            guard let right = eval(node.right, environment) else { return nil }
             if isError(object: right) { return right }
             return evalPrefixExpression(operator: node.operator, right: right)
             
         case let node as Ast.InfixExpression:
-            guard let left = eval(node.left) else { return nil }
-            guard let right = eval(node.right) else { return nil }
+            guard let left = eval(node.left, environment) else { return nil }
+            guard let right = eval(node.right, environment) else { return nil }
             if isError(object: left) { return left }
             if isError(object: right) { return right }
             return evalInfixExpression(operator: node.operator, left: left, right: right)
             
         case let node as Ast.IfExpression:
-            return evalIfExpression(ifExpression: node)
+            return evalIfExpression(ifExpression: node, environment: environment)
+            
+        case let node as Ast.Identifier:
+            return evalIdentifier(node: node, environment: environment)
             
         default:
             return nil
         }
     }
     
-    private static func evalProgram(program: Ast.Program) -> Object {
+    private static func evalProgram(program: Ast.Program, environment: Environment) -> Object {
         var result: Object = Object_t.Null()
         
         for (_, statement) in program.statements.enumerated() {
-            guard let evaluated = eval(statement) else { continue }
+            guard let evaluated = eval(statement, environment) else { continue }
             
             switch evaluated {
             case let node as Object_t.ReturnValue:
@@ -72,11 +80,11 @@ struct Evaluator {
         return result
     }
     
-    private static func evalBlockStatement(block: Ast.BlockStatement) -> Object {
+    private static func evalBlockStatement(block: Ast.BlockStatement, environment: Environment) -> Object {
         var result: Object = Object_t.Null()
         
         for (_, statement) in block.statements.enumerated() {
-            guard let evaluated = eval(statement) else { continue }
+            guard let evaluated = eval(statement, environment) else { continue }
             
             if evaluated.type() == .return_value_obj ||
                 evaluated.type() == .error_obj {
@@ -169,25 +177,33 @@ struct Evaluator {
             Object_t.Boolean(value: false)
     }
     
-    private static func evalIfExpression(ifExpression: Ast.IfExpression) -> Object {
-        guard let condition = eval(ifExpression.condition) else {
+    private static func evalIfExpression(ifExpression: Ast.IfExpression, environment: Environment) -> Object {
+        guard let condition = eval(ifExpression.condition, environment) else {
             return Object_t.Null()
         }
         if isError(object: condition) { return condition }
         
         if isTruthy(object: condition) {
-            guard let consequence = eval(ifExpression.consequence) else {
+            guard let consequence = eval(ifExpression.consequence, environment) else {
                 return Object_t.Null()
             }
             return consequence
         } else if ifExpression.alternative != nil {
-            guard let alternative = eval(ifExpression.alternative!) else {
+            guard let alternative = eval(ifExpression.alternative!, environment) else {
                 return Object_t.Null()
             }
             return alternative
         } else {
             return Object_t.Null()
         }
+    }
+    
+    private static func evalIdentifier(node: Ast.Identifier, environment: Environment) -> Object {
+        guard let value = environment.get(name: node.value) else {
+            return Object_t.Error(message: "identifier not found: \(node.value)")
+        }
+        
+        return value
     }
     
     private static func isTruthy(object: Object) -> Bool {

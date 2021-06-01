@@ -161,6 +161,7 @@ class EvaluatorTest: XCTestCase {
                       return 1;
                     }
                     """, "unknown operator: BOOLEAN + BOOLEAN"),
+            TestCase("foobar", "identifier not found: foobar")
         ]
         
         for test in tests {
@@ -177,14 +178,28 @@ class EvaluatorTest: XCTestCase {
         }
     }
     
+    func testLetStatements() {
+        let tests: [TestCase<Int64>] = [
+            TestCase("let a = 5; a;", 5),
+            TestCase("let a = 5 * 5; a;", 25),
+            TestCase("let a = 5; let b = a; b;", 5),
+            TestCase("let a = 5; let b = a; let c = a + b + 5; c;", 15),
+        ]
+        
+        for test in tests {
+            let _ = testIntegerObject(object: testEval(input: test.input), expected: test.expected)
+        }
+    }
+    
     private func testEval(input: String) -> Object {
         let lexer = Lexer(input: input)
         let parser = Parser(lexer: lexer)
+        let environment = Environment()
         guard let program = parser.parseProgram() else {
             return Object_t.Null()
         }
         
-        return Evaluator.eval(program) ?? Object_t.Null()
+        return Evaluator.eval(program, environment) ?? Object_t.Null()
     }
 
     private func testIntegerObject(object: Object, expected: Int64) -> Bool {
