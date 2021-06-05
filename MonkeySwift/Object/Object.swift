@@ -12,6 +12,7 @@ enum ObjectType: String {
     case boolean_obj        = "BOOLEAN"
     case null_obj           = "NULL"
     case return_value_obj   = "RETURN_VALUE"
+    case function_obj       = "FUNCTION"
     case error_obj          = "ERROR"
 }
 
@@ -84,6 +85,26 @@ struct Object_t {
         
         func inspect() -> String {
             return value.inspect()
+        }
+    }
+    
+    struct Function: Object {
+        let parameters: [Ast.Identifier]
+        
+        let body: Ast.BlockStatement
+        
+        let env: Environment
+        
+        func type() -> ObjectType {
+            .function_obj
+        }
+        
+        func inspect() -> String {
+            return """
+                    fn(\(parameters.map{ $0.string() }.joined(separator: ", "))){
+                        \(body.string())
+                    }
+                    """
         }
     }
     

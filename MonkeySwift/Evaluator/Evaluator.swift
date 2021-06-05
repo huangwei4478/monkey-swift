@@ -35,6 +35,25 @@ struct Evaluator {
         case let node as Ast.IntegerLiteral:
             return Object_t.Integer(value: node.value)
             
+        case let node as Ast.FunctionLiteral:
+            return Object_t.Function(parameters: node.parameters,
+                                     body: node.body,
+                                     env: environment)
+            
+        case let node as Ast.CallExpression:
+            guard let function = eval(node.function, environment) else { return nil }
+            if isError(object: function) {
+                return function
+            }
+            
+            let args = evalExpressions(expressions: node.arguments,
+                                       environment: environment)
+            if args.count == 1 && isError(object: args.first!) {
+                return args[0]
+            }
+            
+            return applyFunction(function, args)
+            
         case let node as Ast.Boolean:
             return nativeBoolToBooleanObject(input: node.value)
             
@@ -172,6 +191,21 @@ struct Evaluator {
         }
     }
     
+    private static func evalExpressions(expressions: [Expression],
+                                        environment: Environment) -> [Object] {
+        var result:[Object] = []
+        
+        for expression in expressions {
+            guard let evaluated = eval(expression, environment) else {
+                return [Object_t.Error(message: "eval nothing")]
+            }
+            
+            result += [evaluated]
+        }
+        
+        return result
+    }
+    
     private static func nativeBoolToBooleanObject(input: Bool) -> Object_t.Boolean {
         return input ? Object_t.Boolean(value: true) :
             Object_t.Boolean(value: false)
@@ -206,6 +240,38 @@ struct Evaluator {
         return value
     }
     
+    private static func applyFunction(_ function: Object, _ arguments: [Object]) -> Object {
+        guard let function = function as? Object_t.Function else {
+            return Object_t.Error(message: "not a function: \(function.type().rawValue)")
+        }
+
+        let extendedEnvironment = extendFunctionEnvironment(function: function,
+                                                            args: arguments)
+        guard let evaluated = eval(function.body, extendedEnvironment) else {
+            return Object_t.Error(message: "eval function body error: \(function.body)")
+        }
+        
+        return unwrapReturnValue(object: evaluated)
+    }
+    
+    private static func extendFunctionEnvironment(function: Object_t.Function, args: [Object]) -> Environment {
+        let environment = Environment(outer: function.env)
+        
+        for (paramIndex, param) in function.parameters.enumerated() {
+            let _ = environment.set(name: param.value, value: args[paramIndex])
+        }
+        
+        return environment
+    }
+    
+    private static func unwrapReturnValue(object: Object) -> Object {
+        if let returnValue = object as? Object_t.ReturnValue {
+            return returnValue.value
+        } else {
+            return object
+        }
+    }
+    
     private static func isTruthy(object: Object) -> Bool {
         switch object {
         case is Object_t.Null:
@@ -217,12 +283,8 @@ struct Evaluator {
         }
     }
     
-    private static func isError(object: Object?) -> Bool {
-        if let object = object {
-            return object.type() == .error_obj
-        } else {
-            return false
-        }
+    private static func isError(object: Object) -> Bool {
+        return object.type() == .error_obj
     }
 }
 

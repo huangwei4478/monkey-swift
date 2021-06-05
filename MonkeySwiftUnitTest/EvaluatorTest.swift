@@ -191,15 +191,70 @@ class EvaluatorTest: XCTestCase {
         }
     }
     
+    func testFunctionObject() {
+        let input = "fn(x) { x + 2; };"
+        
+        let evaluated = testEval(input: input)
+        
+        guard let fn = evaluated as? Object_t.Function else {
+            XCTFail("object is not function. got=\(type(of: evaluated)) (\(evaluated))")
+            return
+        }
+        
+        guard fn.parameters.count == 1 else {
+            XCTFail("function has wrong parameters. Parameters=\(fn.parameters)")
+            return
+        }
+        
+        guard fn.parameters[0].string() == "x" else {
+            XCTFail("parameter is not 'x'. got=\(fn.parameters[0])")
+            return
+        }
+        
+        let expectedBody = "(x + 2)"
+        
+        guard fn.body.string() == expectedBody else {
+            XCTFail("body is not \(expectedBody), got=\(fn.body.string())")
+            return
+        }
+    }
+    
+    func testFunctionApplication() {
+        let tests: [TestCase<Int64>] = [
+            TestCase("let identity = fn(x) { x; }; identity(5);", 5),
+            TestCase("let identity = fn(x) { return x; }; identity(5);", 5),
+            TestCase("let double = fn(x) { x * 2; }; double(5);", 10),
+            TestCase("let add = fn(x, y) { x + y; }; add(5, 5);", 10),
+            TestCase("let add = fn(x, y) { x + y; }; add(5 + 5, add(5, 5));", 20),
+            TestCase("fn(x) { x; }(5)", 5),
+        ]
+        
+        for test in tests {
+           let _ = testIntegerObject(object: testEval(input: test.input), expected: test.expected)
+        }
+    }
+    
+    func testCurryClosure() {
+        let input = """
+                    let newAdder = fn(x) {
+                        fn(y) { x + y };
+                    };
+                    
+                    let addTwo = newAdder(2);
+                    addTwo(2);
+                    """
+        let _ = testIntegerObject(object: testEval(input: input), expected: 4)
+    }
+    
     private func testEval(input: String) -> Object {
         let lexer = Lexer(input: input)
         let parser = Parser(lexer: lexer)
         let environment = Environment()
         guard let program = parser.parseProgram() else {
-            return Object_t.Null()
+            return Object_t.Error(message: "parse program error, failed to create ast tree")
         }
         
-        return Evaluator.eval(program, environment) ?? Object_t.Null()
+        return Evaluator.eval(program, environment) ?? Object_t.Error(message: "eval error")
     }
 
     private func testIntegerObject(object: Object, expected: Int64) -> Bool {
