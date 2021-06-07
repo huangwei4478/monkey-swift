@@ -68,6 +68,7 @@ final class Parser {
         self.registerPrefix(tokenType: .LPAREN, fn: parseGroupedExpression)
         self.registerPrefix(tokenType: .IF, fn: parseIfExpression)
         self.registerPrefix(tokenType: .FUNCTION, fn: parseFunctionLiteral)
+        self.registerPrefix(tokenType: .STRING, fn: parseStringLiteral)
         
         self.registerInfix(tokenType: .PLUS, fn: parseInfixExpression)
         self.registerInfix(tokenType: .MINUS, fn: parseInfixExpression)
@@ -340,6 +341,10 @@ final class Parser {
         return Ast.FunctionLiteral(token: prevToken,
                                    parameters: parameters,
                                    body: body)
+    }
+    
+    private func parseStringLiteral() -> Expression {
+        return Ast.StringLiteral(token: curToken, value: curToken.literal)
     }
     
     private func parseFunctionParameters() -> [Ast.Identifier] {

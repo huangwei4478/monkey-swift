@@ -120,6 +120,22 @@ public struct Ast {
         func string() -> String {
             return token.literal
         }
+    }
+    
+    struct StringLiteral: Expression {
+        let token: Token
+        
+        let value: String
+        
+        func expressionNode() {}
+        
+        func tokenLiteral() -> String {
+            return token.literal
+        }
+        
+        func string() -> String {
+            return token.literal
+        }
         
         
     }

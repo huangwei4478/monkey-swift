@@ -723,6 +723,34 @@ class ParserTest: XCTestCase {
         let _ = testInfixExpression(expression: callExpression.arguments[2], left: 4, operator: "+", right: 5)
     }
     
+    func testStringLiteralExpression() {
+        let input = "\"Hello world\";"
+        
+        let lexer = Lexer(input: input)
+        let parser = Parser(lexer: lexer)
+        let optionalProgram = parser.parseProgram()
+        checkParserErrors(parser)
+        
+        guard let program = optionalProgram else {
+            XCTFail("parser.parseProgram() is returning nil")
+            return
+        }
+        
+        guard let statement = program.statements.first as? Ast.ExpressionStatement else {
+            XCTFail("program.statement[0] is not ast.ExpressionStatement. got=\(type(of: program.statements.first))")
+            return
+        }
+        
+        guard let literal = statement.expression as? Ast.StringLiteral else {
+            XCTFail("exp not Ast.StringLiteral. got=\(type(of: statement.expression))")
+            return
+        }
+        
+        if literal.value != "Hello world" {
+            XCTFail("literal.value not \("Hello world"). got=\(literal.value)")
+        }
+    }
+    
     private func checkParserErrors(_ parser: Parser) {
         let errors = parser.Errors()
         

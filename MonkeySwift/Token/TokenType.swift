@@ -38,6 +38,9 @@ public enum TokenType: String {
     case LBRACE = "{"
     case RBRACE = "}"
     
+    // Data Types
+    case STRING = "STRING"
+    
     // Keywords
     case FUNCTION = "FUNCTION"
     case LET = "LET"

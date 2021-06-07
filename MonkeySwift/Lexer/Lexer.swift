@@ -80,6 +80,8 @@ public struct Lexer {
                 token = Token(tokenType: .LT, literal: String(ch))
             case ">":
                 token = Token(tokenType: .GT, literal: String(ch))
+            case "\"":
+                token = Token(tokenType: .STRING, literal: readString())
             case Character(Unicode.Scalar(0)):
                 token = Token(tokenType: .EOF, literal: "")
             default:
@@ -121,6 +123,19 @@ public struct Lexer {
         while ch.isDigit() {
             readChar()
         }
+        
+        let startIndex = input.index(input.startIndex, offsetBy: prevPosition)
+        let endIndex = input.index(input.startIndex, offsetBy: position)
+        
+        return String(input[startIndex ..< endIndex])
+    }
+    
+    mutating func readString() -> String {
+        let prevPosition = position + 1
+        
+        repeat {
+            readChar()
+        } while ch != "\"" && ch != Character(Unicode.Scalar(0))
         
         let startIndex = input.index(input.startIndex, offsetBy: prevPosition)
         let endIndex = input.index(input.startIndex, offsetBy: position)
