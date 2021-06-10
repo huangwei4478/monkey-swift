@@ -13,6 +13,7 @@ enum ObjectType: String {
     case null_obj           = "NULL"
     case return_value_obj   = "RETURN_VALUE"
     case function_obj       = "FUNCTION"
+    case string_obj         = "STRING"
     case error_obj          = "ERROR"
 }
 
@@ -105,6 +106,18 @@ struct Object_t {
                         \(body.string())
                     }
                     """
+        }
+    }
+    
+    struct string: Object {
+        let value: String
+        
+        func type() -> ObjectType {
+            return .string_obj
+        }
+        
+        func inspect() -> String {
+            return value
         }
     }
     

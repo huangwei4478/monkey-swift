@@ -161,7 +161,8 @@ class EvaluatorTest: XCTestCase {
                       return 1;
                     }
                     """, "unknown operator: BOOLEAN + BOOLEAN"),
-            TestCase("foobar", "identifier not found: foobar")
+            TestCase("foobar", "identifier not found: foobar"),
+            TestCase(#""Hello" - "world!""#, "unknown operator: STRING - STRING")
         ]
         
         for test in tests {
@@ -244,6 +245,38 @@ class EvaluatorTest: XCTestCase {
                     addTwo(2);
                     """
         let _ = testIntegerObject(object: testEval(input: input), expected: 4)
+    }
+    
+    func testStringLiteral() {
+        let input = #""Hello World!""#
+        
+        let evaluated = testEval(input: input)
+        
+        guard let string = evaluated as? Object_t.string else {
+            XCTFail("object is not string. got=\(type(of: evaluated)) (\(evaluated))")
+            return
+        }
+        
+        guard string.value == "Hello World!" else {
+            XCTFail("string has wrong value. got=\(string.value)")
+            return
+        }
+    }
+    
+    func testStringConcatenation() {
+        let input = #""Hello" + " " + "World!""#
+
+        let evaluated = testEval(input: input)
+
+        guard let string = evaluated as? Object_t.string else {
+            XCTFail("object is not string. got=\(type(of: evaluated)) (\(evaluated))")
+            return
+        }
+
+        guard string.value == "Hello World!" else {
+            XCTFail("string has wrong value. got=\(string.value)")
+            return
+        }
     }
     
     private func testEval(input: String) -> Object {

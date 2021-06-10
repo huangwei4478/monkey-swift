@@ -40,6 +40,9 @@ struct Evaluator {
                                      body: node.body,
                                      env: environment)
             
+        case let node as Ast.StringLiteral:
+            return Object_t.string(value: node.value)
+            
         case let node as Ast.CallExpression:
             guard let function = eval(node.function, environment) else { return nil }
             if isError(object: function) {
@@ -136,6 +139,8 @@ struct Evaluator {
             return nativeBoolToBooleanObject(input: left == right)
         case let (`operator`, _, _) where `operator` == "!=":
             return nativeBoolToBooleanObject(input: left != right)
+        case let (`operator`, left, right) where left.type() == .string_obj && right.type() == .string_obj:
+            return evalStringInfixExpression(operator: `operator`, left: left as! Object_t.string, right: right as! Object_t.string)
         case let (_, left, right) where left.type() != right.type():
             return Object_t.Error(message: "type mismatch: \(left.type().rawValue) \(`operator`) \(right.type().rawValue)")
         default:
@@ -238,6 +243,14 @@ struct Evaluator {
         }
         
         return value
+    }
+    
+    private static func evalStringInfixExpression(`operator`: String, left: Object_t.string, right: Object_t.string) -> Object {
+        guard `operator` == "+" else {
+            return Object_t.Error(message: "unknown operator: \(left.type().rawValue) \(`operator`) \(right.type().rawValue)")
+        }
+        
+        return Object_t.string(value: left.value + right.value)
     }
     
     private static func applyFunction(_ function: Object, _ arguments: [Object]) -> Object {
