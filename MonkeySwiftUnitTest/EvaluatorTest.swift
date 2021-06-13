@@ -279,6 +279,37 @@ class EvaluatorTest: XCTestCase {
         }
     }
     
+    func testBuiltinFunctions() {
+        let tests: [TestCase<Any>] = [
+            TestCase(#"len("")"#, 0),
+            TestCase(#"len("four")"#, 4),
+            TestCase(#"len("hello world")"#, 11),
+            TestCase(#"len(1)"#, #"argument to `len` not supported, got=INTEGER"#),
+            TestCase(#"len("one", "two")"#, "wrong number of arguments. got=2, want=1")
+        ]
+        
+        for test in tests {
+            let evaluated = testEval(input: test.input)
+            
+            switch test.expected {
+            case let expected as Int:
+                let _ = testIntegerObject(object: evaluated, expected: Int64(expected))
+            case let expected as String:
+                guard let error = evaluated as? Object_t.Error else {
+                    XCTFail("object is not Error. got=\(type(of: evaluated))")
+                    continue
+                }
+                if error.message != expected {
+                    XCTFail("wrong error message. expected=\(test.expected), got=\(error.message)")
+                    continue
+                }
+            default:
+                XCTFail("test case type error. please double check the type in testcases")
+                continue
+            }
+        }
+    }
+    
     private func testEval(input: String) -> Object {
         let lexer = Lexer(input: input)
         let parser = Parser(lexer: lexer)

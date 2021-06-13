@@ -238,11 +238,13 @@ struct Evaluator {
     }
     
     private static func evalIdentifier(node: Ast.Identifier, environment: Environment) -> Object {
-        guard let value = environment.get(name: node.value) else {
+        if let value = environment.get(name: node.value) {
+            return value
+        } else if let builtin = builtins[node.value] {
+            return builtin
+        } else {
             return Object_t.Error(message: "identifier not found: \(node.value)")
         }
-        
-        return value
     }
     
     private static func evalStringInfixExpression(`operator`: String, left: Object_t.string, right: Object_t.string) -> Object {
@@ -254,17 +256,20 @@ struct Evaluator {
     }
     
     private static func applyFunction(_ function: Object, _ arguments: [Object]) -> Object {
-        guard let function = function as? Object_t.Function else {
+        switch function {
+        case let function as Object_t.Function:
+            let extendedEnvironment = extendFunctionEnvironment(function: function,
+                                                                args: arguments)
+            guard let evaluated = eval(function.body, extendedEnvironment) else {
+                return Object_t.Error(message: "eval function body error: \(function.body)")
+            }
+            return unwrapReturnValue(object: evaluated)
+            
+        case let function as Object_t.Builtin:
+            return function.function(arguments)
+        default:
             return Object_t.Error(message: "not a function: \(function.type().rawValue)")
         }
-
-        let extendedEnvironment = extendFunctionEnvironment(function: function,
-                                                            args: arguments)
-        guard let evaluated = eval(function.body, extendedEnvironment) else {
-            return Object_t.Error(message: "eval function body error: \(function.body)")
-        }
-        
-        return unwrapReturnValue(object: evaluated)
     }
     
     private static func extendFunctionEnvironment(function: Object_t.Function, args: [Object]) -> Environment {
@@ -301,6 +306,19 @@ struct Evaluator {
     }
 }
 
-
+let builtins: [String: Object_t.Builtin] = [
+    "len":
+        Object_t.Builtin(function: { args in
+            guard args.count == 1 else {
+                return Object_t.Error(message: "wrong number of arguments. got=\(args.count), want=1")
+            }
+            switch args[0] {
+            case let arg as Object_t.string:
+                return Object_t.Integer(value: Int64(arg.value.count))
+            default:
+                return Object_t.Error(message: "argument to `len` not supported, got=\(args[0].type().rawValue)")
+            }
+    })
+]
 
 

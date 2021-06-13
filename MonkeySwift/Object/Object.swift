@@ -14,6 +14,7 @@ enum ObjectType: String {
     case return_value_obj   = "RETURN_VALUE"
     case function_obj       = "FUNCTION"
     case string_obj         = "STRING"
+    case builtin_obj        = "BUILTIN"
     case error_obj          = "ERROR"
 }
 
@@ -43,6 +44,9 @@ func != (lhs: Object, rhs: Object) -> Bool {
 }
 
 struct Object_t {
+    
+    typealias BuiltinFunction = (_ args: [Object]) -> Object
+    
     struct Integer: Object {
         let value: Int64
         
@@ -119,6 +123,19 @@ struct Object_t {
         func inspect() -> String {
             return value
         }
+    }
+    
+    struct Builtin: Object {
+        let function: BuiltinFunction
+        
+        func type() -> ObjectType {
+            return .builtin_obj
+        }
+        
+        func inspect() -> String {
+            return "builtin function"
+        }
+        
     }
     
     struct Error: Object {
