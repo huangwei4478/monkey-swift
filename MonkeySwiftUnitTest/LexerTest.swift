@@ -92,6 +92,7 @@ class LexerTest: XCTestCase {
         10 != 9;
         "foobar"
         "foo bar"
+        [1, 2];
         """
         
         let tests: [ExpectedToken] = [
@@ -170,6 +171,12 @@ class LexerTest: XCTestCase {
             ExpectedToken(expectedType: .SEMICOLON, expectedLiteral: ";"),
             ExpectedToken(expectedType: .STRING, expectedLiteral: "foobar"),
             ExpectedToken(expectedType: .STRING, expectedLiteral: "foo bar"),
+            ExpectedToken(expectedType: .LBRACKET, expectedLiteral: "["),
+            ExpectedToken(expectedType: .INT, expectedLiteral: "1"),
+            ExpectedToken(expectedType: .COMMA, expectedLiteral: ","),
+            ExpectedToken(expectedType: .INT, expectedLiteral: "2"),
+            ExpectedToken(expectedType: .RBRACKET, expectedLiteral: "]"),
+            ExpectedToken(expectedType: .SEMICOLON, expectedLiteral: ";"),
             ExpectedToken(expectedType: .EOF, expectedLiteral: "")
         ]
         

@@ -37,6 +37,8 @@ public enum TokenType: String {
     case RPAREN = ")"
     case LBRACE = "{"
     case RBRACE = "}"
+    case LBRACKET = "["
+    case RBRACKET = "]"
     
     // Data Types
     case STRING = "STRING"
