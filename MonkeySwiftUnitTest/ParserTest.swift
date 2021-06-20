@@ -751,6 +751,39 @@ class ParserTest: XCTestCase {
         }
     }
     
+    func testParsingArrayLiterals() {
+        let input = "[1, 2 * 2, 3 + 3]"
+        
+        let lexer = Lexer(input: input)
+        let parser = Parser(lexer: lexer)
+        let optionalProgram = parser.parseProgram()
+        checkParserErrors(parser)
+        
+        guard let program = optionalProgram else {
+            XCTFail("parser.parseProgram() is returning nil")
+            return
+        }
+        
+        guard let statement = program.statements.first as? Ast.ExpressionStatement else {
+            XCTFail("program.statement[0] is not ast.ExpressionStatement. got=\(type(of: program.statements.first))")
+            return
+        }
+        
+        guard let array = statement.expression as? Ast.ArrayLiteral else {
+            XCTFail("expression not Ast.ArrayLiteral. got=\(statement.expression)")
+            return
+        }
+        
+        if array.elements.count != 3 {
+            XCTFail("array.elements.count not 3, got=\(array.elements.count)")
+            return
+        }
+        
+        let _ = testIntegerLiteral(array.elements[0], 1)
+        let _ = testInfixExpression(expression: array.elements[1], left: 2, operator: "*", right: 2)
+        let _ = testInfixExpression(expression: array.elements[2], left: 3, operator: "+", right: 3)
+    }
+    
     private func checkParserErrors(_ parser: Parser) {
         let errors = parser.Errors()
         

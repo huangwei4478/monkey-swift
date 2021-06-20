@@ -256,8 +256,23 @@ public struct Ast {
             
             return "\(tokenLiteral())(\(params))\(body.string())"
         }
+    }
+    
+    struct ArrayLiteral: Expression {
+        let token: Token                    // the '[' token
         
+        let elements: [Expression]
         
+        func expressionNode() {}
+        
+        func tokenLiteral() -> String {
+            return token.literal
+        }
+        
+        func string() -> String {
+            let elementExpressions = elements.map{ $0.string() }.joined(separator: ", ")
+            return "[\(elementExpressions)]"
+        }
     }
     
     struct CallExpression: Expression {

@@ -69,6 +69,7 @@ final class Parser {
         self.registerPrefix(tokenType: .IF, fn: parseIfExpression)
         self.registerPrefix(tokenType: .FUNCTION, fn: parseFunctionLiteral)
         self.registerPrefix(tokenType: .STRING, fn: parseStringLiteral)
+        self.registerPrefix(tokenType: .LBRACKET, fn: parseArrayLiteral)
         
         self.registerInfix(tokenType: .PLUS, fn: parseInfixExpression)
         self.registerInfix(tokenType: .MINUS, fn: parseInfixExpression)
@@ -140,6 +141,38 @@ final class Parser {
         }
         
         return leftExpression
+    }
+    
+    private func parseExpressionList(endTokenType: TokenType) -> [Expression] {
+        var list: [Expression] = []
+        
+        if peekTokenIs(endTokenType) {
+            nextToken()
+            return list
+        }
+        
+        nextToken()
+        
+        // ??, recursive here
+        if let expression = parseExpression(precedence: .lowest) {
+            list.append(expression)
+        }
+        
+        while peekTokenIs(.COMMA) {
+            nextToken()
+            nextToken()
+            
+            // ??, recursive here
+            if let expression = parseExpression(precedence: .lowest) {
+                list.append(expression)
+            }
+        }
+        
+        if !expectPeek(endTokenType) {
+            return [Ast.Identifier(token: Token(tokenType: .ILLEGAL, literal: "failed to parse function literald  next token not \(endTokenType), got=\(peekToken)"), value: peekToken.literal)]
+        }
+        
+        return list
     }
     
     private func parseLetStatement() -> Ast.LetStatement? {
@@ -347,6 +380,11 @@ final class Parser {
         return Ast.StringLiteral(token: curToken, value: curToken.literal)
     }
     
+    private func parseArrayLiteral() -> Expression {
+        let array = Ast.ArrayLiteral(token: curToken, elements: parseExpressionList(endTokenType: .RBRACKET))
+        return array
+    }
+    
     private func parseFunctionParameters() -> [Ast.Identifier] {
         var identifiers: [Ast.Identifier] = []
         
@@ -377,41 +415,10 @@ final class Parser {
     
     private func parseCallExpression(function: Expression) -> Expression {
         let prevToken = curToken
-        let arguments = parseCallArguments()
+        let arguments = parseExpressionList(endTokenType: .RPAREN)
         return Ast.CallExpression(token: prevToken,
                                   function: function,
                                   arguments: arguments)
-    }
-    
-    private func parseCallArguments() -> [Expression] {
-        var args:[Expression] = []
-        if peekTokenIs(.RPAREN) {
-            nextToken()
-            return args
-        }
-        
-        nextToken()
-        
-        // recursive here!
-        if let expression = parseExpression(precedence: .lowest) {
-            args.append(expression)
-        }
-
-        while peekTokenIs(.COMMA) {
-            nextToken()
-            nextToken()
-            
-            // recursive here!
-            if let expression = parseExpression(precedence: .lowest) {
-                args.append(expression)
-            }
-        }
-        
-        if !expectPeek(.RPAREN) {
-            return [Ast.Identifier(token: Token(tokenType: .ILLEGAL, literal: "failed to parse function literald  next token not .RPAREN, got=\(peekToken)"), value: peekToken.literal)]
-        }
-        
-        return args
     }
     
     private func curTokenIs(_ tokenType: TokenType) -> Bool {
