@@ -15,6 +15,7 @@ private enum Precedence: Int, Comparable {
     case product
     case prefix
     case call
+    case index
     
     static func < (lhs: Precedence, rhs: Precedence) -> Bool {
         return lhs.rawValue < rhs.rawValue
@@ -30,7 +31,8 @@ private let precedences: [TokenType: Precedence] = [
     .MINUS:     .sum,
     .SLASH:     .product,
     .ASTERISK:  .product,
-    .LPAREN:    .call
+    .LPAREN:    .call,
+    .LBRACKET:  .index
 ]
 
 final class Parser {
@@ -80,6 +82,7 @@ final class Parser {
         self.registerInfix(tokenType: .LT, fn: parseInfixExpression)
         self.registerInfix(tokenType: .GT, fn: parseInfixExpression)
         self.registerInfix(tokenType: .LPAREN, fn: parseCallExpression)
+        self.registerInfix(tokenType: .LBRACKET, fn: parseIndexExpression)
 
         // read two tokens, so curToken and peekToken are both set
         self.nextToken()
@@ -356,11 +359,27 @@ final class Parser {
                                 alternative: alternative)
     }
     
+    private func parseIndexExpression(left: Expression) -> Expression {
+        let prevToken = curToken
+        
+        nextToken()
+        
+        guard let index = parseExpression(precedence: .lowest) else {
+            return Ast.Identifier(token: Token(tokenType: .ILLEGAL, literal: "failed to parse index expression"), value: peekToken.literal)
+        }
+        
+        guard expectPeek(.RBRACKET) else {
+            return Ast.Identifier(token: Token(tokenType: .ILLEGAL, literal: "failed to parse index expression, end token not .RBRACKET, got=\(peekToken)"), value: peekToken.literal)
+        }
+        
+        return Ast.IndexExpression(token: prevToken, left: left, index: index)
+    }
+    
     private func parseFunctionLiteral() -> Expression {
         let prevToken = curToken
         
         if !expectPeek(.LPAREN) {
-            return Ast.Identifier(token: Token(tokenType: .ILLEGAL, literal: "failed to parse function literald  next token not .LPAREN, got=\(peekToken)"), value: peekToken.literal)
+            return Ast.Identifier(token: Token(tokenType: .ILLEGAL, literal: "failed to parse function literal next token not .LPAREN, got=\(peekToken)"), value: peekToken.literal)
         }
         
         let parameters = parseFunctionParameters()

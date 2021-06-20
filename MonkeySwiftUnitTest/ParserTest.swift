@@ -359,7 +359,11 @@ class ParserTest: XCTestCase {
             Test("!(true == true)", "(!(true == true))"),
             Test("a + add(b * c) + d", "((a + add((b * c))) + d)"),
             Test("add(a, b, 1, 2 * 3, 4 + 5, add(6, 7 * 8))", "add(a, b, 1, (2 * 3), (4 + 5), add(6, (7 * 8)))"),
-            Test("add(a + b + c * d / f + g)", "add((((a + b) + ((c * d) / f)) + g))")
+            Test("add(a + b + c * d / f + g)", "add((((a + b) + ((c * d) / f)) + g))"),
+            Test("a * [1, 2, 3, 4][b * c] * d",
+                 "((a * ([1, 2, 3, 4][(b * c)])) * d)"),
+            Test("add(a * b[2], b[1], 2 * [1, 2][1])",
+                 "add((a * (b[2])), (b[1]), (2 * ([1, 2][1])))")
         ]
         
         for (_, test) in tests.enumerated() {
@@ -782,6 +786,34 @@ class ParserTest: XCTestCase {
         let _ = testIntegerLiteral(array.elements[0], 1)
         let _ = testInfixExpression(expression: array.elements[1], left: 2, operator: "*", right: 2)
         let _ = testInfixExpression(expression: array.elements[2], left: 3, operator: "+", right: 3)
+    }
+    
+    func testParsingIndexExpressions() {
+        let input = "myArray[1 + 1]"
+        
+        let lexer = Lexer(input: input)
+        let parser = Parser(lexer: lexer)
+        let optionalProgram = parser.parseProgram()
+        checkParserErrors(parser)
+        
+        guard let program = optionalProgram else {
+            XCTFail("parser.parseProgram() is returning nil")
+            return
+        }
+        
+        guard let statement = program.statements.first as? Ast.ExpressionStatement else {
+            XCTFail("program.statement[0] is not ast.ExpressionStatement. got=\(type(of: program.statements.first))")
+            return
+        }
+        
+        guard let indexExpression = statement.expression as? Ast.IndexExpression else {
+            XCTFail("expression not Ast.IndexExpression. got=\(statement.expression)")
+            return
+        }
+        
+        let _ = testIdentifier(expression: indexExpression.left, value: "myArray")
+        let _ = testInfixExpression(expression: indexExpression.index,
+                                    left: 1, operator: "+", right: 1)
     }
     
     private func checkParserErrors(_ parser: Parser) {

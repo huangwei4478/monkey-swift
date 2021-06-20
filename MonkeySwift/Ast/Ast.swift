@@ -178,6 +178,24 @@ public struct Ast {
         }
     }
     
+    struct IndexExpression: Expression {
+        let token: Token            // the [ token
+        
+        let left: Expression
+        
+        let index: Expression
+        
+        func expressionNode() {}
+        
+        func tokenLiteral() -> String {
+            return token.literal
+        }
+        
+        func string() -> String {
+            return "(\(left.string())[\(index.string())])"
+        }
+    }
+    
     struct Boolean: Expression {
         let token: Token
         
