@@ -64,6 +64,19 @@ struct Evaluator {
             
             return applyFunction(function, args)
             
+        case let node as Ast.IndexExpression:
+            guard let left = eval(node.left, environment) else { return nil }
+            if isError(object: left) {
+                return left
+            }
+            
+            guard let index = eval(node.index, environment) else { return nil }
+            if isError(object: index) {
+                return index
+            }
+            
+            return evalIndexExpression(left: left, index: index)
+            
         case let node as Ast.Boolean:
             return nativeBoolToBooleanObject(input: node.value)
             
@@ -260,6 +273,34 @@ struct Evaluator {
         }
         
         return Object_t.string(value: left.value + right.value)
+    }
+    
+    private static func evalIndexExpression(left: Object, index: Object) -> Object {
+        switch (left, index) {
+        case (let left, let index) where left.type() == .array_obj && index.type() == .integer_obj:
+            return evalArrayIndexExpression(array: left, index: index)
+        default:
+            return Object_t.Error(message: "index operator not supported: \(left.type())")
+        }
+    }
+    
+    private static func evalArrayIndexExpression(array: Object, index: Object) -> Object {
+        guard let arrayObject = array as? Object_t.Array else {
+            return Object_t.Error(message: "\(array) is not an Array type")
+        }
+        
+        guard let index = index as? Object_t.Integer else {
+            return Object_t.Error(message: "\(index) is not an Integer type")
+        }
+        
+        let max = arrayObject.elements.count - 1
+        
+        // edge cases
+        if index.value < 0 || index.value > max {
+            return Object_t.Null()
+        }
+        
+        return arrayObject.elements[Int(index.value)]
     }
     
     private static func applyFunction(_ function: Object, _ arguments: [Object]) -> Object {

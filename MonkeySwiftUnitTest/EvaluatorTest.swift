@@ -330,6 +330,59 @@ class EvaluatorTest: XCTestCase {
         let _ = testIntegerObject(object: result.elements[2], expected: 6)
     }
     
+    func testArrayIndexExpressions() {
+        let tests: [TestCase<Int64?>] = [
+                    TestCase(
+                        "[1, 2, 3][0]",
+                        1),
+                    TestCase(
+                        "[1, 2, 3][1]",
+                        2
+                    ),
+                    TestCase(
+                        "[1, 2, 3][2]",
+                        3
+                    ),
+                    TestCase(
+                        "let i = 0; [1][i];",
+                        1
+                    ),
+                    TestCase(
+                        "[1, 2, 3][1 + 1];",
+                        3
+                    ),
+                    TestCase(
+                        "let myArray = [1, 2, 3]; myArray[2];",
+                        3
+                    ),
+                    TestCase(
+                        "let myArray = [1, 2, 3]; myArray[0] + myArray[1] + myArray[2];",
+                        6
+                    ),
+                    TestCase(
+                        "let myArray = [1, 2, 3]; let i = myArray[0]; myArray[i]",
+                        2
+                    ),
+                    TestCase(
+                        "[1, 2, 3][3]",
+                        nil
+                    ),
+                    TestCase(
+                        "[1, 2, 3][-1]",
+                        nil
+                    ),
+        ]
+        
+        for (_, test) in tests.enumerated() {
+            let evaluated = testEval(input: test.input)
+            if let expectedInteger = test.expected {
+                let _ = testIntegerObject(object: evaluated, expected: expectedInteger)
+            } else {
+                let _ = testNullObject(object: evaluated)
+            }
+        }
+    }
+    
     private func testEval(input: String) -> Object {
         let lexer = Lexer(input: input)
         let parser = Parser(lexer: lexer)
