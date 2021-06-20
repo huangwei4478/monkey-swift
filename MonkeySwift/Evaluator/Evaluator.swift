@@ -363,10 +363,61 @@ let builtins: [String: Object_t.Builtin] = [
             switch args[0] {
             case let arg as Object_t.string:
                 return Object_t.Integer(value: Int64(arg.value.count))
+            case let arg as Object_t.Array:
+                return Object_t.Integer(value: Int64(arg.elements.count))
             default:
                 return Object_t.Error(message: "argument to `len` not supported, got=\(args[0].type().rawValue)")
             }
-    })
+    }),
+    "first":
+        Object_t.Builtin(function: { args in
+            guard args.count == 1 else {
+                return Object_t.Error(message: "wrong number of arguments. got=\(args.count), want=1")
+            }
+            switch args[0] {
+            case let arg as Object_t.Array:
+                return arg.elements.first ?? Object_t.Null()
+            default:
+                return Object_t.Error(message: "argument to `first` must be ARRAY, got=\(args[0].type().rawValue)")
+            }
+        }),
+    "last":
+        Object_t.Builtin(function: { args in
+            guard args.count == 1 else {
+                return Object_t.Error(message: "wrong number of arguments. got=\(args.count), want=1")
+            }
+            switch args[0] {
+            case let arg as Object_t.Array:
+                return arg.elements.last ?? Object_t.Null()
+            default:
+                return Object_t.Error(message: "argument to `last` must be ARRAY, got=\(args[0].type().rawValue)")
+            }
+        }),
+    "rest":
+        Object_t.Builtin(function: { args in
+            guard args.count == 1 else {
+                return Object_t.Error(message: "wrong number of arguments. got=\(args.count), want=1")
+            }
+            switch args[0] {
+            case let arg as Object_t.Array:
+                return Object_t.Array(elements: Array(arg.elements.dropFirst()))
+            default:
+                return Object_t.Error(message: "argument to `rest` must be ARRAY, got=\(args[0].type().rawValue)")
+            }
+        }),
+    "push":
+        Object_t.Builtin(function: { args in
+            guard args.count == 2 else {
+                return Object_t.Error(message: "wrong number of arguments. got=\(args.count), want=2")
+            }
+            
+            switch args[0] {
+            case let arg as Object_t.Array:
+                return Object_t.Array(elements: arg.elements + [args[1]])
+            default:
+                return Object_t.Error(message: "argument to `push` must be ARRAY, got=\(args[0].type().rawValue)")
+            }
+        })
 ]
 
 
