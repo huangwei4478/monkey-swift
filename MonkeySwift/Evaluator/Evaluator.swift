@@ -43,6 +43,13 @@ struct Evaluator {
         case let node as Ast.StringLiteral:
             return Object_t.string(value: node.value)
             
+        case let node as Ast.ArrayLiteral:
+            let elements = evalExpressions(expressions: node.elements, environment: environment)
+            if elements.count == 1 && isError(object: elements[0]) {
+                return elements[0]
+            }
+            return Object_t.Array(elements: elements)
+            
         case let node as Ast.CallExpression:
             guard let function = eval(node.function, environment) else { return nil }
             if isError(object: function) {

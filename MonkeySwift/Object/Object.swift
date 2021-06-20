@@ -15,6 +15,7 @@ enum ObjectType: String {
     case function_obj       = "FUNCTION"
     case string_obj         = "STRING"
     case builtin_obj        = "BUILTIN"
+    case array_obj          = "ARRAY"
     case error_obj          = "ERROR"
 }
 
@@ -110,6 +111,19 @@ struct Object_t {
                         \(body.string())
                     }
                     """
+        }
+    }
+    
+    struct Array: Object {
+        let elements: [Object]
+        
+        func type() -> ObjectType {
+            return .array_obj
+        }
+        
+        func inspect() -> String {
+            let elements = elements.map { $0.inspect() }.joined(separator: ", ")
+            return "[\(elements)]"
         }
     }
     

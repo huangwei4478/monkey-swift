@@ -310,6 +310,26 @@ class EvaluatorTest: XCTestCase {
         }
     }
     
+    func testArrayLiterals() {
+        let input = "[1, 2 * 2, 3 + 3]"
+        
+        let evaluated = testEval(input: input)
+        
+        guard let result = evaluated as? Object_t.Array else {
+            XCTFail("object is not Array. got=\(type(of: evaluated)) (\(evaluated))")
+            return
+        }
+        
+        if result.elements.count != 3 {
+            XCTFail("array has wrong num of elements. got=\(result.elements.count)")
+            return
+        }
+        
+        let _ = testIntegerObject(object: result.elements[0], expected: 1)
+        let _ = testIntegerObject(object: result.elements[1], expected: 4)
+        let _ = testIntegerObject(object: result.elements[2], expected: 6)
+    }
+    
     private func testEval(input: String) -> Object {
         let lexer = Lexer(input: input)
         let parser = Parser(lexer: lexer)
