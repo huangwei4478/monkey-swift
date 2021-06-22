@@ -293,6 +293,28 @@ public struct Ast {
         }
     }
     
+    struct HashLiteral: Expression {
+        
+        typealias HashPair = (key: Expression, value: Expression)
+        
+        let token: Token            // the '{' token
+        
+        let pairs: [HashPair]
+
+        func expressionNode() {}
+        
+        func tokenLiteral() -> String {
+            return token.literal
+        }
+        
+        func string() -> String {
+            let keyValues = pairs.map { key, value in
+                return "\(key.string()):\(value.string())"
+            }
+            return "{\(keyValues.joined(separator: ", "))}"
+        }
+    }
+    
     struct CallExpression: Expression {
         let token: Token                    // the '(' token
         

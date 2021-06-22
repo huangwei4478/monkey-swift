@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Token {
+public struct Token: Hashable {
     let tokenType: TokenType
     let literal: String
 }

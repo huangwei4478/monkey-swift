@@ -72,6 +72,7 @@ final class Parser {
         self.registerPrefix(tokenType: .FUNCTION, fn: parseFunctionLiteral)
         self.registerPrefix(tokenType: .STRING, fn: parseStringLiteral)
         self.registerPrefix(tokenType: .LBRACKET, fn: parseArrayLiteral)
+        self.registerPrefix(tokenType: .LBRACE, fn: parseHashLiteral)
         
         self.registerInfix(tokenType: .PLUS, fn: parseInfixExpression)
         self.registerInfix(tokenType: .MINUS, fn: parseInfixExpression)
@@ -402,6 +403,48 @@ final class Parser {
     private func parseArrayLiteral() -> Expression {
         let array = Ast.ArrayLiteral(token: curToken, elements: parseExpressionList(endTokenType: .RBRACKET))
         return array
+    }
+    
+    private func parseHashLiteral() -> Expression {
+        let prevToken = curToken
+        
+        var pairs = [Ast.HashLiteral.HashPair]()
+        
+        while !peekTokenIs(.RBRACE) {
+            nextToken()
+            guard let key = parseExpression(precedence: .lowest) else {
+                return Ast.Identifier(token: Token(tokenType: .ILLEGAL,
+                                                   literal: "failed to parse expression for the key of hash literal"), value: curToken.literal)
+            }
+            
+            if !expectPeek(.COLON) {
+                return Ast.Identifier(token: Token(tokenType: .ILLEGAL,
+                                                   literal: "failed to parse expression for hash literal, next token not colon"), value: curToken.literal)
+            }
+            
+            nextToken()
+            
+            guard let value = parseExpression(precedence: .lowest) else {
+                return Ast.Identifier(token: Token(tokenType: .ILLEGAL,
+                                                   literal: "failed to parse expression for the value of hash literal"), value: curToken.literal)
+            }
+            
+            // TODO: what about the duplicate key issue?
+            // use Set instead?
+            pairs.append((key: key, value: value))
+            
+            if !peekTokenIs(.RBRACE) && !expectPeek(.COMMA) {
+                return Ast.Identifier(token: Token(tokenType: .ILLEGAL,
+                                                   literal: "failed to parse expression for the hash literal, wrong terminator at the end of the key-value pair"), value: curToken.literal)
+            }
+        }
+        
+        if !expectPeek(.RBRACE) {
+            return Ast.Identifier(token: Token(tokenType: .ILLEGAL,
+                                               literal: "failed to parse expression for the hash literal, wrong terminator at the end hash literal"), value: curToken.literal)
+        }
+        
+        return Ast.HashLiteral(token: prevToken, pairs: pairs)
     }
     
     private func parseFunctionParameters() -> [Ast.Identifier] {

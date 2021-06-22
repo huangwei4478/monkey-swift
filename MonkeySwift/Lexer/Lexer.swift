@@ -65,6 +65,8 @@ public struct Lexer {
                 token = Token(tokenType: .LBRACKET, literal: String(ch))
             case "]":
                 token = Token(tokenType: .RBRACKET, literal: String(ch))
+            case ":":
+                token = Token(tokenType: .COLON, literal: String(ch))
             case "-":
                 token = Token(tokenType: .MINUS, literal: String(ch))
             case "!":

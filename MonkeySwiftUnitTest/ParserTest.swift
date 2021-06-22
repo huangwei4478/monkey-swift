@@ -583,6 +583,7 @@ class ParserTest: XCTestCase {
         }
     }
     
+    @discardableResult
     private func testInfixExpression(expression: Expression, left: Any, operator: String, right: Any) -> Bool {
         guard let infixExpression = expression as? Ast.InfixExpression else {
             XCTFail("expression is not Ast.InfixExpression. got=\(type(of: expression))(\(expression))")
@@ -814,6 +815,133 @@ class ParserTest: XCTestCase {
         let _ = testIdentifier(expression: indexExpression.left, value: "myArray")
         let _ = testInfixExpression(expression: indexExpression.index,
                                     left: 1, operator: "+", right: 1)
+    }
+    
+    func testParsingHashLiteralsStringKeys() {
+        let input = #"{"one": 1, "two": 2, "three": 3}"#
+        
+        let lexer = Lexer(input: input)
+        let parser = Parser(lexer: lexer)
+        let optionalProgram = parser.parseProgram()
+        checkParserErrors(parser)
+        
+        guard let program = optionalProgram else {
+            XCTFail("parser.parseProgram() is returning nil")
+            return
+        }
+        
+        guard let statement = program.statements.first as? Ast.ExpressionStatement else {
+            XCTFail("program.statement[0] is not ast.ExpressionStatement. got=\(type(of: program.statements.first))")
+            return
+        }
+        
+        guard let hashLiteral = statement.expression as? Ast.HashLiteral else {
+            XCTFail("expression not Ast.HashLiteral, got=\(type(of: statement.expression))")
+            return
+        }
+        
+        if hashLiteral.pairs.count != 3 {
+            XCTFail("hashLiteral.paris has wrong length. got=\(hashLiteral.pairs.count)")
+            return
+        }
+        
+        let expected = [
+            "one": 1,
+            "two": 2,
+            "three": 3
+        ]
+        
+        for (key, value) in hashLiteral.pairs {
+            guard let stringLiteral = key as? Ast.StringLiteral else {
+                XCTFail("key is not Ast.StringLiteral. got=\(type(of: key))")
+                return
+            }
+            
+            guard let expectedValue = expected[stringLiteral.string()] else {
+                XCTFail("no such value for key \(stringLiteral.string())")
+                return
+            }
+            
+            let _ = testIntegerLiteral(value, Int64(expectedValue))
+        }
+    }
+    
+    func testParsingEmptyHashLiteral() {
+        let input = "{}"
+        
+        let lexer = Lexer(input: input)
+        let parser = Parser(lexer: lexer)
+        let optionalProgram = parser.parseProgram()
+        checkParserErrors(parser)
+        
+        guard let program = optionalProgram else {
+            XCTFail("parser.parseProgram() is returning nil")
+            return
+        }
+        
+        guard let statement = program.statements.first as? Ast.ExpressionStatement else {
+            XCTFail("program.statement[0] is not ast.ExpressionStatement. got=\(type(of: program.statements.first))")
+            return
+        }
+        
+        guard let hashLiteral = statement.expression as? Ast.HashLiteral else {
+            XCTFail("expression not Ast.HashLiteral, got=\(type(of: statement.expression))")
+            return
+        }
+        
+        guard hashLiteral.pairs.count == 0 else {
+            XCTFail("hash.Pairs has wrong length. got=\(hashLiteral.pairs.count)")
+            return
+        }
+    }
+    
+    func testParsingHashLiteralWithExpressions() {
+        let input = #"{"one": 0 + 1, "two": 10 - 8, "three": 15 / 5}"#
+        
+        let lexer = Lexer(input: input)
+        let parser = Parser(lexer: lexer)
+        let optionalProgram = parser.parseProgram()
+        checkParserErrors(parser)
+        
+        guard let program = optionalProgram else {
+            XCTFail("parser.parseProgram() is returning nil")
+            return
+        }
+        
+        guard let statement = program.statements.first as? Ast.ExpressionStatement else {
+            XCTFail("program.statement[0] is not ast.ExpressionStatement. got=\(type(of: program.statements.first))")
+            return
+        }
+        
+        guard let hashLiteral = statement.expression as? Ast.HashLiteral else {
+            XCTFail("expression not Ast.HashLiteral, got=\(type(of: statement.expression))")
+            return
+        }
+        
+        guard hashLiteral.pairs.count == 3 else {
+            XCTFail("hash.Pairs has wrong length. got=\(hashLiteral.pairs.count)")
+            return
+        }
+        
+        let tests: [String: (Expression) -> ()] = [
+            "one": { self.testInfixExpression(expression: $0, left: 0, operator: "+", right: 1) },
+            "two": { self.testInfixExpression(expression: $0, left: 10, operator: "-", right: 8) },
+            "three": { self.testInfixExpression(expression: $0, left: 15, operator: "/", right: 5) }
+        ]
+        
+        for (key, value) in hashLiteral.pairs {
+            guard let stringLiteral = key as? Ast.StringLiteral else {
+                XCTFail("key is not Ast.StringLiteral. got=\(type(of: key))")
+                continue
+            }
+            
+            guard let testFunc = tests[stringLiteral.string()] else {
+                XCTFail("no such value for key \(stringLiteral.string())")
+                continue
+            }
+            
+            testFunc(value)
+        }
     }
     
     private func checkParserErrors(_ parser: Parser) {
