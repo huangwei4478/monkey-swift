@@ -466,6 +466,13 @@ let builtins: [String: Object_t.Builtin] = [
             default:
                 return Object_t.Error(message: "argument to `push` must be ARRAY, got=\(args[0].type().rawValue)")
             }
+        }),
+    "puts":
+        Object_t.Builtin(function: { args in
+                            for arg in args {
+                                print(arg.inspect())
+                            }
+            return Object_t.Null()
         })
 ]
 
