@@ -50,6 +50,9 @@ struct Evaluator {
             }
             return Object_t.Array(elements: elements)
             
+        case let node as Ast.HashLiteral:
+            return evalHashLiteral(node: node, environment: environment)
+            
         case let node as Ast.CallExpression:
             guard let function = eval(node.function, environment) else { return nil }
             if isError(object: function) {
@@ -301,6 +304,34 @@ struct Evaluator {
         }
         
         return arrayObject.elements[Int(index.value)]
+    }
+    
+    private static func evalHashLiteral(node: Ast.HashLiteral, environment: Environment) -> Object {
+        var pairs: [HashKey: Object_t.HashPair] = [:]
+        
+        for (keyNode, valueNode) in node.pairs {
+            guard let key = eval(keyNode, environment) else { return Object_t.Error(message: "eval function key error: \(keyNode.string())") }
+            if isError(object: key) {
+                return key
+            }
+            
+            guard let hashKey = key as? Object_t_Hashable else {
+                return Object_t.Error(message: "unusable as hash key: \(key.type())")
+            }
+            
+            guard let value = eval(valueNode, environment) else {
+                return Object_t.Error(message: "eval function value error: \(valueNode.string())")
+            }
+            
+            if isError(object: value) {
+                return value
+            }
+            
+            let hashed = hashKey.hashKey()
+            pairs[hashed] = Object_t.HashPair(key: key, value: value)
+        }
+        
+        return Object_t.Hash(pairs: pairs)
     }
     
     private static func applyFunction(_ function: Object, _ arguments: [Object]) -> Object {

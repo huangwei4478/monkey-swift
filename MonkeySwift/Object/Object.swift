@@ -16,6 +16,7 @@ enum ObjectType: String {
     case string_obj         = "STRING"
     case builtin_obj        = "BUILTIN"
     case array_obj          = "ARRAY"
+    case hash_obj           = "HASH"
     case error_obj          = "ERROR"
 }
 
@@ -152,6 +153,25 @@ struct Object_t {
         
     }
     
+    struct HashPair {
+        let key: Object
+        
+        let value: Object
+    }
+    
+    struct Hash: Object {
+        let pairs: [HashKey: HashPair]
+        
+        func type() -> ObjectType {
+            .hash_obj
+        }
+        
+        func inspect() -> String {
+            let keyValues = pairs.map({ "\($1.key.inspect()): \($1.value.inspect())" })
+            return "{\(keyValues.joined(separator: ", "))}"
+        }
+    }
+    
     struct Error: Object {
         let message: String
         
@@ -165,3 +185,42 @@ struct Object_t {
     }
 }
 
+struct HashKey: Hashable {
+    let type: ObjectType
+    
+    let value: UInt64
+}
+
+protocol Object_t_Hashable {
+    func hashKey() -> HashKey
+}
+
+extension Object_t.Boolean: Object_t_Hashable {
+    func hashKey() -> HashKey {
+        let value: UInt64
+        
+        if self.value {
+            value = 1
+        } else {
+            value = 0
+        }
+        
+        return HashKey(type: self.type(), value: value)
+    }
+}
+
+extension Object_t.Integer: Object_t_Hashable {
+    func hashKey() -> HashKey {
+        return HashKey(type: self.type(), value: UInt64(self.value))
+    }
+    
+}
+
+// Swift 4.2+: Swift hashvalue is not stable
+// https://www.hackingwithswift.com/articles/115/swift-4-2-improves-hashable-with-a-new-hasher-struct
+// use abs() to fix the negative issue
+extension Object_t.string: Object_t_Hashable {
+    func hashKey() -> HashKey {
+        return HashKey(type: self.type(), value: UInt64(abs(self.value.hashValue)))
+    }
+}

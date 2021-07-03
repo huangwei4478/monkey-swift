@@ -383,6 +383,49 @@ class EvaluatorTest: XCTestCase {
         }
     }
     
+    func testHashLiterals() {
+        let input = #"""
+                    let two = "two";
+                    {
+                        "one": 10 - 9,
+                        two: 1 + 1,
+                        "thr" + "ee": 6 / 2,
+                        4: 4,
+                        true: 5,
+                        false: 6,
+                    }
+                    """#
+        let evaluated = testEval(input: input)
+        
+        guard let result = evaluated as? Object_t.Hash else {
+            XCTFail("object is not Hash. got=\(type(of: evaluated)) (\(evaluated))")
+            return
+        }
+        
+        let expected : [HashKey: Int64] = [
+            Object_t.string(value: "one").hashKey(): 1,
+            Object_t.string(value: "two").hashKey(): 2,
+            Object_t.string(value: "three").hashKey(): 3,
+            Object_t.Integer(value: 4).hashKey(): 4,
+            Object_t.Boolean(value: true).hashKey(): 5,
+            Object_t.Boolean(value: false).hashKey(): 6
+        ]
+        
+        guard result.pairs.count == expected.count else {
+            XCTFail("Hash has wrong num of pairs. got=\(result.pairs.count)")
+            return
+        }
+        
+        for (expectedKey, expectedValue) in expected {
+            guard let pair = result.pairs[expectedKey] else {
+                XCTFail("no pair for given key in Pairs")
+                return
+            }
+            
+            let _ = testIntegerObject(object: pair.value, expected: expectedValue)
+        }
+    }
+    
     private func testEval(input: String) -> Object {
         let lexer = Lexer(input: input)
         let parser = Parser(lexer: lexer)
