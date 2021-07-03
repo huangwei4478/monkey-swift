@@ -162,7 +162,8 @@ class EvaluatorTest: XCTestCase {
                     }
                     """, "unknown operator: BOOLEAN + BOOLEAN"),
             TestCase("foobar", "identifier not found: foobar"),
-            TestCase(#""Hello" - "world!""#, "unknown operator: STRING - STRING")
+            TestCase(#""Hello" - "world!""#, "unknown operator: STRING - STRING"),
+            TestCase(#"{"name": "Monkey"}[fn(x) { x }]"#, "unusable as hash key: FUNCTION")
         ]
         
         for test in tests {
@@ -403,12 +404,12 @@ class EvaluatorTest: XCTestCase {
         }
         
         let expected : [HashKey: Int64] = [
-            Object_t.string(value: "one").hashKey(): 1,
-            Object_t.string(value: "two").hashKey(): 2,
-            Object_t.string(value: "three").hashKey(): 3,
-            Object_t.Integer(value: 4).hashKey(): 4,
-            Object_t.Boolean(value: true).hashKey(): 5,
-            Object_t.Boolean(value: false).hashKey(): 6
+            Object_t.string(value: "one").hashKey():    1,
+            Object_t.string(value: "two").hashKey():    2,
+            Object_t.string(value: "three").hashKey():  3,
+            Object_t.Integer(value: 4).hashKey():       4,
+            Object_t.Boolean(value: true).hashKey():    5,
+            Object_t.Boolean(value: false).hashKey():   6
         ]
         
         guard result.pairs.count == expected.count else {
@@ -423,6 +424,26 @@ class EvaluatorTest: XCTestCase {
             }
             
             let _ = testIntegerObject(object: pair.value, expected: expectedValue)
+        }
+    }
+    
+    func testHashIndexExpressions() {
+        let tests: [TestCase<Int?>] = [
+            TestCase(#"{"foo": 5}["foo"]"#, 5),
+            TestCase(#"{"foo": 5}["bar"]"#, nil),
+            TestCase(#"{}["foo"]"#, nil),
+            TestCase(#"{5: 5}[5]"#, 5),
+            TestCase(#"{true: 5}[true]"#, 5),
+            TestCase(#"{false: 5}[false]"#, 5)
+        ]
+        
+        for test in tests {
+            let evaluated = testEval(input: test.input)
+            if let integer = test.expected {
+                let _ = testIntegerObject(object: evaluated, expected: Int64(integer))
+            } else {
+                let _ = testNullObject(object: evaluated)
+            }
         }
     }
     

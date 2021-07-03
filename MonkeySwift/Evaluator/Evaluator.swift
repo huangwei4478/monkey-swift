@@ -282,6 +282,8 @@ struct Evaluator {
         switch (left, index) {
         case (let left, let index) where left.type() == .array_obj && index.type() == .integer_obj:
             return evalArrayIndexExpression(array: left, index: index)
+        case (let left, let index) where left.type() == .hash_obj:
+            return evalHashIndexExpression(hash: left, index: index)
         default:
             return Object_t.Error(message: "index operator not supported: \(left.type())")
         }
@@ -306,6 +308,22 @@ struct Evaluator {
         return arrayObject.elements[Int(index.value)]
     }
     
+    private static func evalHashIndexExpression(hash: Object, index: Object) -> Object {
+        guard let hashObject = hash as? Object_t.Hash else {
+            return Object_t.Error(message: "unusable as hash type: \(hash.type().rawValue) ")
+        }
+        
+        guard let key = index as? Object_t_Hashable else {
+            return Object_t.Error(message: "unusable as hash key: \(index.type().rawValue)")
+        }
+        
+        guard let pair = hashObject.pairs[key.hashKey()] else {
+            return Object_t.Null()
+        }
+        
+        return pair.value
+    }
+    
     private static func evalHashLiteral(node: Ast.HashLiteral, environment: Environment) -> Object {
         var pairs: [HashKey: Object_t.HashPair] = [:]
         
@@ -316,7 +334,7 @@ struct Evaluator {
             }
             
             guard let hashKey = key as? Object_t_Hashable else {
-                return Object_t.Error(message: "unusable as hash key: \(key.type())")
+                return Object_t.Error(message: "unusable as hash key: \(1111)")
             }
             
             guard let value = eval(valueNode, environment) else {
