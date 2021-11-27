@@ -19,6 +19,41 @@ class CodeTest: XCTestCase {
     }
 
 	func testMake() {
+		struct TestCase {
+			let op: Opcode
+			let operands: [Int]
+			let expected: [Byte]
+			
+			init(_ op: Opcode, _ operands: [Int], _ expected: [Byte]) {
+				self.op = op
+				self.operands = operands
+				self.expected = expected
+			}
+		}
 		
+		let testCases: [TestCase] = [
+			TestCase(OpcodeEnum.OpConstant.rawValue, [65534],
+					 [Byte(OpcodeEnum.OpConstant.rawValue),
+					  Byte(bitPattern: 255),
+					  Byte(bitPattern: 254)
+					 ]
+					)
+		]
+		
+		for testCase in testCases {
+			let instruction = make(op: testCase.op, operands: testCase.operands)
+			
+			guard instruction.count == testCase.expected.count else {
+				XCTFail("instruction has wrong length. want=\(testCase.expected.count), got=\(instruction.count)")
+				return
+			}
+			
+			for (index, byte) in testCase.expected.enumerated() {
+				guard instruction[index] == byte else {
+					XCTFail("wrong byte at pos \(index). want=\(byte), got=\(instruction[index])")
+					return
+				}
+			}
+		}
 	}
 }
