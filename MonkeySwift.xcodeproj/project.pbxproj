@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E15016927538FE90021481F /* Compiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E15016827538FE90021481F /* Compiler.swift */; };
+		0E15016A27538FE90021481F /* Compiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E15016827538FE90021481F /* Compiler.swift */; };
+		0E15016C275398100021481F /* CompileTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E15016B275398100021481F /* CompileTest.swift */; };
 		0E325D50274E8C630050A383 /* OpCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E325D4F274E8C630050A383 /* OpCode.swift */; };
 		0E325D51274E8C6C0050A383 /* OpCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E325D4F274E8C630050A383 /* OpCode.swift */; };
 		0E325D56274E94530050A383 /* CodeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E325D55274E94530050A383 /* CodeTest.swift */; };
@@ -18,8 +21,8 @@
 		0E44344B25FCD321003A97D2 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44344A25FCD321003A97D2 /* Parser.swift */; };
 		0E44345125FCD82F003A97D2 /* Ast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44345025FCD82F003A97D2 /* Ast.swift */; };
 		0E44345425FCE466003A97D2 /* Ast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44345025FCD82F003A97D2 /* Ast.swift */; };
-		0E4E14832751F7B300101A89 /* Bytecode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4E14822751F7B300101A89 /* Bytecode.swift */; };
-		0E4E14842751F7B300101A89 /* Bytecode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4E14822751F7B300101A89 /* Bytecode.swift */; };
+		0E4E14832751F7B300101A89 /* BytecodeTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4E14822751F7B300101A89 /* BytecodeTool.swift */; };
+		0E4E14842751F7B300101A89 /* BytecodeTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4E14822751F7B300101A89 /* BytecodeTool.swift */; };
 		0E4F6BBD26668DA5006140B0 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4F6BBC26668DA5006140B0 /* Environment.swift */; };
 		0E4F6BBE26669153006140B0 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4F6BBC26668DA5006140B0 /* Environment.swift */; };
 		0E6B51D7264816670042ED5B /* Evaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6B51D6264816670042ED5B /* Evaluator.swift */; };
@@ -53,6 +56,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0E15016827538FE90021481F /* Compiler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compiler.swift; sourceTree = "<group>"; };
+		0E15016B275398100021481F /* CompileTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompileTest.swift; sourceTree = "<group>"; };
 		0E325D4F274E8C630050A383 /* OpCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpCode.swift; sourceTree = "<group>"; };
 		0E325D55274E94530050A383 /* CodeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeTest.swift; sourceTree = "<group>"; };
 		0E44342D25FCCD83003A97D2 /* MonkeySwiftUnitTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MonkeySwiftUnitTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -61,7 +66,7 @@
 		0E44344425FCD009003A97D2 /* ParserTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserTest.swift; sourceTree = "<group>"; };
 		0E44344A25FCD321003A97D2 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		0E44345025FCD82F003A97D2 /* Ast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ast.swift; sourceTree = "<group>"; };
-		0E4E14822751F7B300101A89 /* Bytecode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bytecode.swift; sourceTree = "<group>"; };
+		0E4E14822751F7B300101A89 /* BytecodeTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BytecodeTool.swift; sourceTree = "<group>"; };
 		0E4F6BBC26668DA5006140B0 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		0E6B51D6264816670042ED5B /* Evaluator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Evaluator.swift; sourceTree = "<group>"; };
 		0E6B51D8264816810042ED5B /* EvaluatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluatorTest.swift; sourceTree = "<group>"; };
@@ -96,11 +101,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E15016727538A590021481F /* Compiler */ = {
+			isa = PBXGroup;
+			children = (
+				0E15016827538FE90021481F /* Compiler.swift */,
+			);
+			path = Compiler;
+			sourceTree = "<group>";
+		};
 		0E325D4E274E8C490050A383 /* ByteCode */ = {
 			isa = PBXGroup;
 			children = (
 				0E325D4F274E8C630050A383 /* OpCode.swift */,
-				0E4E14822751F7B300101A89 /* Bytecode.swift */,
+				0E4E14822751F7B300101A89 /* BytecodeTool.swift */,
 			);
 			path = ByteCode;
 			sourceTree = "<group>";
@@ -123,6 +136,7 @@
 				0E6B51D8264816810042ED5B /* EvaluatorTest.swift */,
 				0EF20F4926901D21006C45F5 /* ObjectTest.swift */,
 				0E325D55274E94530050A383 /* CodeTest.swift */,
+				0E15016B275398100021481F /* CompileTest.swift */,
 			);
 			path = MonkeySwiftUnitTest;
 			sourceTree = "<group>";
@@ -181,6 +195,7 @@
 		98BCE7EE25F8F90B00600211 /* MonkeySwift */ = {
 			isa = PBXGroup;
 			children = (
+				0E15016727538A590021481F /* Compiler */,
 				0E325D52274E92750050A383 /* Extensions */,
 				0E325D4E274E8C490050A383 /* ByteCode */,
 				0E6B51D52648163A0042ED5B /* Evaluator */,
@@ -318,9 +333,11 @@
 				0E44343E25FCCEB6003A97D2 /* TokenType.swift in Sources */,
 				0E44343B25FCCEAD003A97D2 /* Lexer.swift in Sources */,
 				0E44345425FCE466003A97D2 /* Ast.swift in Sources */,
-				0E4E14842751F7B300101A89 /* Bytecode.swift in Sources */,
+				0E4E14842751F7B300101A89 /* BytecodeTool.swift in Sources */,
 				0EA41FFA2639B82F00CDC676 /* Object.swift in Sources */,
+				0E15016A27538FE90021481F /* Compiler.swift in Sources */,
 				0EA41FFB2639B84F00CDC676 /* Parser.swift in Sources */,
+				0E15016C275398100021481F /* CompileTest.swift in Sources */,
 				0E6B51DA264828EA0042ED5B /* Evaluator.swift in Sources */,
 				0EF20F4A26901D21006C45F5 /* ObjectTest.swift in Sources */,
 				0E44344525FCD009003A97D2 /* ParserTest.swift in Sources */,
@@ -338,9 +355,10 @@
 				98BCE80225F8FA7900600211 /* ConsoleIO.swift in Sources */,
 				98BCE80025F8FA7900600211 /* Token.swift in Sources */,
 				98BCE7F025F8F90B00600211 /* utils.swift in Sources */,
-				0E4E14832751F7B300101A89 /* Bytecode.swift in Sources */,
+				0E4E14832751F7B300101A89 /* BytecodeTool.swift in Sources */,
 				0E325D50274E8C630050A383 /* OpCode.swift in Sources */,
 				0EA41FF92639B82F00CDC676 /* Object.swift in Sources */,
+				0E15016927538FE90021481F /* Compiler.swift in Sources */,
 				0E6B51D7264816670042ED5B /* Evaluator.swift in Sources */,
 				0EBF48472751DC23009463C5 /* Errors.swift in Sources */,
 				0E44345125FCD82F003A97D2 /* Ast.swift in Sources */,

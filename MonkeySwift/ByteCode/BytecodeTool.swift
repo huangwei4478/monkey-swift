@@ -1,5 +1,5 @@
 //
-//  Bytecode.swift
+//  BytecodeTool.swift
 //  MonkeySwift
 //
 //  Created by huangwei on 2021/11/27.
@@ -7,14 +7,14 @@
 
 import Foundation
 
-public enum Bytecode {
+public enum BytecodeTool {
 	/// Converts abstract representation into Hermes VM bytecode instructions
 	/// - Parameters:
 	///   - op: The instruction `OpCode`
 	///   - operands: The operands values
 	/// - Returns: The instruction bytes
 	public static func make(_ op: OpCodes, _ operands: Int32...) -> Instructions {
-		return Bytecode.make(op, operands: operands)
+		return BytecodeTool.make(op, operands: operands)
 	}
 	
 	/// Converts abstract representation into Hermes VM bytecode instructions

@@ -18,7 +18,7 @@ class CodeTest: XCTestCase {
 		]
 		
 		for test in tests {
-			let instructions = Bytecode.make(test.opCode, operands: test.operands)
+			let instructions = BytecodeTool.make(test.opCode, operands: test.operands)
 			XCTAssertEqual(instructions.count, test.expected.count)
 			for index in 0 ..< test.expected.count {
 				XCTAssertEqual(instructions[index], test.expected[index])
