@@ -58,3 +58,9 @@ public struct OperationDefinition {
 	]
 }
 
+extension Instructions {
+	var string: String {
+		return ""
+	}
+}
+

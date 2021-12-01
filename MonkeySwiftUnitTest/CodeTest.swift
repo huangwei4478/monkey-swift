@@ -25,4 +25,22 @@ class CodeTest: XCTestCase {
 			}
 		}
 	}
+	
+	func testInstructionsString() {
+		let instructions = [
+			BytecodeTool.make(.constant, operands: [1]),
+			BytecodeTool.make(.constant, operands: [2]),
+			BytecodeTool.make(.constant, operands: [65535])
+		]
+		
+		let expected =
+  		"0000 OpConstant 1\n0003 OpConstant 2\n0006 OpConstant 65535"
+		
+		let concatted = instructions.reduce([], +) as Instructions
+		guard concatted.string == expected else {
+			XCTFail("instructions wrongly formatted.\nwant=\(expected)\ngot=\(concatted.string)")
+			return
+		}
+		
+	}
 }
