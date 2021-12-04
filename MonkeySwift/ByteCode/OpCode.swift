@@ -58,9 +58,67 @@ public struct OperationDefinition {
 	]
 }
 
-extension Instructions {
-	var string: String {
-		return ""
+public extension Instructions {
+	
+	/// returns a human readable representations of this set of instructions
+	var description: String {
+		var output = ""
+		var index = 0
+		while index < self.count {
+			guard let opCode = OpCodes(rawValue: self[index]) else {
+				output += "Error: No Opcode for: \(self[index])\n"
+				index += 1
+				continue
+			}
+			
+			guard let def = OperationDefinition[opCode] else {
+				output += "Error: No definition for: \(self[index])"
+				index += 1
+				continue
+			}
+			
+			let read = BytecodeTool.readOperands(def, instructions: Array(self[(index + 1)...]))
+			
+			let formatString = "%04d %@%@"
+			let operandString = read.values.map{ $0.description }.joined(separator: "")
+			let opName = operandString.isEmpty ? def.name : def.name.padding(toLength: 20, withPad: " ", startingAt: 0)
+			
+			output += String(format: formatString, index, opName, operandString)
+			
+			index += 1 + read.count
+			
+			if index < self.count {
+				output += "\n"
+			}
+		}
+		return output
+	}
+	
+	/// Convert a number of bytes to `Int32` representation, the taken bytes must be
+	/// between 1 and 4, and reinterpret an int in big endian coding
+	/// - Parameter bytes: The number of bytes, represented by `Sizes` enum goes from 1 to 4 bytes
+	/// - Returns: The `Int32` value
+	func readInt(bytes: Sizes, startIndex: Int = 0) -> Int32? {
+		return readInt(bytes: bytes.rawValue, startIndex: startIndex)
+	}
+	
+	/// Converts a number of bytes to `Int32` representation, the taken bytes must be
+	/// between 1 and 4, and reprent an int in big endian encoding
+	/// - Parameter bytes: The number of bytes, Must be between 1 and 4
+	/// - Returns: The `Int32` value
+	func readInt(bytes: Int, startIndex: Int = 0) -> Int32? {
+		guard bytes >= 1 && bytes <= 4 else { return nil }
+		
+		guard startIndex <= self.count - bytes else { return nil }
+		
+		var value: Int32 = 0
+		
+		for byte in self[startIndex ..< (startIndex + bytes)] {
+			value = value << 8;
+			value = value | Int32(byte)
+		}
+		
+		return value
 	}
 }
 
