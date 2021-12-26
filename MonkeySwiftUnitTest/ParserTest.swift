@@ -436,6 +436,47 @@ class ParserTest: XCTestCase {
         
         
     }
+	
+	func testWhileExpression() {
+		let input = "while (x < y) { x }"
+		let lexer = Lexer(input: input)
+		let parser = Parser(lexer: lexer)
+		let optionalProgram = parser.parseProgram()
+		checkParserErrors(parser)
+		
+		guard let program = optionalProgram else {
+			XCTFail("parser.parseProgram() is returning nil")
+			return
+		}
+		
+		guard let expressionStatement = program.statements[0] as? Ast.ExpressionStatement else {
+			XCTFail("program.statement[0] is not ast.ExpressionStatement. got=\(type(of: program.statements[0]))")
+			return
+		}
+		
+		guard let whileExpression = expressionStatement.expression as? Ast.WhileExpression else {
+			XCTFail("expression not Ast.whileExpression. got=\(type(of: expressionStatement.expression))")
+			return
+		}
+		
+		if !testInfixExpression(expression: whileExpression.condition, left: "x", operator: "<", right: "y") {
+			return
+		}
+		
+		if whileExpression.consequence.statements.count != 1 {
+			XCTFail("whileExpression.consequence is not 1 statements. got=\(whileExpression.consequence.statements.count)")
+			return
+		}
+		
+		guard let consequence = whileExpression.consequence.statements[0] as? Ast.ExpressionStatement else {
+			XCTFail("whileExpression.consequence.statements[0] is not Ast.ExpressionStatement. got=\(type(of: whileExpression.consequence.statements[0]))")
+			return
+		}
+		
+		if !testIdentifier(expression: consequence.expression, value: "x") {
+			return
+		}
+	}
     
     func testIfExpression() {
         let input = "if (x < y) { x }"

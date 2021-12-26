@@ -21,7 +21,7 @@ public struct Lexer {
         readChar()
     }
     
-    public mutating func readChar() {
+    private mutating func readChar() {
         if readPosition >= input.count {
             ch = Character(Unicode.Scalar(0))
         } else {

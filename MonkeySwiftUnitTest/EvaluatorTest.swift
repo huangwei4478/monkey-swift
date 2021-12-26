@@ -111,6 +111,17 @@ class EvaluatorTest: XCTestCase {
             }
         }
     }
+	
+	func testWhileExpression() {
+		let inputs = """
+		let x = 1;
+		while (x < 10) {
+			x = x + 1;
+		}
+"""
+		let evaluated = testEval(input: inputs)
+		testIntegerObject(object: evaluated, expected: 11)
+	}
     
     func testReturnStatements() {
         let tests: [TestCase<Int64>] = [

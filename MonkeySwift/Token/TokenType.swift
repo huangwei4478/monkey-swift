@@ -52,6 +52,7 @@ public enum TokenType: String {
     case IF = "IF"
     case ELSE = "ELSE"
     case RETURN = "RETURN"
+	case WHILE = "WHILE"
     
     static let keywords: [String: TokenType] = [
         "fn": .FUNCTION,
@@ -60,7 +61,8 @@ public enum TokenType: String {
         "false": .FALSE,
         "if": .IF,
         "else": .ELSE,
-        "return": .RETURN
+        "return": .RETURN,
+		"while": .WHILE
     ]
     
     static func lookupIdentifier(identifier: String) -> TokenType {

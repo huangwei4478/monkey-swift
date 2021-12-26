@@ -254,6 +254,24 @@ public struct Ast {
             return string
         }
     }
+	
+	struct WhileExpression: Expression {
+		let token: Token					// the 'while' token
+		
+		let condition: Expression
+		
+		let consequence: BlockStatement
+		
+		func expressionNode() {}
+		
+		func tokenLiteral() -> String {
+			return token.literal
+		}
+		
+		func string() -> String {
+			return "while (\(condition.string())) { \(consequence.string()) }"
+		}
+	}
     
     struct FunctionLiteral: Expression {
         

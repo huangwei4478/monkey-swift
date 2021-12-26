@@ -259,6 +259,32 @@ struct Evaluator {
             return Object_t.Null()
         }
     }
+	
+	private static func evalWhileExpression(whileExpression: Ast.WhileExpression, environment: Environment)  -> Object {
+		
+		var result: Object = Object_t.Null()
+		
+		while(true) {
+			guard let condition = eval(whileExpression.condition, environment) else {
+				return Object_t.Null()
+			}
+			
+			if isError(object: condition) {
+				return condition
+			}
+			
+			if isTruthy(object: condition) {
+				guard let consequenceResult = eval(whileExpression.consequence, environment) else {
+					return Object_t.Null()
+				}
+				result = consequenceResult
+			} else {
+				break
+			}
+		}
+		
+		return result
+	}
     
     private static func evalIdentifier(node: Ast.Identifier, environment: Environment) -> Object {
         if let value = environment.get(name: node.value) {

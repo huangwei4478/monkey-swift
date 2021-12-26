@@ -188,4 +188,22 @@ class LexerTest: XCTestCase {
         
         examine(with: input, testTokens: tests)
     }
+	
+	func testNextToken05() throws {
+		let input = "while(x < 2) { ; }"
+		
+		let tests: [ExpectedToken] = [
+			ExpectedToken(expectedType: .WHILE, expectedLiteral: "while"),
+			ExpectedToken(expectedType: .LPAREN, expectedLiteral: "("),
+			ExpectedToken(expectedType: .IDENT, expectedLiteral: "x"),
+			ExpectedToken(expectedType: .LT, expectedLiteral: "<"),
+			ExpectedToken(expectedType: .INT, expectedLiteral: "2"),
+			ExpectedToken(expectedType: .RPAREN, expectedLiteral: ")"),
+			ExpectedToken(expectedType: .LBRACE, expectedLiteral: "{"),
+			ExpectedToken(expectedType: .SEMICOLON, expectedLiteral: ";"),
+			ExpectedToken(expectedType: .RBRACE, expectedLiteral: "}")
+		]
+		
+		examine(with: input, testTokens: tests)
+	}
 }

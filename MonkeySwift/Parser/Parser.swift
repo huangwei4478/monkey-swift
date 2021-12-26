@@ -69,6 +69,7 @@ final class Parser {
         self.registerPrefix(tokenType: .FALSE, fn: parseBoolean)
         self.registerPrefix(tokenType: .LPAREN, fn: parseGroupedExpression)
         self.registerPrefix(tokenType: .IF, fn: parseIfExpression)
+		self.registerPrefix(tokenType: .WHILE, fn: parseWhileExpression)
         self.registerPrefix(tokenType: .FUNCTION, fn: parseFunctionLiteral)
         self.registerPrefix(tokenType: .STRING, fn: parseStringLiteral)
         self.registerPrefix(tokenType: .LBRACKET, fn: parseArrayLiteral)
@@ -359,6 +360,37 @@ final class Parser {
                                 consequence: consequence,
                                 alternative: alternative)
     }
+	
+	private func parseWhileExpression() -> Expression {
+		let prevToken = curToken
+		
+		if !expectPeek(.LPAREN) {
+			return Ast.Identifier(token: Token(tokenType: .ILLEGAL,
+											   literal: "failed to parse while expression. next Token not .LPAREN, got=\(peekToken)"), value: peekToken.literal)
+		}
+		
+		nextToken()
+		
+		guard let condition = parseExpression(precedence: .lowest) else {
+			return Ast.Identifier(token: Token(tokenType: .ILLEGAL,
+											   literal: "failed to parse condition expression for whileExpression"), value: curToken.literal)
+		}
+		
+		if !expectPeek(.RPAREN) {
+			return Ast.Identifier(token: Token(tokenType: .ILLEGAL,
+											   literal: "failed to parse while expression. next token not .RPAREN, got=\(peekToken)"), value: peekToken.literal)
+		}
+		
+		if !expectPeek(.LBRACE) {
+			return Ast.Identifier(token: Token(tokenType: .ILLEGAL, literal: "failed to parse while expression. next token not .LBRACE, got=\(peekToken)"), value: peekToken.literal)
+		}
+		
+		let consequence = parseBlockStatement()
+		
+		return Ast.WhileExpression(token: prevToken,
+								   condition: condition,
+								   consequence: consequence)
+	}
     
     private func parseIndexExpression(left: Expression) -> Expression {
         let prevToken = curToken
