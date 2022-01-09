@@ -11,7 +11,10 @@ how to use
 ```bash
 git clone https://github.com/huangwei4478/monkey-swift
 cd monkey-swift
-swift run MonkeySwift
+swift run MonkeySwift repl    // into repl mode
+
+// or, load script file
+swift run MonkeySwift script ./fibonacci.mk
 ```
 
 
