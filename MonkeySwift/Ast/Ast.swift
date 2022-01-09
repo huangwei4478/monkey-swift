@@ -40,22 +40,6 @@ public struct Ast {
         }
     }
     
-    struct Identifier: Expression {
-        let token: Token                    // the token.IDENT token
-        
-        let value: String
-        
-        func expressionNode() {}
-        
-        func tokenLiteral() -> String {
-            return token.literal
-        }
-        
-        func string() -> String {
-            return value
-        }
-    }
-    
     struct LetStatement: Statement {
         let token: Token                    // the token.LET token
         
@@ -105,7 +89,44 @@ public struct Ast {
             return expression.string()
         }
     }
+	
+	// AssignmentStatement: let-less assignment
+	// such as "x = y"
+	struct AssignStatement: Expression {
+		
+		let token: Token
+		
+		let name: Identifier
+		
+		let value: Expression
+		
+		func expressionNode() {}
+		
+		func tokenLiteral() -> String {
+			return token.literal
+		}
+		
+		func string() -> String {
+			return "\(name.string()) = \(value.string())"
+		}
+	}
     
+	struct Identifier: Expression {
+		let token: Token                    // the token.IDENT token
+		
+		let value: String
+		
+		func expressionNode() {}
+		
+		func tokenLiteral() -> String {
+			return token.literal
+		}
+		
+		func string() -> String {
+			return value
+		}
+	}
+	
     struct IntegerLiteral: Expression {
         let token: Token
         

@@ -118,9 +118,22 @@ class EvaluatorTest: XCTestCase {
 		while (x < 10) {
 			x = x + 1;
 		}
+  		return x;
 """
 		let evaluated = testEval(input: inputs)
-		testIntegerObject(object: evaluated, expected: 11)
+		let _ = testIntegerObject(object: evaluated, expected: 10)
+	}
+	
+	func testAssignmentStatement() {
+		let inputs = """
+  		let x = 10;
+  		let y = x + 3;
+  		x = y;
+  		return x;
+"""
+		
+		let evaluated = testEval(input: inputs)
+		let _ = testIntegerObject(object: evaluated, expected: 13)
 	}
     
     func testReturnStatements() {

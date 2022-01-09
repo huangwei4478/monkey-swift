@@ -30,6 +30,9 @@ struct Evaluator {
             guard let value = eval(node.value, environment) else { return nil }
             if isError(object: value) { return value }
             return environment.set(name: node.name.value, value: value)
+			
+		case let node as Ast.AssignStatement:
+			return evalAssignStatement(assignStatement: node, environment: environment)
             
         // Expressions
         case let node as Ast.IntegerLiteral:
@@ -97,6 +100,9 @@ struct Evaluator {
             
         case let node as Ast.IfExpression:
             return evalIfExpression(ifExpression: node, environment: environment)
+			
+		case let node as Ast.WhileExpression:
+			return evalWhileExpression(whileExpression: node, environment: environment)
             
         case let node as Ast.Identifier:
             return evalIdentifier(node: node, environment: environment)
@@ -239,6 +245,23 @@ struct Evaluator {
             Object_t.Boolean(value: false)
     }
     
+	private static func evalAssignStatement(assignStatement: Ast.AssignStatement, environment: Environment) -> Object {
+		guard let valueEvaluated = eval(assignStatement.value, environment) else {
+			return Object_t.Null()
+		}
+		
+		if isError(object: valueEvaluated) { return valueEvaluated }
+		
+		// 作用域里有 name 这一个变量吗？没有的话就是凭空出现一个 identifier 给他赋值，这是个严重的错误
+		if environment.get(name: assignStatement.name.string()) == nil {
+			return Object_t.Error(message: "Setting unknown variable \(assignStatement.name) is a bug!")
+		}
+		
+		let _ = environment.set(name: assignStatement.name.string(), value: valueEvaluated)
+		
+		return valueEvaluated
+	}
+	
     private static func evalIfExpression(ifExpression: Ast.IfExpression, environment: Environment) -> Object {
         guard let condition = eval(ifExpression.condition, environment) else {
             return Object_t.Null()

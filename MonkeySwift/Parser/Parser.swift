@@ -9,6 +9,7 @@ import Foundation
 
 private enum Precedence: Int, Comparable {
     case lowest = 1
+	case assign
     case equals
     case lessgreater
     case sum
@@ -23,6 +24,7 @@ private enum Precedence: Int, Comparable {
 }
 
 private let precedences: [TokenType: Precedence] = [
+	.ASSIGN:	.assign,
     .EQ:        .equals,
     .NOT_EQ:    .equals,
     .LT:        .lessgreater,
@@ -76,6 +78,7 @@ final class Parser {
         self.registerPrefix(tokenType: .LBRACE, fn: parseHashLiteral)
         
         self.registerInfix(tokenType: .PLUS, fn: parseInfixExpression)
+		self.registerInfix(tokenType: .ASSIGN, fn: parseAssignExpression)
         self.registerInfix(tokenType: .MINUS, fn: parseInfixExpression)
         self.registerInfix(tokenType: .SLASH, fn: parseInfixExpression)
         self.registerInfix(tokenType: .ASTERISK, fn: parseInfixExpression)
@@ -141,7 +144,6 @@ final class Parser {
             
             nextToken()
             
-            // What the hell?
             leftExpression = infixFn(leftExpression)
         }
         
@@ -158,7 +160,7 @@ final class Parser {
         
         nextToken()
         
-        // ??, recursive here
+        // recursive here
         if let expression = parseExpression(precedence: .lowest) {
             list.append(expression)
         }
@@ -167,7 +169,7 @@ final class Parser {
             nextToken()
             nextToken()
             
-            // ??, recursive here
+            // recursive here
             if let expression = parseExpression(precedence: .lowest) {
                 list.append(expression)
             }
@@ -289,12 +291,39 @@ final class Parser {
         
         nextToken()
         
-        // recursive here!
+        // recursive here
         guard let rightExpression = parseExpression(precedence: prevPrecedence) else {
             return Ast.Identifier(token: Token(tokenType: .ILLEGAL, literal: "failed to parse right expression for infix expression"), value: curToken.literal)
         }
         return Ast.InfixExpression(token: prevToken, left: left, operator: prevToken.literal, right: rightExpression)
     }
+	
+	/// parse a bare assignment, without a `let`
+	private func parseAssignExpression(left: Expression) -> Expression {
+		let prevToken = curToken; // curToken: the '=' token
+		
+		guard let name = left as? Ast.Identifier else {
+			return Ast.Identifier(token: Token(tokenType: .ILLEGAL,
+											   literal: "failed to parse assign expression: left is not an identifier"),
+								  value: curToken.literal)
+		}
+		
+		nextToken()
+		
+		/**
+		 	An assignment is generally:
+		 		
+		 		variable = value
+		 */
+		
+		guard let value = parseExpression(precedence: .lowest) else {
+			return Ast.Identifier(token: Token(tokenType: .ILLEGAL,
+											   literal: "failed to parse value expression for assign expression"),
+								  value: curToken.literal)
+		}
+		
+		return Ast.AssignStatement(token: prevToken, name: name, value: value)
+	}
     
     private func parseBoolean() -> Expression {
         return Ast.Boolean(token: curToken, value: curTokenIs(.TRUE))
@@ -461,8 +490,6 @@ final class Parser {
                                                    literal: "failed to parse expression for the value of hash literal"), value: curToken.literal)
             }
             
-            // TODO: what about the duplicate key issue?
-            // use Set instead?
             pairs.append((key: key, value: value))
             
             if !peekTokenIs(.RBRACE) && !expectPeek(.COMMA) {
