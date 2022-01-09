@@ -38,6 +38,20 @@ public struct Lexer {
         skipWhitespace()
         
         switch (ch) {
+			case "&":
+				if peekCharacter() == "&" {
+					readChar()
+					token = Token(tokenType: .AND, literal: "&&")
+				} else {
+					token = Token(tokenType: .ILLEGAL, literal: String(ch))
+				}
+			case "|":
+				if peekCharacter() == "|" {
+					readChar()
+					token = Token(tokenType: .OR, literal: "||")
+				} else {
+					token = Token(tokenType: .ILLEGAL, literal: String(ch))
+				}
             case "=":
                 if peekCharacter() == "=" {
                     let prevCh = ch

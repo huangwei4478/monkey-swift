@@ -28,6 +28,9 @@ public enum TokenType: String {
     
     case EQ = "=="
     case NOT_EQ = "!="
+	
+	case AND = "&&"
+	case OR  = "||"
     
     // Delimiters
     case COMMA = ","

@@ -168,6 +168,12 @@ struct Evaluator {
             return nativeBoolToBooleanObject(input: left == right)
         case let (`operator`, _, _) where `operator` == "!=":
             return nativeBoolToBooleanObject(input: left != right)
+		case let (`operator`, left, right) where `operator` == "&&" && left.type() == .boolean_obj && right.type() == .boolean_obj:
+			let boolean = (left as! Object_t.Boolean).value && (right as! Object_t.Boolean).value
+			return nativeBoolToBooleanObject(input: boolean)
+		case let (`operator`, left, right) where `operator` == "||" && left.type() == .boolean_obj && right.type() == .boolean_obj:
+			let boolean = (left as! Object_t.Boolean).value || (right as! Object_t.Boolean).value
+			return nativeBoolToBooleanObject(input: boolean)
         case let (`operator`, left, right) where left.type() == .string_obj && right.type() == .string_obj:
             return evalStringInfixExpression(operator: `operator`, left: left as! Object_t.string, right: right as! Object_t.string)
         case let (_, left, right) where left.type() != right.type():

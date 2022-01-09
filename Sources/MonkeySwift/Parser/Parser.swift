@@ -9,6 +9,7 @@ import Foundation
 
 private enum Precedence: Int, Comparable {
     case lowest = 1
+	case condition			// OR or AND
 	case assign
     case equals
     case lessgreater
@@ -34,6 +35,8 @@ private let precedences: [TokenType: Precedence] = [
     .SLASH:     .product,
     .ASTERISK:  .product,
     .LPAREN:    .call,
+	.AND:		.condition,
+	.OR:		.condition,
     .LBRACKET:  .index
 ]
 
@@ -77,6 +80,8 @@ final class Parser {
         self.registerPrefix(tokenType: .LBRACKET, fn: parseArrayLiteral)
         self.registerPrefix(tokenType: .LBRACE, fn: parseHashLiteral)
         
+		self.registerInfix(tokenType: .AND, fn: parseInfixExpression)
+		self.registerInfix(tokenType: .OR, fn: parseInfixExpression)
         self.registerInfix(tokenType: .PLUS, fn: parseInfixExpression)
 		self.registerInfix(tokenType: .ASSIGN, fn: parseAssignExpression)
         self.registerInfix(tokenType: .MINUS, fn: parseInfixExpression)

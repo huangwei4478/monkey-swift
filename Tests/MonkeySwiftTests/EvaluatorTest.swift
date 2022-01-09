@@ -64,7 +64,11 @@ class EvaluatorTest: XCTestCase {
             TestCase("(1 < 2) == false", false),
             TestCase("(1 > 2) == true", false),
             TestCase("(1 > 2) == false", true),
-
+			TestCase("true && false", false),
+			TestCase("true || false", true),
+			TestCase("true && true", true),
+			TestCase("true || true", true),
+			TestCase("false || false", false)
         ]
         
         for (_, test) in tests.enumerated() {
