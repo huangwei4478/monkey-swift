@@ -7,8 +7,6 @@
 
 import XCTest
 
-@testable import MonkeySwift
-
 class LexerTest: XCTestCase {
     
     private struct ExpectedToken {

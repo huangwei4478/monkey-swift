@@ -3,580 +3,1268 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		"MonkeySwift::MonkeySwiftPackageTests::ProductTarget" /* MonkeySwiftPackageTests */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = OBJ_137 /* Build configuration list for PBXAggregateTarget "MonkeySwiftPackageTests" */;
+			buildPhases = (
+			);
+			dependencies = (
+				OBJ_140 /* PBXTargetDependency */,
+			);
+			name = MonkeySwiftPackageTests;
+			productName = MonkeySwiftPackageTests;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
-		0E15016927538FE90021481F /* Compiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E15016827538FE90021481F /* Compiler.swift */; };
-		0E15016A27538FE90021481F /* Compiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E15016827538FE90021481F /* Compiler.swift */; };
-		0E15016C275398100021481F /* CompileTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E15016B275398100021481F /* CompileTest.swift */; };
-		0E325D50274E8C630050A383 /* OpCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E325D4F274E8C630050A383 /* OpCode.swift */; };
-		0E325D51274E8C6C0050A383 /* OpCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E325D4F274E8C630050A383 /* OpCode.swift */; };
-		0E325D56274E94530050A383 /* CodeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E325D55274E94530050A383 /* CodeTest.swift */; };
-		0E44343825FCCDB3003A97D2 /* LexerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44343725FCCDB3003A97D2 /* LexerTest.swift */; };
-		0E44343B25FCCEAD003A97D2 /* Lexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BCE7FB25F8FA7900600211 /* Lexer.swift */; };
-		0E44343E25FCCEB6003A97D2 /* TokenType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BCE7F825F8FA7900600211 /* TokenType.swift */; };
-		0E44344125FCCEB8003A97D2 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BCE7F925F8FA7900600211 /* Token.swift */; };
-		0E44344525FCD009003A97D2 /* ParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44344425FCD009003A97D2 /* ParserTest.swift */; };
-		0E44344B25FCD321003A97D2 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44344A25FCD321003A97D2 /* Parser.swift */; };
-		0E44345125FCD82F003A97D2 /* Ast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44345025FCD82F003A97D2 /* Ast.swift */; };
-		0E44345425FCE466003A97D2 /* Ast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44345025FCD82F003A97D2 /* Ast.swift */; };
-		0E4E14832751F7B300101A89 /* BytecodeTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4E14822751F7B300101A89 /* BytecodeTool.swift */; };
-		0E4E14842751F7B300101A89 /* BytecodeTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4E14822751F7B300101A89 /* BytecodeTool.swift */; };
-		0E4F6BBD26668DA5006140B0 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4F6BBC26668DA5006140B0 /* Environment.swift */; };
-		0E4F6BBE26669153006140B0 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4F6BBC26668DA5006140B0 /* Environment.swift */; };
-		0E6B51D7264816670042ED5B /* Evaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6B51D6264816670042ED5B /* Evaluator.swift */; };
-		0E6B51D9264816810042ED5B /* EvaluatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6B51D8264816810042ED5B /* EvaluatorTest.swift */; };
-		0E6B51DA264828EA0042ED5B /* Evaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6B51D6264816670042ED5B /* Evaluator.swift */; };
-		0E8C04EC261076B300CEFB9D /* AstTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8C04EB261076B300CEFB9D /* AstTest.swift */; };
-		0EA41FF92639B82F00CDC676 /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA41FF82639B82F00CDC676 /* Object.swift */; };
-		0EA41FFA2639B82F00CDC676 /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA41FF82639B82F00CDC676 /* Object.swift */; };
-		0EA41FFB2639B84F00CDC676 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44344A25FCD321003A97D2 /* Parser.swift */; };
-		0EBF48472751DC23009463C5 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBF48462751DC23009463C5 /* Errors.swift */; };
-		0EBF48482751DC23009463C5 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBF48462751DC23009463C5 /* Errors.swift */; };
-		0EF20F4A26901D21006C45F5 /* ObjectTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF20F4926901D21006C45F5 /* ObjectTest.swift */; };
-		98BCE7F025F8F90B00600211 /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BCE7EF25F8F90B00600211 /* utils.swift */; };
-		98BCE7FF25F8FA7900600211 /* TokenType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BCE7F825F8FA7900600211 /* TokenType.swift */; };
-		98BCE80025F8FA7900600211 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BCE7F925F8FA7900600211 /* Token.swift */; };
-		98BCE80125F8FA7900600211 /* Lexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BCE7FB25F8FA7900600211 /* Lexer.swift */; };
-		98BCE80225F8FA7900600211 /* ConsoleIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BCE7FD25F8FA7900600211 /* ConsoleIO.swift */; };
-		98BCE80325F8FA7900600211 /* Repl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BCE7FE25F8FA7900600211 /* Repl.swift */; };
+		0EB1D59F278A9D9E00DD0EA9 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D587278A9D9D00DD0EA9 /* Errors.swift */; };
+		0EB1D5A0278A9D9E00DD0EA9 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D589278A9D9D00DD0EA9 /* Parser.swift */; };
+		0EB1D5A2278A9D9E00DD0EA9 /* OpCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D58C278A9D9E00DD0EA9 /* OpCode.swift */; };
+		0EB1D5A3278A9D9E00DD0EA9 /* BytecodeTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D58D278A9D9E00DD0EA9 /* BytecodeTool.swift */; };
+		0EB1D5A4278A9D9E00DD0EA9 /* Compiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D58F278A9D9E00DD0EA9 /* Compiler.swift */; };
+		0EB1D5A5278A9D9E00DD0EA9 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D591278A9D9E00DD0EA9 /* Environment.swift */; };
+		0EB1D5A6278A9D9E00DD0EA9 /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D592278A9D9E00DD0EA9 /* Object.swift */; };
+		0EB1D5A7278A9D9E00DD0EA9 /* TokenType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D594278A9D9E00DD0EA9 /* TokenType.swift */; };
+		0EB1D5A8278A9D9E00DD0EA9 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D595278A9D9E00DD0EA9 /* Token.swift */; };
+		0EB1D5A9278A9D9E00DD0EA9 /* ConsoleIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D597278A9D9E00DD0EA9 /* ConsoleIO.swift */; };
+		0EB1D5AA278A9D9E00DD0EA9 /* MonkeyRepl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D598278A9D9E00DD0EA9 /* MonkeyRepl.swift */; };
+		0EB1D5AB278A9D9E00DD0EA9 /* Evaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D59A278A9D9E00DD0EA9 /* Evaluator.swift */; };
+		0EB1D5AC278A9D9E00DD0EA9 /* Ast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D59C278A9D9E00DD0EA9 /* Ast.swift */; };
+		0EB1D5AD278A9D9E00DD0EA9 /* Lexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D59E278A9D9E00DD0EA9 /* Lexer.swift */; };
+		0EB1D5B5278A9DDF00DD0EA9 /* EvaluatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D5AE278A9DDF00DD0EA9 /* EvaluatorTest.swift */; };
+		0EB1D5B6278A9DDF00DD0EA9 /* LexerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D5AF278A9DDF00DD0EA9 /* LexerTest.swift */; };
+		0EB1D5B7278A9DDF00DD0EA9 /* ObjectTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D5B0278A9DDF00DD0EA9 /* ObjectTest.swift */; };
+		0EB1D5B8278A9DDF00DD0EA9 /* CodeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D5B1278A9DDF00DD0EA9 /* CodeTest.swift */; };
+		0EB1D5B9278A9DDF00DD0EA9 /* AstTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D5B2278A9DDF00DD0EA9 /* AstTest.swift */; };
+		0EB1D5BA278A9DDF00DD0EA9 /* ParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D5B3278A9DDF00DD0EA9 /* ParserTest.swift */; };
+		0EB1D5BB278A9DDF00DD0EA9 /* CompileTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D5B4278A9DDF00DD0EA9 /* CompileTest.swift */; };
+		0EB1D5BC278A9E6600DD0EA9 /* Ast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D59C278A9D9E00DD0EA9 /* Ast.swift */; };
+		0EB1D5BD278A9E6A00DD0EA9 /* OpCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D58C278A9D9E00DD0EA9 /* OpCode.swift */; };
+		0EB1D5BE278A9E6D00DD0EA9 /* BytecodeTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D58D278A9D9E00DD0EA9 /* BytecodeTool.swift */; };
+		0EB1D5BF278A9E7000DD0EA9 /* Compiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D58F278A9D9E00DD0EA9 /* Compiler.swift */; };
+		0EB1D5C0278A9E7300DD0EA9 /* Evaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D59A278A9D9E00DD0EA9 /* Evaluator.swift */; };
+		0EB1D5C1278A9E7600DD0EA9 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D587278A9D9D00DD0EA9 /* Errors.swift */; };
+		0EB1D5C2278A9E7900DD0EA9 /* Lexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D59E278A9D9E00DD0EA9 /* Lexer.swift */; };
+		0EB1D5C3278A9E7B00DD0EA9 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D591278A9D9E00DD0EA9 /* Environment.swift */; };
+		0EB1D5C4278A9E7E00DD0EA9 /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D592278A9D9E00DD0EA9 /* Object.swift */; };
+		0EB1D5C5278A9E8100DD0EA9 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D589278A9D9D00DD0EA9 /* Parser.swift */; };
+		0EB1D5C6278A9E8300DD0EA9 /* ConsoleIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D597278A9D9E00DD0EA9 /* ConsoleIO.swift */; };
+		0EB1D5C7278A9E8600DD0EA9 /* MonkeyRepl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D598278A9D9E00DD0EA9 /* MonkeyRepl.swift */; };
+		0EB1D5C8278A9E8900DD0EA9 /* TokenType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D594278A9D9E00DD0EA9 /* TokenType.swift */; };
+		0EB1D5C9278A9E8B00DD0EA9 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D595278A9D9E00DD0EA9 /* Token.swift */; };
+		0EB1D5CB278AA56400DD0EA9 /* MonkeyScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D5CA278AA56400DD0EA9 /* MonkeyScript.swift */; };
+		0EB1D5CC278AA56400DD0EA9 /* MonkeyScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D5CA278AA56400DD0EA9 /* MonkeyScript.swift */; };
+		OBJ_100 /* DumpHelpGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_49 /* DumpHelpGenerator.swift */; };
+		OBJ_101 /* HelpCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_50 /* HelpCommand.swift */; };
+		OBJ_102 /* HelpGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_51 /* HelpGenerator.swift */; };
+		OBJ_103 /* MessageInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_52 /* MessageInfo.swift */; };
+		OBJ_104 /* UsageGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_53 /* UsageGenerator.swift */; };
+		OBJ_105 /* CollectionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_55 /* CollectionExtensions.swift */; };
+		OBJ_106 /* SequenceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_56 /* SequenceExtensions.swift */; };
+		OBJ_107 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_57 /* StringExtensions.swift */; };
+		OBJ_108 /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_58 /* Tree.swift */; };
+		OBJ_110 /* ArgumentParserToolInfo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "swift-argument-parser::ArgumentParserToolInfo::Product" /* ArgumentParserToolInfo.framework */; };
+		OBJ_117 /* ToolInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_60 /* ToolInfo.swift */; };
+		OBJ_124 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* main.swift */; };
+		OBJ_126 /* ArgumentParser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "swift-argument-parser::ArgumentParser::Product" /* ArgumentParser.framework */; };
+		OBJ_127 /* ArgumentParserToolInfo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "swift-argument-parser::ArgumentParserToolInfo::Product" /* ArgumentParserToolInfo.framework */; };
+		OBJ_135 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
+		OBJ_146 /* MonkeySwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* MonkeySwiftTests.swift */; };
+		OBJ_148 /* ArgumentParser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "swift-argument-parser::ArgumentParser::Product" /* ArgumentParser.framework */; };
+		OBJ_149 /* ArgumentParserToolInfo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "swift-argument-parser::ArgumentParserToolInfo::Product" /* ArgumentParserToolInfo.framework */; };
+		OBJ_158 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_61 /* Package.swift */; };
+		OBJ_72 /* BashCompletionsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* BashCompletionsGenerator.swift */; };
+		OBJ_73 /* CompletionsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* CompletionsGenerator.swift */; };
+		OBJ_74 /* FishCompletionsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* FishCompletionsGenerator.swift */; };
+		OBJ_75 /* ZshCompletionsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* ZshCompletionsGenerator.swift */; };
+		OBJ_76 /* Argument.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* Argument.swift */; };
+		OBJ_77 /* ArgumentHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* ArgumentHelp.swift */; };
+		OBJ_78 /* CompletionKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* CompletionKind.swift */; };
+		OBJ_79 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* Errors.swift */; };
+		OBJ_80 /* Flag.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* Flag.swift */; };
+		OBJ_81 /* NameSpecification.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* NameSpecification.swift */; };
+		OBJ_82 /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* Option.swift */; };
+		OBJ_83 /* OptionGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* OptionGroup.swift */; };
+		OBJ_84 /* CommandConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* CommandConfiguration.swift */; };
+		OBJ_85 /* EnumerableFlag.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* EnumerableFlag.swift */; };
+		OBJ_86 /* ExpressibleByArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_33 /* ExpressibleByArgument.swift */; };
+		OBJ_87 /* ParsableArguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_34 /* ParsableArguments.swift */; };
+		OBJ_88 /* ParsableArgumentsValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* ParsableArgumentsValidation.swift */; };
+		OBJ_89 /* ParsableCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_36 /* ParsableCommand.swift */; };
+		OBJ_90 /* ArgumentDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_38 /* ArgumentDecoder.swift */; };
+		OBJ_91 /* ArgumentDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_39 /* ArgumentDefinition.swift */; };
+		OBJ_92 /* ArgumentSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_40 /* ArgumentSet.swift */; };
+		OBJ_93 /* CommandParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_41 /* CommandParser.swift */; };
+		OBJ_94 /* InputOrigin.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_42 /* InputOrigin.swift */; };
+		OBJ_95 /* Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_43 /* Name.swift */; };
+		OBJ_96 /* Parsed.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_44 /* Parsed.swift */; };
+		OBJ_97 /* ParsedValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_45 /* ParsedValues.swift */; };
+		OBJ_98 /* ParserError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_46 /* ParserError.swift */; };
+		OBJ_99 /* SplitArguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_47 /* SplitArguments.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		98BCE7EA25F8F90B00600211 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
+/* Begin PBXContainerItemProxy section */
+		0EB1D57F278A9D2E00DD0EA9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "swift-argument-parser::ArgumentParser";
+			remoteInfo = ArgumentParser;
 		};
-/* End PBXCopyFilesBuildPhase section */
+		0EB1D580278A9D2E00DD0EA9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "swift-argument-parser::ArgumentParserToolInfo";
+			remoteInfo = ArgumentParserToolInfo;
+		};
+		0EB1D581278A9D2E00DD0EA9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "swift-argument-parser::ArgumentParserToolInfo";
+			remoteInfo = ArgumentParserToolInfo;
+		};
+		0EB1D582278A9D2E00DD0EA9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "MonkeySwift::MonkeySwift";
+			remoteInfo = MonkeySwift;
+		};
+		0EB1D583278A9D2E00DD0EA9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "swift-argument-parser::ArgumentParser";
+			remoteInfo = ArgumentParser;
+		};
+		0EB1D584278A9D2E00DD0EA9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "swift-argument-parser::ArgumentParserToolInfo";
+			remoteInfo = ArgumentParserToolInfo;
+		};
+		0EB1D585278A9D2E00DD0EA9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "MonkeySwift::MonkeySwiftTests";
+			remoteInfo = MonkeySwiftTests;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0E15016827538FE90021481F /* Compiler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compiler.swift; sourceTree = "<group>"; };
-		0E15016B275398100021481F /* CompileTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompileTest.swift; sourceTree = "<group>"; };
-		0E325D4F274E8C630050A383 /* OpCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpCode.swift; sourceTree = "<group>"; };
-		0E325D55274E94530050A383 /* CodeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeTest.swift; sourceTree = "<group>"; };
-		0E44342D25FCCD83003A97D2 /* MonkeySwiftUnitTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MonkeySwiftUnitTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0E44343125FCCD83003A97D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0E44343725FCCDB3003A97D2 /* LexerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexerTest.swift; sourceTree = "<group>"; };
-		0E44344425FCD009003A97D2 /* ParserTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserTest.swift; sourceTree = "<group>"; };
-		0E44344A25FCD321003A97D2 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
-		0E44345025FCD82F003A97D2 /* Ast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ast.swift; sourceTree = "<group>"; };
-		0E4E14822751F7B300101A89 /* BytecodeTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BytecodeTool.swift; sourceTree = "<group>"; };
-		0E4F6BBC26668DA5006140B0 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
-		0E6B51D6264816670042ED5B /* Evaluator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Evaluator.swift; sourceTree = "<group>"; };
-		0E6B51D8264816810042ED5B /* EvaluatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluatorTest.swift; sourceTree = "<group>"; };
-		0E8C04EB261076B300CEFB9D /* AstTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AstTest.swift; sourceTree = "<group>"; };
-		0EA41FF82639B82F00CDC676 /* Object.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Object.swift; sourceTree = "<group>"; };
-		0EBF48462751DC23009463C5 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
-		0EF20F4926901D21006C45F5 /* ObjectTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectTest.swift; sourceTree = "<group>"; };
-		98BCE7EC25F8F90B00600211 /* MonkeySwift */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MonkeySwift; sourceTree = BUILT_PRODUCTS_DIR; };
-		98BCE7EF25F8F90B00600211 /* utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
-		98BCE7F825F8FA7900600211 /* TokenType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenType.swift; sourceTree = "<group>"; };
-		98BCE7F925F8FA7900600211 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
-		98BCE7FB25F8FA7900600211 /* Lexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lexer.swift; sourceTree = "<group>"; };
-		98BCE7FD25F8FA7900600211 /* ConsoleIO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsoleIO.swift; sourceTree = "<group>"; };
-		98BCE7FE25F8FA7900600211 /* Repl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repl.swift; sourceTree = "<group>"; };
+		0EB1D587278A9D9D00DD0EA9 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		0EB1D589278A9D9D00DD0EA9 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		0EB1D58C278A9D9E00DD0EA9 /* OpCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpCode.swift; sourceTree = "<group>"; };
+		0EB1D58D278A9D9E00DD0EA9 /* BytecodeTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BytecodeTool.swift; sourceTree = "<group>"; };
+		0EB1D58F278A9D9E00DD0EA9 /* Compiler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Compiler.swift; sourceTree = "<group>"; };
+		0EB1D591278A9D9E00DD0EA9 /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		0EB1D592278A9D9E00DD0EA9 /* Object.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Object.swift; sourceTree = "<group>"; };
+		0EB1D594278A9D9E00DD0EA9 /* TokenType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenType.swift; sourceTree = "<group>"; };
+		0EB1D595278A9D9E00DD0EA9 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
+		0EB1D597278A9D9E00DD0EA9 /* ConsoleIO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsoleIO.swift; sourceTree = "<group>"; };
+		0EB1D598278A9D9E00DD0EA9 /* MonkeyRepl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonkeyRepl.swift; sourceTree = "<group>"; };
+		0EB1D59A278A9D9E00DD0EA9 /* Evaluator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Evaluator.swift; sourceTree = "<group>"; };
+		0EB1D59C278A9D9E00DD0EA9 /* Ast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ast.swift; sourceTree = "<group>"; };
+		0EB1D59E278A9D9E00DD0EA9 /* Lexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lexer.swift; sourceTree = "<group>"; };
+		0EB1D5AE278A9DDF00DD0EA9 /* EvaluatorTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EvaluatorTest.swift; sourceTree = "<group>"; };
+		0EB1D5AF278A9DDF00DD0EA9 /* LexerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LexerTest.swift; sourceTree = "<group>"; };
+		0EB1D5B0278A9DDF00DD0EA9 /* ObjectTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectTest.swift; sourceTree = "<group>"; };
+		0EB1D5B1278A9DDF00DD0EA9 /* CodeTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeTest.swift; sourceTree = "<group>"; };
+		0EB1D5B2278A9DDF00DD0EA9 /* AstTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AstTest.swift; sourceTree = "<group>"; };
+		0EB1D5B3278A9DDF00DD0EA9 /* ParserTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserTest.swift; sourceTree = "<group>"; };
+		0EB1D5B4278A9DDF00DD0EA9 /* CompileTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompileTest.swift; sourceTree = "<group>"; };
+		0EB1D5CA278AA56400DD0EA9 /* MonkeyScript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonkeyScript.swift; sourceTree = "<group>"; };
+		0EB1D5CE278AA86B00DD0EA9 /* helloworld.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = helloworld.mk; sourceTree = "<group>"; };
+		0EB1D5CF278AA8B200DD0EA9 /* fibonacci.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = fibonacci.mk; sourceTree = "<group>"; };
+		0EB1D5D0278AA9C000DD0EA9 /* array_and_dictionary.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = array_and_dictionary.mk; sourceTree = "<group>"; };
+		0EB1D5D2278AAA1600DD0EA9 /* adder.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = adder.mk; sourceTree = "<group>"; };
+		0EB1D5D4278AAAEA00DD0EA9 /* mapper.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = mapper.mk; sourceTree = "<group>"; };
+		"MonkeySwift::MonkeySwift::Product" /* MonkeySwift */ = {isa = PBXFileReference; lastKnownFileType = text; path = MonkeySwift; sourceTree = BUILT_PRODUCTS_DIR; };
+		"MonkeySwift::MonkeySwiftTests::Product" /* MonkeySwiftTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = MonkeySwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		OBJ_12 /* MonkeySwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonkeySwiftTests.swift; sourceTree = "<group>"; };
+		OBJ_17 /* BashCompletionsGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BashCompletionsGenerator.swift; sourceTree = "<group>"; };
+		OBJ_18 /* CompletionsGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionsGenerator.swift; sourceTree = "<group>"; };
+		OBJ_19 /* FishCompletionsGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishCompletionsGenerator.swift; sourceTree = "<group>"; };
+		OBJ_20 /* ZshCompletionsGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZshCompletionsGenerator.swift; sourceTree = "<group>"; };
+		OBJ_22 /* Argument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Argument.swift; sourceTree = "<group>"; };
+		OBJ_23 /* ArgumentHelp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgumentHelp.swift; sourceTree = "<group>"; };
+		OBJ_24 /* CompletionKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionKind.swift; sourceTree = "<group>"; };
+		OBJ_25 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		OBJ_26 /* Flag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flag.swift; sourceTree = "<group>"; };
+		OBJ_27 /* NameSpecification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameSpecification.swift; sourceTree = "<group>"; };
+		OBJ_28 /* Option.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
+		OBJ_29 /* OptionGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionGroup.swift; sourceTree = "<group>"; };
+		OBJ_31 /* CommandConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandConfiguration.swift; sourceTree = "<group>"; };
+		OBJ_32 /* EnumerableFlag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumerableFlag.swift; sourceTree = "<group>"; };
+		OBJ_33 /* ExpressibleByArgument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressibleByArgument.swift; sourceTree = "<group>"; };
+		OBJ_34 /* ParsableArguments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsableArguments.swift; sourceTree = "<group>"; };
+		OBJ_35 /* ParsableArgumentsValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsableArgumentsValidation.swift; sourceTree = "<group>"; };
+		OBJ_36 /* ParsableCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsableCommand.swift; sourceTree = "<group>"; };
+		OBJ_38 /* ArgumentDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgumentDecoder.swift; sourceTree = "<group>"; };
+		OBJ_39 /* ArgumentDefinition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgumentDefinition.swift; sourceTree = "<group>"; };
+		OBJ_40 /* ArgumentSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgumentSet.swift; sourceTree = "<group>"; };
+		OBJ_41 /* CommandParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandParser.swift; sourceTree = "<group>"; };
+		OBJ_42 /* InputOrigin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputOrigin.swift; sourceTree = "<group>"; };
+		OBJ_43 /* Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Name.swift; sourceTree = "<group>"; };
+		OBJ_44 /* Parsed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parsed.swift; sourceTree = "<group>"; };
+		OBJ_45 /* ParsedValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsedValues.swift; sourceTree = "<group>"; };
+		OBJ_46 /* ParserError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserError.swift; sourceTree = "<group>"; };
+		OBJ_47 /* SplitArguments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitArguments.swift; sourceTree = "<group>"; };
+		OBJ_49 /* DumpHelpGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DumpHelpGenerator.swift; sourceTree = "<group>"; };
+		OBJ_50 /* HelpCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpCommand.swift; sourceTree = "<group>"; };
+		OBJ_51 /* HelpGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpGenerator.swift; sourceTree = "<group>"; };
+		OBJ_52 /* MessageInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageInfo.swift; sourceTree = "<group>"; };
+		OBJ_53 /* UsageGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageGenerator.swift; sourceTree = "<group>"; };
+		OBJ_55 /* CollectionExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionExtensions.swift; sourceTree = "<group>"; };
+		OBJ_56 /* SequenceExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceExtensions.swift; sourceTree = "<group>"; };
+		OBJ_57 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		OBJ_58 /* Tree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tree.swift; sourceTree = "<group>"; };
+		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		OBJ_60 /* ToolInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolInfo.swift; sourceTree = "<group>"; };
+		OBJ_61 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/huangwei/Documents/LearningProjects/MonkeySwift/.build/checkouts/swift-argument-parser/Package.swift"; sourceTree = "<group>"; };
+		OBJ_9 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		"swift-argument-parser::ArgumentParser::Product" /* ArgumentParser.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ArgumentParser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"swift-argument-parser::ArgumentParserToolInfo::Product" /* ArgumentParserToolInfo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ArgumentParserToolInfo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		0E44342A25FCCD83003A97D2 /* Frameworks */ = {
+		OBJ_109 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 0;
+			files = (
+				OBJ_110 /* ArgumentParserToolInfo.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_118 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		98BCE7E925F8F90B00600211 /* Frameworks */ = {
+		OBJ_125 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 0;
 			files = (
+				OBJ_126 /* ArgumentParser.framework in Frameworks */,
+				OBJ_127 /* ArgumentParserToolInfo.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_147 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_148 /* ArgumentParser.framework in Frameworks */,
+				OBJ_149 /* ArgumentParserToolInfo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0E15016727538A590021481F /* Compiler */ = {
+		0EB1D586278A9D9D00DD0EA9 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				0E15016827538FE90021481F /* Compiler.swift */,
-			);
-			path = Compiler;
-			sourceTree = "<group>";
-		};
-		0E325D4E274E8C490050A383 /* ByteCode */ = {
-			isa = PBXGroup;
-			children = (
-				0E325D4F274E8C630050A383 /* OpCode.swift */,
-				0E4E14822751F7B300101A89 /* BytecodeTool.swift */,
-			);
-			path = ByteCode;
-			sourceTree = "<group>";
-		};
-		0E325D52274E92750050A383 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				0EBF48462751DC23009463C5 /* Errors.swift */,
+				0EB1D587278A9D9D00DD0EA9 /* Errors.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		0E44342E25FCCD83003A97D2 /* MonkeySwiftUnitTest */ = {
+		0EB1D588278A9D9D00DD0EA9 /* Parser */ = {
 			isa = PBXGroup;
 			children = (
-				0E44343125FCCD83003A97D2 /* Info.plist */,
-				0E44343725FCCDB3003A97D2 /* LexerTest.swift */,
-				0E44344425FCD009003A97D2 /* ParserTest.swift */,
-				0E8C04EB261076B300CEFB9D /* AstTest.swift */,
-				0E6B51D8264816810042ED5B /* EvaluatorTest.swift */,
-				0EF20F4926901D21006C45F5 /* ObjectTest.swift */,
-				0E325D55274E94530050A383 /* CodeTest.swift */,
-				0E15016B275398100021481F /* CompileTest.swift */,
-			);
-			path = MonkeySwiftUnitTest;
-			sourceTree = "<group>";
-		};
-		0E44344825FCD2EC003A97D2 /* Ast */ = {
-			isa = PBXGroup;
-			children = (
-				0E44345025FCD82F003A97D2 /* Ast.swift */,
-			);
-			path = Ast;
-			sourceTree = "<group>";
-		};
-		0E44344925FCD305003A97D2 /* Parser */ = {
-			isa = PBXGroup;
-			children = (
-				0E44344A25FCD321003A97D2 /* Parser.swift */,
+				0EB1D589278A9D9D00DD0EA9 /* Parser.swift */,
 			);
 			path = Parser;
 			sourceTree = "<group>";
 		};
-		0E6B51D52648163A0042ED5B /* Evaluator */ = {
+		0EB1D58B278A9D9E00DD0EA9 /* ByteCode */ = {
 			isa = PBXGroup;
 			children = (
-				0E6B51D6264816670042ED5B /* Evaluator.swift */,
+				0EB1D58C278A9D9E00DD0EA9 /* OpCode.swift */,
+				0EB1D58D278A9D9E00DD0EA9 /* BytecodeTool.swift */,
 			);
-			path = Evaluator;
+			path = ByteCode;
 			sourceTree = "<group>";
 		};
-		0EA41FF72639B81400CDC676 /* Object */ = {
+		0EB1D58E278A9D9E00DD0EA9 /* Compiler */ = {
 			isa = PBXGroup;
 			children = (
-				0EA41FF82639B82F00CDC676 /* Object.swift */,
-				0E4F6BBC26668DA5006140B0 /* Environment.swift */,
+				0EB1D58F278A9D9E00DD0EA9 /* Compiler.swift */,
+			);
+			path = Compiler;
+			sourceTree = "<group>";
+		};
+		0EB1D590278A9D9E00DD0EA9 /* Object */ = {
+			isa = PBXGroup;
+			children = (
+				0EB1D591278A9D9E00DD0EA9 /* Environment.swift */,
+				0EB1D592278A9D9E00DD0EA9 /* Object.swift */,
 			);
 			path = Object;
 			sourceTree = "<group>";
 		};
-		98BCE7E325F8F90B00600211 = {
+		0EB1D593278A9D9E00DD0EA9 /* Token */ = {
 			isa = PBXGroup;
 			children = (
-				98BCE7EE25F8F90B00600211 /* MonkeySwift */,
-				0E44342E25FCCD83003A97D2 /* MonkeySwiftUnitTest */,
-				98BCE7ED25F8F90B00600211 /* Products */,
-			);
-			sourceTree = "<group>";
-		};
-		98BCE7ED25F8F90B00600211 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				98BCE7EC25F8F90B00600211 /* MonkeySwift */,
-				0E44342D25FCCD83003A97D2 /* MonkeySwiftUnitTest.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		98BCE7EE25F8F90B00600211 /* MonkeySwift */ = {
-			isa = PBXGroup;
-			children = (
-				0E15016727538A590021481F /* Compiler */,
-				0E325D52274E92750050A383 /* Extensions */,
-				0E325D4E274E8C490050A383 /* ByteCode */,
-				0E6B51D52648163A0042ED5B /* Evaluator */,
-				0EA41FF72639B81400CDC676 /* Object */,
-				0E44344925FCD305003A97D2 /* Parser */,
-				0E44344825FCD2EC003A97D2 /* Ast */,
-				98BCE7FA25F8FA7900600211 /* Lexer */,
-				98BCE7FC25F8FA7900600211 /* Repl */,
-				98BCE7F725F8FA7900600211 /* Token */,
-				98BCE7EF25F8F90B00600211 /* utils.swift */,
-			);
-			path = MonkeySwift;
-			sourceTree = "<group>";
-		};
-		98BCE7F725F8FA7900600211 /* Token */ = {
-			isa = PBXGroup;
-			children = (
-				98BCE7F825F8FA7900600211 /* TokenType.swift */,
-				98BCE7F925F8FA7900600211 /* Token.swift */,
+				0EB1D594278A9D9E00DD0EA9 /* TokenType.swift */,
+				0EB1D595278A9D9E00DD0EA9 /* Token.swift */,
 			);
 			path = Token;
 			sourceTree = "<group>";
 		};
-		98BCE7FA25F8FA7900600211 /* Lexer */ = {
+		0EB1D596278A9D9E00DD0EA9 /* Repl */ = {
 			isa = PBXGroup;
 			children = (
-				98BCE7FB25F8FA7900600211 /* Lexer.swift */,
-			);
-			path = Lexer;
-			sourceTree = "<group>";
-		};
-		98BCE7FC25F8FA7900600211 /* Repl */ = {
-			isa = PBXGroup;
-			children = (
-				98BCE7FD25F8FA7900600211 /* ConsoleIO.swift */,
-				98BCE7FE25F8FA7900600211 /* Repl.swift */,
+				0EB1D597278A9D9E00DD0EA9 /* ConsoleIO.swift */,
+				0EB1D598278A9D9E00DD0EA9 /* MonkeyRepl.swift */,
+				0EB1D5CA278AA56400DD0EA9 /* MonkeyScript.swift */,
 			);
 			path = Repl;
 			sourceTree = "<group>";
 		};
+		0EB1D599278A9D9E00DD0EA9 /* Evaluator */ = {
+			isa = PBXGroup;
+			children = (
+				0EB1D59A278A9D9E00DD0EA9 /* Evaluator.swift */,
+			);
+			path = Evaluator;
+			sourceTree = "<group>";
+		};
+		0EB1D59B278A9D9E00DD0EA9 /* Ast */ = {
+			isa = PBXGroup;
+			children = (
+				0EB1D59C278A9D9E00DD0EA9 /* Ast.swift */,
+			);
+			path = Ast;
+			sourceTree = "<group>";
+		};
+		0EB1D59D278A9D9E00DD0EA9 /* Lexer */ = {
+			isa = PBXGroup;
+			children = (
+				0EB1D59E278A9D9E00DD0EA9 /* Lexer.swift */,
+			);
+			path = Lexer;
+			sourceTree = "<group>";
+		};
+		0EB1D5CD278AA84800DD0EA9 /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				0EB1D5CE278AA86B00DD0EA9 /* helloworld.mk */,
+				0EB1D5CF278AA8B200DD0EA9 /* fibonacci.mk */,
+				0EB1D5D0278AA9C000DD0EA9 /* array_and_dictionary.mk */,
+				0EB1D5D2278AAA1600DD0EA9 /* adder.mk */,
+			);
+			name = Scripts;
+			sourceTree = "<group>";
+		};
+		OBJ_10 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_11 /* MonkeySwiftTests */,
+			);
+			name = Tests;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_11 /* MonkeySwiftTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_12 /* MonkeySwiftTests.swift */,
+				0EB1D5B2278A9DDF00DD0EA9 /* AstTest.swift */,
+				0EB1D5B1278A9DDF00DD0EA9 /* CodeTest.swift */,
+				0EB1D5B4278A9DDF00DD0EA9 /* CompileTest.swift */,
+				0EB1D5AE278A9DDF00DD0EA9 /* EvaluatorTest.swift */,
+				0EB1D5AF278A9DDF00DD0EA9 /* LexerTest.swift */,
+				0EB1D5B0278A9DDF00DD0EA9 /* ObjectTest.swift */,
+				0EB1D5B3278A9DDF00DD0EA9 /* ParserTest.swift */,
+			);
+			name = MonkeySwiftTests;
+			path = Tests/MonkeySwiftTests;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_13 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_14 /* swift-argument-parser 0.5.0 */,
+			);
+			name = Dependencies;
+			sourceTree = "<group>";
+		};
+		OBJ_14 /* swift-argument-parser 0.5.0 */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_15 /* ArgumentParser */,
+				OBJ_59 /* ArgumentParserToolInfo */,
+				OBJ_61 /* Package.swift */,
+			);
+			name = "swift-argument-parser 0.5.0";
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_15 /* ArgumentParser */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_16 /* Completions */,
+				OBJ_21 /* Parsable Properties */,
+				OBJ_30 /* Parsable Types */,
+				OBJ_37 /* Parsing */,
+				OBJ_48 /* Usage */,
+				OBJ_54 /* Utilities */,
+			);
+			name = ArgumentParser;
+			path = ".build/checkouts/swift-argument-parser/Sources/ArgumentParser";
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_16 /* Completions */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_17 /* BashCompletionsGenerator.swift */,
+				OBJ_18 /* CompletionsGenerator.swift */,
+				OBJ_19 /* FishCompletionsGenerator.swift */,
+				OBJ_20 /* ZshCompletionsGenerator.swift */,
+			);
+			path = Completions;
+			sourceTree = "<group>";
+		};
+		OBJ_21 /* Parsable Properties */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_22 /* Argument.swift */,
+				OBJ_23 /* ArgumentHelp.swift */,
+				OBJ_24 /* CompletionKind.swift */,
+				OBJ_25 /* Errors.swift */,
+				OBJ_26 /* Flag.swift */,
+				OBJ_27 /* NameSpecification.swift */,
+				OBJ_28 /* Option.swift */,
+				OBJ_29 /* OptionGroup.swift */,
+			);
+			path = "Parsable Properties";
+			sourceTree = "<group>";
+		};
+		OBJ_30 /* Parsable Types */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_31 /* CommandConfiguration.swift */,
+				OBJ_32 /* EnumerableFlag.swift */,
+				OBJ_33 /* ExpressibleByArgument.swift */,
+				OBJ_34 /* ParsableArguments.swift */,
+				OBJ_35 /* ParsableArgumentsValidation.swift */,
+				OBJ_36 /* ParsableCommand.swift */,
+			);
+			path = "Parsable Types";
+			sourceTree = "<group>";
+		};
+		OBJ_37 /* Parsing */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_38 /* ArgumentDecoder.swift */,
+				OBJ_39 /* ArgumentDefinition.swift */,
+				OBJ_40 /* ArgumentSet.swift */,
+				OBJ_41 /* CommandParser.swift */,
+				OBJ_42 /* InputOrigin.swift */,
+				OBJ_43 /* Name.swift */,
+				OBJ_44 /* Parsed.swift */,
+				OBJ_45 /* ParsedValues.swift */,
+				OBJ_46 /* ParserError.swift */,
+				OBJ_47 /* SplitArguments.swift */,
+			);
+			path = Parsing;
+			sourceTree = "<group>";
+		};
+		OBJ_48 /* Usage */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_49 /* DumpHelpGenerator.swift */,
+				OBJ_50 /* HelpCommand.swift */,
+				OBJ_51 /* HelpGenerator.swift */,
+				OBJ_52 /* MessageInfo.swift */,
+				OBJ_53 /* UsageGenerator.swift */,
+			);
+			path = Usage;
+			sourceTree = "<group>";
+		};
+		OBJ_5 /*  */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_6 /* Package.swift */,
+				0EB1D5CD278AA84800DD0EA9 /* Scripts */,
+				0EB1D5D4278AAAEA00DD0EA9 /* mapper.mk */,
+				OBJ_7 /* Sources */,
+				OBJ_10 /* Tests */,
+				OBJ_13 /* Dependencies */,
+				OBJ_62 /* Products */,
+			);
+			name = "";
+			sourceTree = "<group>";
+		};
+		OBJ_54 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_55 /* CollectionExtensions.swift */,
+				OBJ_56 /* SequenceExtensions.swift */,
+				OBJ_57 /* StringExtensions.swift */,
+				OBJ_58 /* Tree.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		OBJ_59 /* ArgumentParserToolInfo */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_60 /* ToolInfo.swift */,
+			);
+			name = ArgumentParserToolInfo;
+			path = ".build/checkouts/swift-argument-parser/Sources/ArgumentParserToolInfo";
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_62 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				"swift-argument-parser::ArgumentParser::Product" /* ArgumentParser.framework */,
+				"swift-argument-parser::ArgumentParserToolInfo::Product" /* ArgumentParserToolInfo.framework */,
+				"MonkeySwift::MonkeySwift::Product" /* MonkeySwift */,
+				"MonkeySwift::MonkeySwiftTests::Product" /* MonkeySwiftTests.xctest */,
+			);
+			name = Products;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		OBJ_7 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_8 /* MonkeySwift */,
+			);
+			name = Sources;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_8 /* MonkeySwift */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_9 /* main.swift */,
+				0EB1D59B278A9D9E00DD0EA9 /* Ast */,
+				0EB1D58B278A9D9E00DD0EA9 /* ByteCode */,
+				0EB1D58E278A9D9E00DD0EA9 /* Compiler */,
+				0EB1D599278A9D9E00DD0EA9 /* Evaluator */,
+				0EB1D586278A9D9D00DD0EA9 /* Extensions */,
+				0EB1D59D278A9D9E00DD0EA9 /* Lexer */,
+				0EB1D590278A9D9E00DD0EA9 /* Object */,
+				0EB1D588278A9D9D00DD0EA9 /* Parser */,
+				0EB1D596278A9D9E00DD0EA9 /* Repl */,
+				0EB1D593278A9D9E00DD0EA9 /* Token */,
+			);
+			name = MonkeySwift;
+			path = Sources/MonkeySwift;
+			sourceTree = SOURCE_ROOT;
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0E44342C25FCCD83003A97D2 /* MonkeySwiftUnitTest */ = {
+		"MonkeySwift::MonkeySwift" /* MonkeySwift */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0E44343225FCCD83003A97D2 /* Build configuration list for PBXNativeTarget "MonkeySwiftUnitTest" */;
+			buildConfigurationList = OBJ_120 /* Build configuration list for PBXNativeTarget "MonkeySwift" */;
 			buildPhases = (
-				0E44342925FCCD83003A97D2 /* Sources */,
-				0E44342A25FCCD83003A97D2 /* Frameworks */,
-				0E44342B25FCCD83003A97D2 /* Resources */,
+				OBJ_123 /* Sources */,
+				OBJ_125 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-			);
-			name = MonkeySwiftUnitTest;
-			productName = MonkeySwiftUnitTest;
-			productReference = 0E44342D25FCCD83003A97D2 /* MonkeySwiftUnitTest.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		98BCE7EB25F8F90B00600211 /* MonkeySwift */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 98BCE7F325F8F90B00600211 /* Build configuration list for PBXNativeTarget "MonkeySwift" */;
-			buildPhases = (
-				98BCE7E825F8F90B00600211 /* Sources */,
-				98BCE7E925F8F90B00600211 /* Frameworks */,
-				98BCE7EA25F8F90B00600211 /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
+				OBJ_128 /* PBXTargetDependency */,
+				OBJ_129 /* PBXTargetDependency */,
 			);
 			name = MonkeySwift;
 			productName = MonkeySwift;
-			productReference = 98BCE7EC25F8F90B00600211 /* MonkeySwift */;
+			productReference = "MonkeySwift::MonkeySwift::Product" /* MonkeySwift */;
 			productType = "com.apple.product-type.tool";
+		};
+		"MonkeySwift::MonkeySwiftTests" /* MonkeySwiftTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_142 /* Build configuration list for PBXNativeTarget "MonkeySwiftTests" */;
+			buildPhases = (
+				OBJ_145 /* Sources */,
+				OBJ_147 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_150 /* PBXTargetDependency */,
+				OBJ_151 /* PBXTargetDependency */,
+				OBJ_152 /* PBXTargetDependency */,
+			);
+			name = MonkeySwiftTests;
+			productName = MonkeySwiftTests;
+			productReference = "MonkeySwift::MonkeySwiftTests::Product" /* MonkeySwiftTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		"MonkeySwift::SwiftPMPackageDescription" /* MonkeySwiftPackageDescription */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_131 /* Build configuration list for PBXNativeTarget "MonkeySwiftPackageDescription" */;
+			buildPhases = (
+				OBJ_134 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MonkeySwiftPackageDescription;
+			productName = MonkeySwiftPackageDescription;
+			productType = "com.apple.product-type.framework";
+		};
+		"swift-argument-parser::ArgumentParser" /* ArgumentParser */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_68 /* Build configuration list for PBXNativeTarget "ArgumentParser" */;
+			buildPhases = (
+				OBJ_71 /* Sources */,
+				OBJ_109 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_111 /* PBXTargetDependency */,
+			);
+			name = ArgumentParser;
+			productName = ArgumentParser;
+			productReference = "swift-argument-parser::ArgumentParser::Product" /* ArgumentParser.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		"swift-argument-parser::ArgumentParserToolInfo" /* ArgumentParserToolInfo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_113 /* Build configuration list for PBXNativeTarget "ArgumentParserToolInfo" */;
+			buildPhases = (
+				OBJ_116 /* Sources */,
+				OBJ_118 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ArgumentParserToolInfo;
+			productName = ArgumentParserToolInfo;
+			productReference = "swift-argument-parser::ArgumentParserToolInfo::Product" /* ArgumentParserToolInfo.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		"swift-argument-parser::SwiftPMPackageDescription" /* swift-argument-parserPackageDescription */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_154 /* Build configuration list for PBXNativeTarget "swift-argument-parserPackageDescription" */;
+			buildPhases = (
+				OBJ_157 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "swift-argument-parserPackageDescription";
+			productName = "swift-argument-parserPackageDescription";
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		98BCE7E425F8F90B00600211 /* Project object */ = {
+		OBJ_1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1240;
-				TargetAttributes = {
-					0E44342C25FCCD83003A97D2 = {
-						CreatedOnToolsVersion = 12.4;
-						LastSwiftMigration = 1240;
-					};
-					98BCE7EB25F8F90B00600211 = {
-						CreatedOnToolsVersion = 12.4;
-					};
-				};
+				LastSwiftMigration = 9999;
+				LastUpgradeCheck = 9999;
 			};
-			buildConfigurationList = 98BCE7E725F8F90B00600211 /* Build configuration list for PBXProject "MonkeySwift" */;
-			compatibilityVersion = "Xcode 9.3";
+			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "MonkeySwift" */;
+			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
 			);
-			mainGroup = 98BCE7E325F8F90B00600211;
-			productRefGroup = 98BCE7ED25F8F90B00600211 /* Products */;
+			mainGroup = OBJ_5 /*  */;
+			productRefGroup = OBJ_62 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				98BCE7EB25F8F90B00600211 /* MonkeySwift */,
-				0E44342C25FCCD83003A97D2 /* MonkeySwiftUnitTest */,
+				"swift-argument-parser::ArgumentParser" /* ArgumentParser */,
+				"swift-argument-parser::ArgumentParserToolInfo" /* ArgumentParserToolInfo */,
+				"MonkeySwift::MonkeySwift" /* MonkeySwift */,
+				"MonkeySwift::SwiftPMPackageDescription" /* MonkeySwiftPackageDescription */,
+				"MonkeySwift::MonkeySwiftPackageTests::ProductTarget" /* MonkeySwiftPackageTests */,
+				"MonkeySwift::MonkeySwiftTests" /* MonkeySwiftTests */,
+				"swift-argument-parser::SwiftPMPackageDescription" /* swift-argument-parserPackageDescription */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXResourcesBuildPhase section */
-		0E44342B25FCCD83003A97D2 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		0E44342925FCCD83003A97D2 /* Sources */ = {
+		OBJ_116 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 0;
 			files = (
-				0E325D56274E94530050A383 /* CodeTest.swift in Sources */,
-				0E8C04EC261076B300CEFB9D /* AstTest.swift in Sources */,
-				0E4F6BBE26669153006140B0 /* Environment.swift in Sources */,
-				0E6B51D9264816810042ED5B /* EvaluatorTest.swift in Sources */,
-				0EBF48482751DC23009463C5 /* Errors.swift in Sources */,
-				0E44343E25FCCEB6003A97D2 /* TokenType.swift in Sources */,
-				0E44343B25FCCEAD003A97D2 /* Lexer.swift in Sources */,
-				0E44345425FCE466003A97D2 /* Ast.swift in Sources */,
-				0E4E14842751F7B300101A89 /* BytecodeTool.swift in Sources */,
-				0EA41FFA2639B82F00CDC676 /* Object.swift in Sources */,
-				0E15016A27538FE90021481F /* Compiler.swift in Sources */,
-				0EA41FFB2639B84F00CDC676 /* Parser.swift in Sources */,
-				0E15016C275398100021481F /* CompileTest.swift in Sources */,
-				0E6B51DA264828EA0042ED5B /* Evaluator.swift in Sources */,
-				0EF20F4A26901D21006C45F5 /* ObjectTest.swift in Sources */,
-				0E44344525FCD009003A97D2 /* ParserTest.swift in Sources */,
-				0E44343825FCCDB3003A97D2 /* LexerTest.swift in Sources */,
-				0E325D51274E8C6C0050A383 /* OpCode.swift in Sources */,
-				0E44344125FCCEB8003A97D2 /* Token.swift in Sources */,
+				OBJ_117 /* ToolInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		98BCE7E825F8F90B00600211 /* Sources */ = {
+		OBJ_123 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 0;
 			files = (
-				98BCE80325F8FA7900600211 /* Repl.swift in Sources */,
-				98BCE80225F8FA7900600211 /* ConsoleIO.swift in Sources */,
-				98BCE80025F8FA7900600211 /* Token.swift in Sources */,
-				98BCE7F025F8F90B00600211 /* utils.swift in Sources */,
-				0E4E14832751F7B300101A89 /* BytecodeTool.swift in Sources */,
-				0E325D50274E8C630050A383 /* OpCode.swift in Sources */,
-				0EA41FF92639B82F00CDC676 /* Object.swift in Sources */,
-				0E15016927538FE90021481F /* Compiler.swift in Sources */,
-				0E6B51D7264816670042ED5B /* Evaluator.swift in Sources */,
-				0EBF48472751DC23009463C5 /* Errors.swift in Sources */,
-				0E44345125FCD82F003A97D2 /* Ast.swift in Sources */,
-				0E4F6BBD26668DA5006140B0 /* Environment.swift in Sources */,
-				98BCE80125F8FA7900600211 /* Lexer.swift in Sources */,
-				98BCE7FF25F8FA7900600211 /* TokenType.swift in Sources */,
-				0E44344B25FCD321003A97D2 /* Parser.swift in Sources */,
+				0EB1D5A3278A9D9E00DD0EA9 /* BytecodeTool.swift in Sources */,
+				0EB1D5AB278A9D9E00DD0EA9 /* Evaluator.swift in Sources */,
+				0EB1D5AC278A9D9E00DD0EA9 /* Ast.swift in Sources */,
+				0EB1D5A5278A9D9E00DD0EA9 /* Environment.swift in Sources */,
+				0EB1D5AA278A9D9E00DD0EA9 /* MonkeyRepl.swift in Sources */,
+				0EB1D59F278A9D9E00DD0EA9 /* Errors.swift in Sources */,
+				0EB1D5AD278A9D9E00DD0EA9 /* Lexer.swift in Sources */,
+				0EB1D5A4278A9D9E00DD0EA9 /* Compiler.swift in Sources */,
+				0EB1D5A6278A9D9E00DD0EA9 /* Object.swift in Sources */,
+				OBJ_124 /* main.swift in Sources */,
+				0EB1D5A0278A9D9E00DD0EA9 /* Parser.swift in Sources */,
+				0EB1D5A8278A9D9E00DD0EA9 /* Token.swift in Sources */,
+				0EB1D5A2278A9D9E00DD0EA9 /* OpCode.swift in Sources */,
+				0EB1D5A9278A9D9E00DD0EA9 /* ConsoleIO.swift in Sources */,
+				0EB1D5CB278AA56400DD0EA9 /* MonkeyScript.swift in Sources */,
+				0EB1D5A7278A9D9E00DD0EA9 /* TokenType.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_134 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_135 /* Package.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_145 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				0EB1D5CC278AA56400DD0EA9 /* MonkeyScript.swift in Sources */,
+				0EB1D5BA278A9DDF00DD0EA9 /* ParserTest.swift in Sources */,
+				0EB1D5C3278A9E7B00DD0EA9 /* Environment.swift in Sources */,
+				0EB1D5C6278A9E8300DD0EA9 /* ConsoleIO.swift in Sources */,
+				0EB1D5B9278A9DDF00DD0EA9 /* AstTest.swift in Sources */,
+				0EB1D5BE278A9E6D00DD0EA9 /* BytecodeTool.swift in Sources */,
+				0EB1D5BC278A9E6600DD0EA9 /* Ast.swift in Sources */,
+				0EB1D5C2278A9E7900DD0EA9 /* Lexer.swift in Sources */,
+				0EB1D5C9278A9E8B00DD0EA9 /* Token.swift in Sources */,
+				0EB1D5BF278A9E7000DD0EA9 /* Compiler.swift in Sources */,
+				0EB1D5BD278A9E6A00DD0EA9 /* OpCode.swift in Sources */,
+				0EB1D5C8278A9E8900DD0EA9 /* TokenType.swift in Sources */,
+				0EB1D5C4278A9E7E00DD0EA9 /* Object.swift in Sources */,
+				0EB1D5C1278A9E7600DD0EA9 /* Errors.swift in Sources */,
+				0EB1D5B8278A9DDF00DD0EA9 /* CodeTest.swift in Sources */,
+				0EB1D5C7278A9E8600DD0EA9 /* MonkeyRepl.swift in Sources */,
+				0EB1D5B6278A9DDF00DD0EA9 /* LexerTest.swift in Sources */,
+				0EB1D5C0278A9E7300DD0EA9 /* Evaluator.swift in Sources */,
+				OBJ_146 /* MonkeySwiftTests.swift in Sources */,
+				0EB1D5C5278A9E8100DD0EA9 /* Parser.swift in Sources */,
+				0EB1D5BB278A9DDF00DD0EA9 /* CompileTest.swift in Sources */,
+				0EB1D5B7278A9DDF00DD0EA9 /* ObjectTest.swift in Sources */,
+				0EB1D5B5278A9DDF00DD0EA9 /* EvaluatorTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_157 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_158 /* Package.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_71 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_72 /* BashCompletionsGenerator.swift in Sources */,
+				OBJ_73 /* CompletionsGenerator.swift in Sources */,
+				OBJ_74 /* FishCompletionsGenerator.swift in Sources */,
+				OBJ_75 /* ZshCompletionsGenerator.swift in Sources */,
+				OBJ_76 /* Argument.swift in Sources */,
+				OBJ_77 /* ArgumentHelp.swift in Sources */,
+				OBJ_78 /* CompletionKind.swift in Sources */,
+				OBJ_79 /* Errors.swift in Sources */,
+				OBJ_80 /* Flag.swift in Sources */,
+				OBJ_81 /* NameSpecification.swift in Sources */,
+				OBJ_82 /* Option.swift in Sources */,
+				OBJ_83 /* OptionGroup.swift in Sources */,
+				OBJ_84 /* CommandConfiguration.swift in Sources */,
+				OBJ_85 /* EnumerableFlag.swift in Sources */,
+				OBJ_86 /* ExpressibleByArgument.swift in Sources */,
+				OBJ_87 /* ParsableArguments.swift in Sources */,
+				OBJ_88 /* ParsableArgumentsValidation.swift in Sources */,
+				OBJ_89 /* ParsableCommand.swift in Sources */,
+				OBJ_90 /* ArgumentDecoder.swift in Sources */,
+				OBJ_91 /* ArgumentDefinition.swift in Sources */,
+				OBJ_92 /* ArgumentSet.swift in Sources */,
+				OBJ_93 /* CommandParser.swift in Sources */,
+				OBJ_94 /* InputOrigin.swift in Sources */,
+				OBJ_95 /* Name.swift in Sources */,
+				OBJ_96 /* Parsed.swift in Sources */,
+				OBJ_97 /* ParsedValues.swift in Sources */,
+				OBJ_98 /* ParserError.swift in Sources */,
+				OBJ_99 /* SplitArguments.swift in Sources */,
+				OBJ_100 /* DumpHelpGenerator.swift in Sources */,
+				OBJ_101 /* HelpCommand.swift in Sources */,
+				OBJ_102 /* HelpGenerator.swift in Sources */,
+				OBJ_103 /* MessageInfo.swift in Sources */,
+				OBJ_104 /* UsageGenerator.swift in Sources */,
+				OBJ_105 /* CollectionExtensions.swift in Sources */,
+				OBJ_106 /* SequenceExtensions.swift in Sources */,
+				OBJ_107 /* StringExtensions.swift in Sources */,
+				OBJ_108 /* Tree.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		OBJ_111 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "swift-argument-parser::ArgumentParserToolInfo" /* ArgumentParserToolInfo */;
+			targetProxy = 0EB1D580278A9D2E00DD0EA9 /* PBXContainerItemProxy */;
+		};
+		OBJ_128 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "swift-argument-parser::ArgumentParser" /* ArgumentParser */;
+			targetProxy = 0EB1D57F278A9D2E00DD0EA9 /* PBXContainerItemProxy */;
+		};
+		OBJ_129 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "swift-argument-parser::ArgumentParserToolInfo" /* ArgumentParserToolInfo */;
+			targetProxy = 0EB1D581278A9D2E00DD0EA9 /* PBXContainerItemProxy */;
+		};
+		OBJ_140 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "MonkeySwift::MonkeySwiftTests" /* MonkeySwiftTests */;
+			targetProxy = 0EB1D585278A9D2E00DD0EA9 /* PBXContainerItemProxy */;
+		};
+		OBJ_150 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "MonkeySwift::MonkeySwift" /* MonkeySwift */;
+			targetProxy = 0EB1D582278A9D2E00DD0EA9 /* PBXContainerItemProxy */;
+		};
+		OBJ_151 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "swift-argument-parser::ArgumentParser" /* ArgumentParser */;
+			targetProxy = 0EB1D583278A9D2E00DD0EA9 /* PBXContainerItemProxy */;
+		};
+		OBJ_152 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "swift-argument-parser::ArgumentParserToolInfo" /* ArgumentParserToolInfo */;
+			targetProxy = 0EB1D584278A9D2E00DD0EA9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
-		0E44343325FCCD83003A97D2 /* Debug */ = {
+		OBJ_114 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = MonkeySwiftUnitTest/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
+				CURRENT_PROJECT_VERSION = 1;
+				DRIVERKIT_DEPLOYMENT_TARGET = 19.0;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = room705.MonkeySwiftUnitTest;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = MonkeySwift.xcodeproj/ArgumentParserToolInfo_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = ArgumentParserToolInfo;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = ArgumentParserToolInfo;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		OBJ_115 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CURRENT_PROJECT_VERSION = 1;
+				DRIVERKIT_DEPLOYMENT_TARGET = 19.0;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = MonkeySwift.xcodeproj/ArgumentParserToolInfo_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = ArgumentParserToolInfo;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = ArgumentParserToolInfo;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
+		OBJ_121 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CURRENT_PROJECT_VERSION = 1;
+				DRIVERKIT_DEPLOYMENT_TARGET = 19.0;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = MonkeySwift.xcodeproj/MonkeySwift_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx @executable_path";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_FORCE_DYNAMIC_LINK_STDLIB = YES;
+				SWIFT_FORCE_STATIC_LINK_STDLIB = NO;
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = MonkeySwift;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		OBJ_122 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CURRENT_PROJECT_VERSION = 1;
+				DRIVERKIT_DEPLOYMENT_TARGET = 19.0;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = MonkeySwift.xcodeproj/MonkeySwift_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx @executable_path";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_FORCE_DYNAMIC_LINK_STDLIB = YES;
+				SWIFT_FORCE_STATIC_LINK_STDLIB = NO;
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = MonkeySwift;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
+		OBJ_132 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LD = /usr/bin/true;
+				OTHER_SWIFT_FLAGS = "-swift-version 5 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/ManifestAPI -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -package-description-version 5.5.0";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
-		0E44343425FCCD83003A97D2 /* Release */ = {
+		OBJ_133 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = MonkeySwiftUnitTest/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = room705.MonkeySwiftUnitTest;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				LD = /usr/bin/true;
+				OTHER_SWIFT_FLAGS = "-swift-version 5 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/ManifestAPI -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -package-description-version 5.5.0";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
-		98BCE7F125F8F90B00600211 /* Debug */ = {
+		OBJ_138 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
+			};
+			name = Debug;
+		};
+		OBJ_139 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		OBJ_143 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DRIVERKIT_DEPLOYMENT_TARGET = 19.0;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = MonkeySwift.xcodeproj/MonkeySwiftTests_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = MonkeySwiftTests;
+				TVOS_DEPLOYMENT_TARGET = 14.0;
+				WATCHOS_DEPLOYMENT_TARGET = 7.0;
+			};
+			name = Debug;
+		};
+		OBJ_144 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DRIVERKIT_DEPLOYMENT_TARGET = 19.0;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = MonkeySwift.xcodeproj/MonkeySwiftTests_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = MonkeySwiftTests;
+				TVOS_DEPLOYMENT_TARGET = 14.0;
+				WATCHOS_DEPLOYMENT_TARGET = 7.0;
+			};
+			name = Release;
+		};
+		OBJ_155 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LD = /usr/bin/true;
+				OTHER_SWIFT_FLAGS = "-swift-version 5 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/ManifestAPI -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -package-description-version 5.2.0";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		OBJ_156 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LD = /usr/bin/true;
+				OTHER_SWIFT_FLAGS = "-swift-version 5 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/ManifestAPI -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -package-description-version 5.2.0";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		OBJ_3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
 					"$(inherited)",
+					"SWIFT_PACKAGE=1",
+					"DEBUG=1",
 				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.1;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "$(inherited) -DXcode";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SUPPORTED_PLATFORMS = "$(AVAILABLE_PLATFORMS)";
+				SUPPORTS_MACCATALYST = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SWIFT_PACKAGE DEBUG";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				USE_HEADERMAP = NO;
 			};
 			name = Debug;
 		};
-		98BCE7F225F8F90B00600211 /* Release */ = {
+		OBJ_4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.1;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SWIFT_PACKAGE=1",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_SWIFT_FLAGS = "$(inherited) -DXcode";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SUPPORTED_PLATFORMS = "$(AVAILABLE_PLATFORMS)";
+				SUPPORTS_MACCATALYST = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SWIFT_PACKAGE";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				USE_HEADERMAP = NO;
 			};
 			name = Release;
 		};
-		98BCE7F425F8F90B00600211 /* Debug */ = {
+		OBJ_69 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				CURRENT_PROJECT_VERSION = 1;
+				DRIVERKIT_DEPLOYMENT_TARGET = 19.0;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = MonkeySwift.xcodeproj/ArgumentParser_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = ArgumentParser;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
 				SWIFT_VERSION = 5.0;
+				TARGET_NAME = ArgumentParser;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
-		98BCE7F525F8F90B00600211 /* Release */ = {
+		OBJ_70 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				CURRENT_PROJECT_VERSION = 1;
+				DRIVERKIT_DEPLOYMENT_TARGET = 19.0;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = MonkeySwift.xcodeproj/ArgumentParser_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = ArgumentParser;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
 				SWIFT_VERSION = 5.0;
+				TARGET_NAME = ArgumentParser;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0E44343225FCCD83003A97D2 /* Build configuration list for PBXNativeTarget "MonkeySwiftUnitTest" */ = {
+		OBJ_113 /* Build configuration list for PBXNativeTarget "ArgumentParserToolInfo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0E44343325FCCD83003A97D2 /* Debug */,
-				0E44343425FCCD83003A97D2 /* Release */,
+				OBJ_114 /* Debug */,
+				OBJ_115 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		98BCE7E725F8F90B00600211 /* Build configuration list for PBXProject "MonkeySwift" */ = {
+		OBJ_120 /* Build configuration list for PBXNativeTarget "MonkeySwift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				98BCE7F125F8F90B00600211 /* Debug */,
-				98BCE7F225F8F90B00600211 /* Release */,
+				OBJ_121 /* Debug */,
+				OBJ_122 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		98BCE7F325F8F90B00600211 /* Build configuration list for PBXNativeTarget "MonkeySwift" */ = {
+		OBJ_131 /* Build configuration list for PBXNativeTarget "MonkeySwiftPackageDescription" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				98BCE7F425F8F90B00600211 /* Debug */,
-				98BCE7F525F8F90B00600211 /* Release */,
+				OBJ_132 /* Debug */,
+				OBJ_133 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_137 /* Build configuration list for PBXAggregateTarget "MonkeySwiftPackageTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_138 /* Debug */,
+				OBJ_139 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_142 /* Build configuration list for PBXNativeTarget "MonkeySwiftTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_143 /* Debug */,
+				OBJ_144 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_154 /* Build configuration list for PBXNativeTarget "swift-argument-parserPackageDescription" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_155 /* Debug */,
+				OBJ_156 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_2 /* Build configuration list for PBXProject "MonkeySwift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_3 /* Debug */,
+				OBJ_4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_68 /* Build configuration list for PBXNativeTarget "ArgumentParser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_69 /* Debug */,
+				OBJ_70 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 98BCE7E425F8F90B00600211 /* Project object */;
+	rootObject = OBJ_1 /* Project object */;
 }

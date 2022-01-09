@@ -9,7 +9,7 @@ import Foundation
 
 let prompt = ">> "
 
-struct Repl {
+struct MonkeyRepl {
     static func start() {
         var shouldQuit = false
         ConsoleIO.shared.printUsage()

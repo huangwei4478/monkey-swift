@@ -7,8 +7,6 @@
 
 import XCTest
 
-@testable import MonkeySwift
-
 class EvaluatorTest: XCTestCase {
     
     struct TestCase<T> {

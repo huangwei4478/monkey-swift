@@ -7,8 +7,6 @@
 
 import XCTest
 
-@testable import MonkeySwift
-
 class AstTest: XCTestCase {
     func testString() {
         let program = Ast.Program(statements: [

@@ -7,8 +7,6 @@
 
 import XCTest
 
-@testable import MonkeySwift
-
 class ParserTest: XCTestCase {
     
     struct Expected {

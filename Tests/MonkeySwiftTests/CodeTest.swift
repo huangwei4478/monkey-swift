@@ -6,7 +6,6 @@
 //
 
 import XCTest
-@testable import MonkeySwift
 
 class CodeTest: XCTestCase {
 

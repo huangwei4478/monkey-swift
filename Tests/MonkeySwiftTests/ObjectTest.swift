@@ -7,8 +7,6 @@
 
 import XCTest
 
-@testable import MonkeySwift
-
 class ObjectTest: XCTestCase {
     func testStringHashKey() {
         let hello1 = Object_t.string(value: "Hello World")
