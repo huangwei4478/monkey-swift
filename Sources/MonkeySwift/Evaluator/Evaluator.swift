@@ -297,10 +297,17 @@ struct Evaluator {
 			}
 			
 			if isTruthy(object: condition) {
-				guard let consequenceResult = eval(whileExpression.consequence, environment) else {
+				guard let evaluated = eval(whileExpression.consequence, environment) else {
 					return Object_t.Null()
 				}
-				result = consequenceResult
+                
+                if evaluated.type() == .return_value_obj ||
+                    evaluated.type() == .error_obj {
+                        // stop the evaluation
+                        return evaluated
+                } else {
+				    result = evaluated
+                }
 			} else {
 				break
 			}

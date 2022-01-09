@@ -160,6 +160,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0E8BC54B278AD51B00FC7065 /* twoSum.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = twoSum.mk; sourceTree = "<group>"; };
+		0E8BC54C278AD51B00FC7065 /* fibonacci.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = fibonacci.mk; sourceTree = "<group>"; };
+		0E8BC54D278AD51B00FC7065 /* adder.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = adder.mk; sourceTree = "<group>"; };
+		0E8BC54E278AD51B00FC7065 /* helloworld.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = helloworld.mk; sourceTree = "<group>"; };
+		0E8BC54F278AD51B00FC7065 /* array_and_dictionary.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = array_and_dictionary.mk; sourceTree = "<group>"; };
+		0E8BC550278AD51B00FC7065 /* mapper.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = mapper.mk; sourceTree = "<group>"; };
 		0EB1D587278A9D9D00DD0EA9 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		0EB1D589278A9D9D00DD0EA9 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		0EB1D58C278A9D9E00DD0EA9 /* OpCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpCode.swift; sourceTree = "<group>"; };
@@ -182,11 +188,6 @@
 		0EB1D5B3278A9DDF00DD0EA9 /* ParserTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserTest.swift; sourceTree = "<group>"; };
 		0EB1D5B4278A9DDF00DD0EA9 /* CompileTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompileTest.swift; sourceTree = "<group>"; };
 		0EB1D5CA278AA56400DD0EA9 /* MonkeyScript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonkeyScript.swift; sourceTree = "<group>"; };
-		0EB1D5CE278AA86B00DD0EA9 /* helloworld.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = helloworld.mk; sourceTree = "<group>"; };
-		0EB1D5CF278AA8B200DD0EA9 /* fibonacci.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = fibonacci.mk; sourceTree = "<group>"; };
-		0EB1D5D0278AA9C000DD0EA9 /* array_and_dictionary.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = array_and_dictionary.mk; sourceTree = "<group>"; };
-		0EB1D5D2278AAA1600DD0EA9 /* adder.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = adder.mk; sourceTree = "<group>"; };
-		0EB1D5D4278AAAEA00DD0EA9 /* mapper.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = mapper.mk; sourceTree = "<group>"; };
 		"MonkeySwift::MonkeySwift::Product" /* MonkeySwift */ = {isa = PBXFileReference; lastKnownFileType = text; path = MonkeySwift; sourceTree = BUILT_PRODUCTS_DIR; };
 		"MonkeySwift::MonkeySwiftTests::Product" /* MonkeySwiftTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = MonkeySwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_12 /* MonkeySwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonkeySwiftTests.swift; sourceTree = "<group>"; };
@@ -272,6 +273,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E8BC54A278AD51B00FC7065 /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				0E8BC54B278AD51B00FC7065 /* twoSum.mk */,
+				0E8BC54C278AD51B00FC7065 /* fibonacci.mk */,
+				0E8BC54D278AD51B00FC7065 /* adder.mk */,
+				0E8BC54E278AD51B00FC7065 /* helloworld.mk */,
+				0E8BC54F278AD51B00FC7065 /* array_and_dictionary.mk */,
+				0E8BC550278AD51B00FC7065 /* mapper.mk */,
+			);
+			path = Scripts;
+			sourceTree = "<group>";
+		};
 		0EB1D586278A9D9D00DD0EA9 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -355,17 +369,6 @@
 				0EB1D59E278A9D9E00DD0EA9 /* Lexer.swift */,
 			);
 			path = Lexer;
-			sourceTree = "<group>";
-		};
-		0EB1D5CD278AA84800DD0EA9 /* Scripts */ = {
-			isa = PBXGroup;
-			children = (
-				0EB1D5CE278AA86B00DD0EA9 /* helloworld.mk */,
-				0EB1D5CF278AA8B200DD0EA9 /* fibonacci.mk */,
-				0EB1D5D0278AA9C000DD0EA9 /* array_and_dictionary.mk */,
-				0EB1D5D2278AAA1600DD0EA9 /* adder.mk */,
-			);
-			name = Scripts;
 			sourceTree = "<group>";
 		};
 		OBJ_10 /* Tests */ = {
@@ -492,18 +495,16 @@
 			path = Usage;
 			sourceTree = "<group>";
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
-				0EB1D5CD278AA84800DD0EA9 /* Scripts */,
-				0EB1D5D4278AAAEA00DD0EA9 /* mapper.mk */,
+				0E8BC54A278AD51B00FC7065 /* Scripts */,
 				OBJ_7 /* Sources */,
 				OBJ_10 /* Tests */,
 				OBJ_13 /* Dependencies */,
 				OBJ_62 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_54 /* Utilities */ = {
@@ -681,7 +682,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_62 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";

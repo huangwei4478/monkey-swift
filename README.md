@@ -14,7 +14,7 @@ cd monkey-swift
 swift run MonkeySwift repl    // into repl mode
 
 // or, load script file
-swift run MonkeySwift script ./fibonacci.mk
+swift run MonkeySwift script ./Scripts/twoSum.mk
 ```
 
 
