@@ -1,5 +1,11 @@
+// Leetcode 01, first problem
+
+/*
+	initial try of monkey scripting language
+*/
+
 let nums = [2, 11, 7, 15];
-let target = 9;
+let target = 9;					// the target 9
 
 let n = len(nums);
 

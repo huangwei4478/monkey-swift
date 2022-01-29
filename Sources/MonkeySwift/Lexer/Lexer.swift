@@ -36,6 +36,17 @@ public struct Lexer {
         let token: Token
         
         skipWhitespace()
+		
+		// skip single-line comments
+		if ch == "/" && peekCharacter() == "/" {
+			skipComment()
+			return nextToken()
+		}
+		
+		// skip multi-line comments
+		if ch == "/" && peekCharacter() == "*" {
+			skipMultiLineComment()
+		}
         
         switch (ch) {
 			case "&":
@@ -168,6 +179,37 @@ public struct Lexer {
             readChar()
         }
     }
+	
+	mutating func skipComment() {
+		while ch != "\n" && ch != Character(Unicode.Scalar(0)) {
+			readChar()
+		}
+		skipWhitespace()
+	}
+	
+	// Consume all tokens, until we have met a "*/"
+	mutating func skipMultiLineComment() {
+		var found = false
+		
+		while !found {
+			// EOF
+			if ch == Character(Unicode.Scalar(0)) {
+				found = true
+			}
+			
+			// keep looking until we find "*/"
+			if ch == "*" && peekCharacter() == "/" {
+				found = true
+				
+				// current position is "*", consume this and forward to the "/"
+				readChar()
+			}
+			
+			readChar()
+		}
+		
+		skipWhitespace()
+	}
     
     func peekCharacter() -> Character {
         if readPosition >= input.count {
