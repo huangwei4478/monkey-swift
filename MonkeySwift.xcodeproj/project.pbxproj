@@ -160,6 +160,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0E50BAAE27A6E219004F3F56 /* test-recursive.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = "test-recursive.mk"; sourceTree = "<group>"; };
 		0E8BC54B278AD51B00FC7065 /* twoSum.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = twoSum.mk; sourceTree = "<group>"; };
 		0E8BC54C278AD51B00FC7065 /* fibonacci.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = fibonacci.mk; sourceTree = "<group>"; };
 		0E8BC54D278AD51B00FC7065 /* adder.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = adder.mk; sourceTree = "<group>"; };
@@ -280,6 +281,7 @@
 			children = (
 				0E8BC54B278AD51B00FC7065 /* twoSum.mk */,
 				0ECE778D27A64C0500258AA4 /* leetcode-704-binary-search */,
+				0E50BAAE27A6E219004F3F56 /* test-recursive.mk */,
 				0E8BC54C278AD51B00FC7065 /* fibonacci.mk */,
 				0E8BC54D278AD51B00FC7065 /* adder.mk */,
 				0E8BC54E278AD51B00FC7065 /* helloworld.mk */,
