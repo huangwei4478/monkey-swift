@@ -188,6 +188,8 @@
 		0EB1D5B3278A9DDF00DD0EA9 /* ParserTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserTest.swift; sourceTree = "<group>"; };
 		0EB1D5B4278A9DDF00DD0EA9 /* CompileTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompileTest.swift; sourceTree = "<group>"; };
 		0EB1D5CA278AA56400DD0EA9 /* MonkeyScript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonkeyScript.swift; sourceTree = "<group>"; };
+		0ECE778D27A64C0500258AA4 /* leetcode-704-binary-search */ = {isa = PBXFileReference; lastKnownFileType = text; path = "leetcode-704-binary-search"; sourceTree = "<group>"; };
+		0ED69FD627A53075008B5D77 /* max.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = max.mk; sourceTree = "<group>"; };
 		"MonkeySwift::MonkeySwift::Product" /* MonkeySwift */ = {isa = PBXFileReference; lastKnownFileType = text; path = MonkeySwift; sourceTree = BUILT_PRODUCTS_DIR; };
 		"MonkeySwift::MonkeySwiftTests::Product" /* MonkeySwiftTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = MonkeySwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_12 /* MonkeySwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonkeySwiftTests.swift; sourceTree = "<group>"; };
@@ -277,11 +279,13 @@
 			isa = PBXGroup;
 			children = (
 				0E8BC54B278AD51B00FC7065 /* twoSum.mk */,
+				0ECE778D27A64C0500258AA4 /* leetcode-704-binary-search */,
 				0E8BC54C278AD51B00FC7065 /* fibonacci.mk */,
 				0E8BC54D278AD51B00FC7065 /* adder.mk */,
 				0E8BC54E278AD51B00FC7065 /* helloworld.mk */,
 				0E8BC54F278AD51B00FC7065 /* array_and_dictionary.mk */,
 				0E8BC550278AD51B00FC7065 /* mapper.mk */,
+				0ED69FD627A53075008B5D77 /* max.mk */,
 			);
 			path = Scripts;
 			sourceTree = "<group>";
