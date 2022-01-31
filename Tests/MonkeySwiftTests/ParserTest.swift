@@ -933,6 +933,58 @@ class ParserTest: XCTestCase {
             return
         }
     }
+	
+	func testParsingClassDefinition() {
+		let input =
+#"""
+  class Breakfast {
+   cook() {
+	puts("Eggs a-fryin!");
+   }
+  
+   serve(who) {
+	puts("enjoy your breakfast");
+   }
+  }
+"""#
+		
+		let lexer = Lexer(input: input)
+		let parser = Parser(lexer: lexer)
+		let optionalProgram = parser.parseProgram()
+		
+		checkParserErrors(parser)
+		
+		guard let program = optionalProgram else {
+			XCTFail("parser.parseProgram() is returning nil")
+			return
+		}
+		
+		guard let statement = program.statements.first as? Ast.ClassDefineStatement else {
+			XCTFail("program.statement[0] is not ast.ClassDefineStatement. got=\(type(of: program.statements.first))")
+			return
+		}
+		
+		guard statement.token.literal == "Breakfast" else {
+			XCTFail("class name error; got=\(statement.token.literal)")
+			return
+		}
+		
+		guard statement.methods.count == 2 else {
+			XCTFail("statement.methods.count error, got=\(statement.methods.count)")
+			return
+		}
+		
+		guard statement.methods[0].token.literal == "cook" else {
+			XCTFail("statement.methods[0].token error, got=\(statement.methods[0].token.literal)")
+			return
+		}
+		
+		guard statement.methods[1].token.literal == "serve" else {
+			XCTFail("statement.methods[1].token error, got=\(statement.methods[1].token.literal)")
+			return
+		}
+	}
+	
     
     func testParsingHashLiteralWithExpressions() {
         let input = #"{"one": 0 + 1, "two": 10 - 8, "three": 15 / 5}"#

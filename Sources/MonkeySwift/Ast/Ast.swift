@@ -73,6 +73,23 @@ public struct Ast {
             return "\(tokenLiteral()) \(returnValue.string());"
         }
     }
+	
+	struct ClassDefineStatement: Statement {
+
+		let token: Token							// the class name identifier token
+		
+		let methods: [Ast.FunctionDefineLiteral]
+		
+		func statementNode() {}
+		
+		func tokenLiteral() -> String {
+			return token.literal
+		}
+		
+		func string() -> String {
+			return "class \(tokenLiteral())"
+		}
+	}
     
     struct ExpressionStatement: Statement {
         let token: Token                    // the first token of the expression

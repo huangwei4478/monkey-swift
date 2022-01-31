@@ -129,6 +129,8 @@ final class Parser {
             return parseLetStatement()
         case .RETURN:
             return parseReturnStatement()
+		case .DEFINE_CLASS:
+			return parseClassDefinitionStatement()
         default:
             return parseExpressionStatement()
         }
@@ -236,6 +238,29 @@ final class Parser {
         return Ast.ReturnStatement(token: returnToken,
                                    returnValue: returnValue)
     }
+	
+	private func parseClassDefinitionStatement() -> Ast.ClassDefineStatement? {
+		nextToken()						// skip the 'class' token
+		
+		let classNameToken = curToken	// the class name identifier token
+
+		guard expectPeek(.LBRACE) else {
+			return nil					// TODO: return parsing error
+		}
+		
+		nextToken()						// skip the "{" token
+		
+		var methods: [Ast.FunctionDefineLiteral] = []
+		
+		while !curTokenIs(.RBRACE) && !curTokenIs(.EOF) {
+			if let functionDefinition = parseMethodDefinition() as? Ast.FunctionDefineLiteral {
+				methods.append(functionDefinition)
+			}
+			nextToken()
+		}
+		
+		return Ast.ClassDefineStatement(token: classNameToken, methods: methods)
+	}
     
     private func parseExpressionStatement() -> Ast.ExpressionStatement? {
         guard let expression = parseExpression(precedence: .lowest) else {
@@ -472,6 +497,30 @@ final class Parser {
 									// now the current token is the function name
 		
 		let prevToken = curToken	// the function name identifier
+		
+		if !expectPeek(.LPAREN) {
+			return Ast.Identifier(token: Token(tokenType: .ILLEGAL, literal: "failed to parse function definition, next token not .LPAREN, got=\(peekToken)"), value: peekToken.literal)
+		}
+		
+		let parameters = parseFunctionParameters()
+		
+		if !expectPeek(.LBRACE) {
+			return Ast.Identifier(token: Token(tokenType: .ILLEGAL, literal: "failed to parse function definition, next token not .LBRACE, got=\(peekToken)"), value: peekToken.literal)
+		}
+		
+		let body = parseBlockStatement()
+		
+		return Ast.FunctionDefineLiteral(token: prevToken,
+										 parameters: parameters,
+										 body: body)
+	}
+	
+	/// only in use of parseClassDefinitionStatement
+	/// for parsing method inside a class definition
+	/// i.e. the function without the `function` keyword, inside a class
+	private func parseMethodDefinition() -> Expression {
+		
+		let prevToken = curToken	// the method name identifier
 		
 		if !expectPeek(.LPAREN) {
 			return Ast.Identifier(token: Token(tokenType: .ILLEGAL, literal: "failed to parse function definition, next token not .LPAREN, got=\(peekToken)"), value: peekToken.literal)

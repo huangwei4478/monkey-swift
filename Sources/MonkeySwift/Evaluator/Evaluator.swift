@@ -31,6 +31,11 @@ struct Evaluator {
             if isError(object: value) { return value }
             return environment.set(name: node.name.value, value: value)
 			
+		case let node as Ast.ClassDefineStatement:
+			let klass = Object_t.Class(name: node.tokenLiteral())
+			let _ = environment.set(name: node.tokenLiteral(), value: klass)
+			return nil
+			
 		case let node as Ast.AssignStatement:
 			return evalAssignStatement(assignStatement: node, environment: environment)
             
@@ -71,7 +76,7 @@ struct Evaluator {
             if isError(object: function) {
                 return function
             }
-            
+			
             let args = evalExpressions(expressions: node.arguments,
                                        environment: environment)
             if args.count == 1 && isError(object: args.first!) {
@@ -442,6 +447,10 @@ struct Evaluator {
             
         case let function as Object_t.Builtin:
             return function.function(arguments)
+			
+		case let function as Object_t.Class:
+			return function.instantiate()
+			
         default:
             return Object_t.Error(message: "not a function: \(function.type().rawValue)")
         }

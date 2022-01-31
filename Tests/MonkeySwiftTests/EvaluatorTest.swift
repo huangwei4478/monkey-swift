@@ -472,6 +472,25 @@ class EvaluatorTest: XCTestCase {
             }
         }
     }
+	
+	func testClassInstantiation() {
+		let input = #"""
+class Shape {}
+let triangle = Shape()
+triangle
+"""#
+		let evaluated = testEval(input: input)
+		
+		guard let instance = evaluated as? Object_t.Instance else {
+			XCTFail("expect a Object_t.Instance, got=\(type(of: evaluated))")
+			return
+		}
+		
+		guard instance.class.name == "Shape" else {
+			XCTFail("expect the class name is Shape, got=\(instance.class.name)")
+			return
+		}
+	}
     
     private func testEval(input: String) -> Object {
         let lexer = Lexer(input: input)

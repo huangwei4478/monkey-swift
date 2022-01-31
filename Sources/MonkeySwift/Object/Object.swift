@@ -17,6 +17,8 @@ enum ObjectType: String {
     case builtin_obj        = "BUILTIN"
     case array_obj          = "ARRAY"
     case hash_obj           = "HASH"
+	case class_obj			= "CLASS"
+	case instance_obj       = "INSTANCE"
     case error_obj          = "ERROR"
 }
 
@@ -171,6 +173,40 @@ struct Object_t {
             return "{\(keyValues.joined(separator: ", "))}"
         }
     }
+	
+	// OOP stuff
+	
+	/// runtime representation of a class
+	struct Class: Object {
+		let name: String
+		// TODO: super class name
+		
+		/// instantiate a new instance of this class
+		func instantiate() -> Instance {
+			return Instance(class: self)
+		}
+		
+		func type() -> ObjectType {
+			.class_obj
+		}
+		
+		func inspect() -> String {
+			return "class \(name)"
+		}
+	}
+	
+	/// runtime representation of an instance
+	struct Instance: Object {
+		let `class`: Class
+		
+		func type() -> ObjectType {
+			return .instance_obj
+		}
+		
+		func inspect() -> String {
+			return "\(`class`.name) instance"
+		}
+	}
     
     struct Error: Object {
         let message: String
