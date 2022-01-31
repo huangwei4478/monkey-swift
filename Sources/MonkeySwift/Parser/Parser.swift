@@ -30,6 +30,8 @@ private let precedences: [TokenType: Precedence] = [
     .NOT_EQ:    .equals,
     .LT:        .lessgreater,
     .GT:        .lessgreater,
+	.LT_EQUAL:	.lessgreater,
+	.GT_EQUAL:	.lessgreater,
     .PLUS:      .sum,
     .MINUS:     .sum,
     .SLASH:     .product,
@@ -91,6 +93,8 @@ final class Parser {
         self.registerInfix(tokenType: .NOT_EQ, fn: parseInfixExpression)
         self.registerInfix(tokenType: .LT, fn: parseInfixExpression)
         self.registerInfix(tokenType: .GT, fn: parseInfixExpression)
+		self.registerInfix(tokenType: .LT_EQUAL, fn: parseInfixExpression)
+		self.registerInfix(tokenType: .GT_EQUAL, fn: parseInfixExpression)
         self.registerInfix(tokenType: .LPAREN, fn: parseCallExpression)
         self.registerInfix(tokenType: .LBRACKET, fn: parseIndexExpression)
 

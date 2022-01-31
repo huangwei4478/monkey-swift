@@ -222,6 +222,10 @@ struct Evaluator {
             return nativeBoolToBooleanObject(input: leftValue < rightValue)
         case ">":
             return nativeBoolToBooleanObject(input: leftValue > rightValue)
+		case "<=":
+			return nativeBoolToBooleanObject(input: leftValue <= rightValue)
+		case ">=":
+			return nativeBoolToBooleanObject(input: leftValue >= rightValue)
         case "==":
             return nativeBoolToBooleanObject(input: leftValue == rightValue)
         case "!=":

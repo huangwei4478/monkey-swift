@@ -108,9 +108,23 @@ public struct Lexer {
             case "*":
                 token = Token(tokenType: .ASTERISK, literal: String(ch))
             case "<":
-                token = Token(tokenType: .LT, literal: String(ch))
+				if peekCharacter() == "=" {
+					let prevCh = ch
+					readChar()
+					let literal = String(prevCh) + String(ch)
+					token = Token(tokenType: .LT_EQUAL, literal: literal)
+				} else {
+					token = Token(tokenType: .LT, literal: String(ch))
+				}
             case ">":
-                token = Token(tokenType: .GT, literal: String(ch))
+				if peekCharacter() == "=" {
+					let prevCh = ch
+					readChar()
+					let literal = String(prevCh) + String(ch)
+					token = Token(tokenType: .GT_EQUAL, literal: literal)
+				} else {
+					token = Token(tokenType: .GT, literal: String(ch))
+				}
             case "\"":
                 token = Token(tokenType: .STRING, literal: readString())
             case Character(Unicode.Scalar(0)):

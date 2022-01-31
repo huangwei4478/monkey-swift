@@ -25,6 +25,8 @@ public enum TokenType: String {
     
     case LT = "<"
     case GT = ">"
+	case LT_EQUAL = "<="
+	case GT_EQUAL = ">="
     
     case EQ = "=="
     case NOT_EQ = "!="
