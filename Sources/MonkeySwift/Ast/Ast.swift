@@ -330,10 +330,10 @@ public struct Ast {
 	}
 	
 	struct SetterExpression: Expression {
-		/// the left part of the .
+		/// the left part of the last .
 		let object: Expression
 		
-		/// the property name, after .
+		/// the property name, after the final .
 		let token: Token
 		
 		/// the value that being assigned to the getter expression

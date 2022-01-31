@@ -396,7 +396,7 @@ final class Parser {
 									  value: curToken.literal)
 			}
 			
-			return Ast.SetterExpression(object: getter, token: getter.token, value: value)
+			return Ast.SetterExpression(object: getter.object, token: getter.token, value: value)
 						
 		} else {
 			return Ast.Identifier(token: Token(tokenType: .ILLEGAL,

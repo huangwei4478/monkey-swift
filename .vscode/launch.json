@@ -4,7 +4,7 @@
             "type": "lldb",
             "request": "launch",
             "name": "Debug MonkeySwift",
-            "program": "${workspaceFolder}/.build/debug/MonkeySwift",
+            "program": "${workspaceFolder:monkey-swift}/.build/debug/MonkeySwift",
             "args": [],
             "cwd": "${workspaceFolder:monkey-swift}",
             "preLaunchTask": "swift: Build Debug MonkeySwift"
@@ -13,7 +13,7 @@
             "type": "lldb",
             "request": "launch",
             "name": "Release MonkeySwift",
-            "program": "${workspaceFolder}/.build/release/MonkeySwift",
+            "program": "${workspaceFolder:monkey-swift}/.build/release/MonkeySwift",
             "args": [],
             "cwd": "${workspaceFolder:monkey-swift}",
             "preLaunchTask": "swift: Build Release MonkeySwift"
