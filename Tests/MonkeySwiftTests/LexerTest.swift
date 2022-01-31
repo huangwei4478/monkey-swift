@@ -77,7 +77,6 @@ class LexerTest: XCTestCase {
         };
 
         let result = add(five, ten);
-        !-/*5;
         5 < 10 > 5;
 
         if (5 < 10) {
@@ -130,12 +129,6 @@ class LexerTest: XCTestCase {
             ExpectedToken(expectedType: .COMMA, expectedLiteral: ","),
             ExpectedToken(expectedType: .IDENT, expectedLiteral: "ten"),
             ExpectedToken(expectedType: .RPAREN, expectedLiteral: ")"),
-            ExpectedToken(expectedType: .SEMICOLON, expectedLiteral: ";"),
-            ExpectedToken(expectedType: .BANG, expectedLiteral: "!"),
-            ExpectedToken(expectedType: .MINUS, expectedLiteral: "-"),
-            ExpectedToken(expectedType: .SLASH, expectedLiteral: "/"),
-            ExpectedToken(expectedType: .ASTERISK, expectedLiteral: "*"),
-            ExpectedToken(expectedType: .INT, expectedLiteral: "5"),
             ExpectedToken(expectedType: .SEMICOLON, expectedLiteral: ";"),
             ExpectedToken(expectedType: .INT, expectedLiteral: "5"),
             ExpectedToken(expectedType: .LT, expectedLiteral: "<"),
@@ -200,6 +193,28 @@ class LexerTest: XCTestCase {
 			ExpectedToken(expectedType: .LBRACE, expectedLiteral: "{"),
 			ExpectedToken(expectedType: .SEMICOLON, expectedLiteral: ";"),
 			ExpectedToken(expectedType: .RBRACE, expectedLiteral: "}")
+		]
+		
+		examine(with: input, testTokens: tests)
+	}
+	
+	func testNextToken06() throws {
+		let input =
+		"""
+		!-/ *5; 1 >= 2;
+		"""
+		
+		let tests: [ExpectedToken] = [
+			ExpectedToken(expectedType: .BANG, expectedLiteral: "!"),
+			ExpectedToken(expectedType: .MINUS, expectedLiteral: "-"),
+			ExpectedToken(expectedType: .SLASH, expectedLiteral: "/"),
+			ExpectedToken(expectedType: .ASTERISK, expectedLiteral: "*"),
+			ExpectedToken(expectedType: .INT, expectedLiteral: "5"),
+			ExpectedToken(expectedType: .SEMICOLON, expectedLiteral: ";"),
+			ExpectedToken(expectedType: .INT, expectedLiteral: "1"),
+			ExpectedToken(expectedType: .GT_EQUAL, expectedLiteral: ">="),
+			ExpectedToken(expectedType: .INT, expectedLiteral: "2"),
+			ExpectedToken(expectedType: .SEMICOLON, expectedLiteral: ";"),
 		]
 		
 		examine(with: input, testTokens: tests)

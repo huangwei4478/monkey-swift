@@ -41,7 +41,6 @@
 		0EB1D5B8278A9DDF00DD0EA9 /* CodeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D5B1278A9DDF00DD0EA9 /* CodeTest.swift */; };
 		0EB1D5B9278A9DDF00DD0EA9 /* AstTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D5B2278A9DDF00DD0EA9 /* AstTest.swift */; };
 		0EB1D5BA278A9DDF00DD0EA9 /* ParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D5B3278A9DDF00DD0EA9 /* ParserTest.swift */; };
-		0EB1D5BB278A9DDF00DD0EA9 /* CompileTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D5B4278A9DDF00DD0EA9 /* CompileTest.swift */; };
 		0EB1D5BC278A9E6600DD0EA9 /* Ast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D59C278A9D9E00DD0EA9 /* Ast.swift */; };
 		0EB1D5BD278A9E6A00DD0EA9 /* OpCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D58C278A9D9E00DD0EA9 /* OpCode.swift */; };
 		0EB1D5BE278A9E6D00DD0EA9 /* BytecodeTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1D58D278A9D9E00DD0EA9 /* BytecodeTool.swift */; };
@@ -73,7 +72,6 @@
 		OBJ_126 /* ArgumentParser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "swift-argument-parser::ArgumentParser::Product" /* ArgumentParser.framework */; };
 		OBJ_127 /* ArgumentParserToolInfo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "swift-argument-parser::ArgumentParserToolInfo::Product" /* ArgumentParserToolInfo.framework */; };
 		OBJ_135 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
-		OBJ_146 /* MonkeySwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* MonkeySwiftTests.swift */; };
 		OBJ_148 /* ArgumentParser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "swift-argument-parser::ArgumentParser::Product" /* ArgumentParser.framework */; };
 		OBJ_149 /* ArgumentParserToolInfo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "swift-argument-parser::ArgumentParserToolInfo::Product" /* ArgumentParserToolInfo.framework */; };
 		OBJ_158 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_61 /* Package.swift */; };
@@ -193,7 +191,6 @@
 		0ED69FD627A53075008B5D77 /* max.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = max.mk; sourceTree = "<group>"; };
 		"MonkeySwift::MonkeySwift::Product" /* MonkeySwift */ = {isa = PBXFileReference; lastKnownFileType = text; path = MonkeySwift; sourceTree = BUILT_PRODUCTS_DIR; };
 		"MonkeySwift::MonkeySwiftTests::Product" /* MonkeySwiftTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = MonkeySwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		OBJ_12 /* MonkeySwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonkeySwiftTests.swift; sourceTree = "<group>"; };
 		OBJ_17 /* BashCompletionsGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BashCompletionsGenerator.swift; sourceTree = "<group>"; };
 		OBJ_18 /* CompletionsGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionsGenerator.swift; sourceTree = "<group>"; };
 		OBJ_19 /* FishCompletionsGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishCompletionsGenerator.swift; sourceTree = "<group>"; };
@@ -388,7 +385,6 @@
 		OBJ_11 /* MonkeySwiftTests */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_12 /* MonkeySwiftTests.swift */,
 				0EB1D5B2278A9DDF00DD0EA9 /* AstTest.swift */,
 				0EB1D5B1278A9DDF00DD0EA9 /* CodeTest.swift */,
 				0EB1D5B4278A9DDF00DD0EA9 /* CompileTest.swift */,
@@ -766,9 +762,7 @@
 				0EB1D5C7278A9E8600DD0EA9 /* MonkeyRepl.swift in Sources */,
 				0EB1D5B6278A9DDF00DD0EA9 /* LexerTest.swift in Sources */,
 				0EB1D5C0278A9E7300DD0EA9 /* Evaluator.swift in Sources */,
-				OBJ_146 /* MonkeySwiftTests.swift in Sources */,
 				0EB1D5C5278A9E8100DD0EA9 /* Parser.swift in Sources */,
-				0EB1D5BB278A9DDF00DD0EA9 /* CompileTest.swift in Sources */,
 				0EB1D5B7278A9DDF00DD0EA9 /* ObjectTest.swift in Sources */,
 				0EB1D5B5278A9DDF00DD0EA9 /* EvaluatorTest.swift in Sources */,
 			);
