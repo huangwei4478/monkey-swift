@@ -159,6 +159,7 @@
 
 /* Begin PBXFileReference section */
 		0E50BAAE27A6E219004F3F56 /* test-recursive.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = "test-recursive.mk"; sourceTree = "<group>"; };
+		0E50BAAF27A7E3B0004F3F56 /* test-function-definition */ = {isa = PBXFileReference; lastKnownFileType = text; path = "test-function-definition"; sourceTree = "<group>"; };
 		0E8BC54B278AD51B00FC7065 /* twoSum.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = twoSum.mk; sourceTree = "<group>"; };
 		0E8BC54C278AD51B00FC7065 /* fibonacci.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = fibonacci.mk; sourceTree = "<group>"; };
 		0E8BC54D278AD51B00FC7065 /* adder.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = adder.mk; sourceTree = "<group>"; };
@@ -277,6 +278,7 @@
 			isa = PBXGroup;
 			children = (
 				0E8BC54B278AD51B00FC7065 /* twoSum.mk */,
+				0E50BAAF27A7E3B0004F3F56 /* test-function-definition */,
 				0ECE778D27A64C0500258AA4 /* leetcode-704-binary-search */,
 				0E50BAAE27A6E219004F3F56 /* test-recursive.mk */,
 				0E8BC54C278AD51B00FC7065 /* fibonacci.mk */,

@@ -314,6 +314,26 @@ public struct Ast {
             return "\(tokenLiteral())(\(params))\(body.string())"
         }
     }
+	
+	struct FunctionDefineLiteral: Expression {
+		let token: Token					// the identifier, i.e. the function name
+		
+		let parameters: [Ast.Identifier]
+		
+		let body: BlockStatement
+		
+		func expressionNode() {}
+		
+		func tokenLiteral() -> String {
+			return token.literal
+		}
+		
+		func string() -> String {
+			let params = parameters.map{ $0.string() }.joined(separator: ", ")
+			
+			return "function \(tokenLiteral())(\(params))\(body.string())"
+		}
+	}
     
     struct ArrayLiteral: Expression {
         let token: Token                    // the '[' token

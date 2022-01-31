@@ -5,7 +5,7 @@ let nums = [-1,0,3,5,9,12];
 let target = 9;
 let expectedOutput = 4;
 
-let binarySearch = fn(array, target) {
+function binarySearch(array, target) {
 	let n = len(array);
 
 	// find target in [l ... r)

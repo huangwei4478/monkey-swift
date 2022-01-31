@@ -50,6 +50,7 @@ public enum TokenType: String {
     case STRING = "STRING"
     
     // Keywords
+	case DEFINE_FUNCTION = "DEFINE_FUNCTION"
     case FUNCTION = "FUNCTION"
     case LET = "LET"
     case TRUE = "TRUE"
@@ -60,6 +61,7 @@ public enum TokenType: String {
 	case WHILE = "WHILE"
     
     static let keywords: [String: TokenType] = [
+		"function": .DEFINE_FUNCTION,
         "fn": .FUNCTION,
         "let": .LET,
         "true": .TRUE,

@@ -42,6 +42,16 @@ struct Evaluator {
             return Object_t.Function(parameters: node.parameters,
                                      body: node.body,
                                      env: environment)
+			
+		case let node as Ast.FunctionDefineLiteral:
+			// just add side-effect into environment,
+			// next time evalIdentifier would find out
+			// Ast.Identifier, the function name, is Object_t.Function in runtime
+			let _ = environment.set(name: node.tokenLiteral(),
+									value: Object_t.Function(parameters: node.parameters,
+															 body: node.body,
+															 env: environment))
+			return nil
             
         case let node as Ast.StringLiteral:
             return Object_t.string(value: node.value)
@@ -327,6 +337,8 @@ struct Evaluator {
 	}
     
     private static func evalIdentifier(node: Ast.Identifier, environment: Environment) -> Object {
+		// environment.get 的意义，就在于对identifier 求值：到底这个identifier 是什么？
+		// 有可能是一个变量，也有可能是个函数调用
         if let value = environment.get(name: node.value) {
             return value
         } else if let builtin = builtins[node.value] {

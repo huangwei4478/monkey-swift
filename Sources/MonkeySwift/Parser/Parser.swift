@@ -78,6 +78,7 @@ final class Parser {
         self.registerPrefix(tokenType: .IF, fn: parseIfExpression)
 		self.registerPrefix(tokenType: .WHILE, fn: parseWhileExpression)
         self.registerPrefix(tokenType: .FUNCTION, fn: parseFunctionLiteral)
+		self.registerPrefix(tokenType: .DEFINE_FUNCTION, fn: parseFunctionDefinition)
         self.registerPrefix(tokenType: .STRING, fn: parseStringLiteral)
         self.registerPrefix(tokenType: .LBRACKET, fn: parseArrayLiteral)
         self.registerPrefix(tokenType: .LBRACE, fn: parseHashLiteral)
@@ -185,7 +186,7 @@ final class Parser {
         }
         
         if !expectPeek(endTokenType) {
-            return [Ast.Identifier(token: Token(tokenType: .ILLEGAL, literal: "failed to parse function literald  next token not \(endTokenType), got=\(peekToken)"), value: peekToken.literal)]
+            return [Ast.Identifier(token: Token(tokenType: .ILLEGAL, literal: "failed to parse expression list, next token not \(endTokenType), got=\(peekToken)"), value: peekToken.literal)]
         }
         
         return list
@@ -450,13 +451,13 @@ final class Parser {
         let prevToken = curToken
         
         if !expectPeek(.LPAREN) {
-            return Ast.Identifier(token: Token(tokenType: .ILLEGAL, literal: "failed to parse function literal next token not .LPAREN, got=\(peekToken)"), value: peekToken.literal)
+            return Ast.Identifier(token: Token(tokenType: .ILLEGAL, literal: "failed to parse function literal, next token not .LPAREN, got=\(peekToken)"), value: peekToken.literal)
         }
         
         let parameters = parseFunctionParameters()
         
         if !expectPeek(.LBRACE) {
-            return Ast.Identifier(token: Token(tokenType: .ILLEGAL, literal: "failed to parse function literald  next token not .LBRACE, got=\(peekToken)"), value: peekToken.literal)
+            return Ast.Identifier(token: Token(tokenType: .ILLEGAL, literal: "failed to parse function literal, next token not .LBRACE, got=\(peekToken)"), value: peekToken.literal)
         }
         
         let body = parseBlockStatement()
@@ -465,6 +466,29 @@ final class Parser {
                                    parameters: parameters,
                                    body: body)
     }
+	
+	private func parseFunctionDefinition() -> Expression {
+		nextToken()					// skip the 'function' keyword,
+									// now the current token is the function name
+		
+		let prevToken = curToken	// the function name identifier
+		
+		if !expectPeek(.LPAREN) {
+			return Ast.Identifier(token: Token(tokenType: .ILLEGAL, literal: "failed to parse function definition, next token not .LPAREN, got=\(peekToken)"), value: peekToken.literal)
+		}
+		
+		let parameters = parseFunctionParameters()
+		
+		if !expectPeek(.LBRACE) {
+			return Ast.Identifier(token: Token(tokenType: .ILLEGAL, literal: "failed to parse function definition, next token not .LBRACE, got=\(peekToken)"), value: peekToken.literal)
+		}
+		
+		let body = parseBlockStatement()
+		
+		return Ast.FunctionDefineLiteral(token: prevToken,
+										 parameters: parameters,
+										 body: body)
+	}
     
     private func parseStringLiteral() -> Expression {
         return Ast.StringLiteral(token: curToken, value: curToken.literal)

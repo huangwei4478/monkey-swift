@@ -1,0 +1,7 @@
+// test function definition
+
+function hello() {
+	puts("Hello, words\n");
+}
+
+hello();
