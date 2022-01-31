@@ -18,6 +18,7 @@ private enum Precedence: Int, Comparable {
     case prefix
     case call
     case index
+	case dot
     
     static func < (lhs: Precedence, rhs: Precedence) -> Bool {
         return lhs.rawValue < rhs.rawValue
@@ -39,7 +40,8 @@ private let precedences: [TokenType: Precedence] = [
     .LPAREN:    .call,
 	.AND:		.condition,
 	.OR:		.condition,
-    .LBRACKET:  .index
+    .LBRACKET:  .index,
+	.DOT:		.dot,
 ]
 
 final class Parser {
@@ -96,6 +98,7 @@ final class Parser {
         self.registerInfix(tokenType: .GT, fn: parseInfixExpression)
 		self.registerInfix(tokenType: .LT_EQUAL, fn: parseInfixExpression)
 		self.registerInfix(tokenType: .GT_EQUAL, fn: parseInfixExpression)
+		self.registerInfix(tokenType: .DOT, fn: parseDotExpression)
         self.registerInfix(tokenType: .LPAREN, fn: parseCallExpression)
         self.registerInfix(tokenType: .LBRACKET, fn: parseIndexExpression)
 
@@ -333,31 +336,73 @@ final class Parser {
         return Ast.InfixExpression(token: prevToken, left: left, operator: prevToken.literal, right: rightExpression)
     }
 	
+	/// parse instance.propertyName getter method
+	private func parseDotExpression(left: Expression) -> Expression {
+		nextToken()							// skip the "." token
+		
+		guard let right = parseExpression(precedence: .dot) else {
+			return Ast.Identifier(token: Token(tokenType: .ILLEGAL,
+											   literal: "failed to parse right expression for getter expression"),
+								  value: curToken.literal)
+		}
+		
+		guard let propertyName = right as? Ast.Identifier else {
+			return Ast.Identifier(token: Token(tokenType: .ILLEGAL,
+											   literal: "parse getter expression error: right is not an identifier"),
+								  value: curToken.literal)
+		}
+		
+		return Ast.GetterExpression(object: left, token: propertyName.token)
+	}
+	
 	/// parse a bare assignment, without a `let`
+	///
+	///
+	/// two cases:
+	/// 	- variable = value
+	/// 	- instanceName.propertyName = value
+	///
 	private func parseAssignExpression(left: Expression) -> Expression {
 		let prevToken = curToken; // curToken: the '=' token
 		
-		guard let name = left as? Ast.Identifier else {
+		if let name = left as? Ast.Identifier {
+			nextToken()
+			
+			/**
+				An assignment is generally:
+					
+					variable = value
+			 */
+			
+			guard let value = parseExpression(precedence: .lowest) else {
+				return Ast.Identifier(token: Token(tokenType: .ILLEGAL,
+												   literal: "failed to parse value expression for assign expression"),
+									  value: curToken.literal)
+			}
+			
+			return Ast.AssignStatement(token: prevToken, name: name, value: value)
+		} else if let getter = left as? Ast.GetterExpression {
+			nextToken()
+			
+			/**
+			 	An Setter assignment is generally:
+			 	
+			 	instanceName.propertyName = value
+			 */
+			
+			guard let value = parseExpression(precedence: .lowest) else {
+				return Ast.Identifier(token: Token(tokenType: .ILLEGAL,
+												   literal: "failed to parse value expression for assign expression"),
+									  value: curToken.literal)
+			}
+			
+			return Ast.SetterExpression(object: getter, token: getter.token, value: value)
+						
+		} else {
 			return Ast.Identifier(token: Token(tokenType: .ILLEGAL,
-											   literal: "failed to parse assign expression: left is not an identifier"),
+											   literal: "failed to parse assign expression: left is neither an  identifier, nor a getter expression"),
 								  value: curToken.literal)
 		}
-		
-		nextToken()
-		
-		/**
-		 	An assignment is generally:
-		 		
-		 		variable = value
-		 */
-		
-		guard let value = parseExpression(precedence: .lowest) else {
-			return Ast.Identifier(token: Token(tokenType: .ILLEGAL,
-											   literal: "failed to parse value expression for assign expression"),
-								  value: curToken.literal)
-		}
-		
-		return Ast.AssignStatement(token: prevToken, name: name, value: value)
 	}
     
     private func parseBoolean() -> Expression {

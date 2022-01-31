@@ -310,7 +310,46 @@ public struct Ast {
 			return "while (\(condition.string())) { \(consequence.string()) }"
 		}
 	}
-    
+	
+	struct GetterExpression: Expression {
+		/// the left part of the "."
+		let object: Expression
+		
+		/// the property name, after "."
+		let token: Token
+		
+		func expressionNode() {}
+		
+		func tokenLiteral() -> String {
+			return token.literal
+		}
+		
+		func string() -> String {
+			return "Getter, property name=\(tokenLiteral())"
+		}
+	}
+	
+	struct SetterExpression: Expression {
+		/// the left part of the .
+		let object: Expression
+		
+		/// the property name, after .
+		let token: Token
+		
+		/// the value that being assigned to the getter expression
+		let value: Expression
+		
+		func expressionNode() {}
+		
+		func tokenLiteral() -> String {
+			return token.literal
+		}
+		
+		func string() -> String {
+			return "Setter, property name = \(tokenLiteral())"
+		}
+	}
+	
     struct FunctionLiteral: Expression {
         
         let token: Token                    // the 'fn' token

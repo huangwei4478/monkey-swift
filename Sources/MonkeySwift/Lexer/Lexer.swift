@@ -125,6 +125,8 @@ public struct Lexer {
 				} else {
 					token = Token(tokenType: .GT, literal: String(ch))
 				}
+			case ".":
+				token = Token(tokenType: .DOT, literal: String(ch))
             case "\"":
                 token = Token(tokenType: .STRING, literal: readString())
             case Character(Unicode.Scalar(0)):

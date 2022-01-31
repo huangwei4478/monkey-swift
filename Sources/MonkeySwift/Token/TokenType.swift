@@ -33,6 +33,8 @@ public enum TokenType: String {
 	
 	case AND = "&&"
 	case OR  = "||"
+	
+	case DOT = "."
     
     // Delimiters
     case COMMA = ","

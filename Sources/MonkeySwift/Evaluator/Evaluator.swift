@@ -97,7 +97,32 @@ struct Evaluator {
             }
             
             return evalIndexExpression(left: left, index: index)
-            
+		case let node as Ast.GetterExpression:
+			guard let left = eval(node.object, environment) else { return nil }
+			if isError(object: left) {
+				return left
+			}
+			
+			guard let instance = left as? Object_t.Instance else {
+				return Object_t.Error(message: "only instances have properties")
+			}
+			
+			return instance.get(token: node.token)
+			
+		case let node as Ast.SetterExpression:
+			guard let left = eval(node.object, environment) else { return nil }
+			if isError(object: left) {
+				return left
+			}
+			
+			guard let instance = left as? Object_t.Instance else {
+				return Object_t.Error(message: "only instances have properties")
+			}
+			
+			guard let value = eval(node.value, environment) else { return nil }
+			instance.set(token: node.token, value: value)
+			return value
+		
         case let node as Ast.Boolean:
             return nativeBoolToBooleanObject(input: node.value)
             
@@ -360,7 +385,7 @@ struct Evaluator {
         
         return Object_t.string(value: left.value + right.value)
     }
-    
+	
     private static func evalIndexExpression(left: Object, index: Object) -> Object {
         switch (left, index) {
         case (let left, let index) where left.type() == .array_obj && index.type() == .integer_obj:

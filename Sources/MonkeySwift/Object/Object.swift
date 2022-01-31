@@ -196,8 +196,27 @@ struct Object_t {
 	}
 	
 	/// runtime representation of an instance
-	struct Instance: Object {
+	class Instance: Object {
 		let `class`: Class
+		
+		private var fields: [String: Object]
+		
+		init(`class`: Class) {
+			self.`class` = `class`
+			fields = [:]
+		}
+		
+		func get(token: Token) -> Object? {
+			guard let object = fields[token.literal] else {
+				return Object_t.Error(message: "Undefined property \(token.literal)")
+			}
+
+			return object
+		}
+		
+		func set(token: Token, value: Object) {
+			fields[token.literal] = value
+		}
 		
 		func type() -> ObjectType {
 			return .instance_obj
