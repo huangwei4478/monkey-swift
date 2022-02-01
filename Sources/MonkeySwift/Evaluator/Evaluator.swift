@@ -516,7 +516,7 @@ struct Evaluator {
 }
 
 let builtins: [String: Object_t.Builtin] = [
-    "len":
+    "len":			// len(arr) -> Int
         Object_t.Builtin(function: { args in
             guard args.count == 1 else {
                 return Object_t.Error(message: "wrong number of arguments. got=\(args.count), want=1")
@@ -526,10 +526,89 @@ let builtins: [String: Object_t.Builtin] = [
                 return Object_t.Integer(value: Int64(arg.value.count))
             case let arg as Object_t.Array:
                 return Object_t.Integer(value: Int64(arg.elements.count))
+			case let arg as Object_t.Null:
+				return Object_t.Integer(value: Int64(0))
             default:
                 return Object_t.Error(message: "argument to `len` not supported, got=\(args[0].type().rawValue)")
             }
     }),
+	"keys":			// keys(hash) -> [Key]
+		Object_t.Builtin(function: { args in
+			guard args.count == 1 else {
+				return Object_t.Error(message: "wrong number of arguments. got=\(args.count), want=1")
+			}
+			switch args[0] {
+			case let arg as Object_t.Hash:
+				let keys = arg.pairs.map({ $1.key })
+				return Object_t.Array(elements: keys)
+			default:
+				return Object_t.Error(message: "argument to `keys` not supported, should be hash,  got=\(args[0].type().rawValue)")
+			}
+		}),
+	"containsKey":	// containsKey(hash, key) -> Bool
+		Object_t.Builtin(function: { args in
+			guard args.count == 2 else {
+				return Object_t.Error(message: "wrong number of arguments. got=\(args.count), want=2")
+			}
+			switch (args[0], args[1]) {
+			case let (hash, key) as (Object_t.Hash, Object_t.string):
+				let containsKey = hash.pairs[key.hashKey()] != nil
+				return Object_t.Boolean(value: containsKey)
+			default:
+				return Object_t.Error(message: "arguments to `containsKey` not supported, should be hash and string, got=\(args[0].type().rawValue), \(args[1].type().rawValue)")
+			}
+		}),
+	"delete":		// delete(hash, key) -> Bool (delete success or not)
+		Object_t.Builtin(function: { args in
+			guard args.count == 2 else {
+				return Object_t.Error(message: "wrong number of arguments. got=\(args.count), want=2")
+			}
+			switch (args[0], args[1]) {
+			case let (hash, key) as (Object_t.Hash, Object_t.string):
+				guard let _ = hash.pairs.removeValue(forKey: key.hashKey()) else {
+					return Object_t.Boolean(value: false)
+				}
+				
+				return Object_t.Boolean(value: true)
+			default:
+				return Object_t.Error(message: "arguments to `delete` not supported, should be hash and string, got=\(args[0].type().rawValue), \(args[1].type().rawValue)")
+			}
+		}),
+	"set":			// set(hash, key, value) -> Null (nothing to return)
+		Object_t.Builtin(function: { args in
+			guard args.count == 3 else {
+				return Object_t.Error(message: "wrong number of arguments. got=\(args.count), want=3")
+			}
+			switch (args[0], args[1], args[2]) {
+			case let (hash, key, value) as (Object_t.Hash, Object_t.string, Object):
+				hash.pairs[key.hashKey()] = Object_t.HashPair(key: key, value: value)
+			default:
+				return Object_t.Error(message: "arguments to `set` not supported, should be hash, string and Object,  got=\(args[0].type().rawValue), \(args[1].type().rawValue), \(args[2].type().rawValue)")
+			}
+			return Object_t.Null()
+		}),
+	"int":			// int(string) -> Int
+		Object_t.Builtin(function: { args in
+			guard args.count == 1 else {
+				return Object_t.Error(message: "wrong number of arguments. got=\(args.count), want=1")
+			}
+			switch args[0] {
+			case let arg as Object_t.string:
+				guard let number = Int64(arg.value) else {
+					return Object_t.Error(message: "\(arg.value) cannot convert to an integer")
+				}
+				return Object_t.Integer(value: number)
+			default:
+				return Object_t.Error(message: "argument to `keys` not supported, should be string, got=\(args[0].type().rawValue)")
+			}
+		}),
+	"string": 		// string(object) -> String
+		Object_t.Builtin(function: { args in
+			guard args.count == 1 else {
+				return Object_t.Error(message: "wrong number of arguments. got=\(args.count), want=1")
+			}
+			return Object_t.string(value: args[0].inspect())
+		}),
     "first":
         Object_t.Builtin(function: { args in
             guard args.count == 1 else {

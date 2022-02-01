@@ -161,9 +161,13 @@ struct Object_t {
         let value: Object
     }
     
-    struct Hash: Object {
-        let pairs: [HashKey: HashPair]
+    class Hash: Object {
+        var pairs: [HashKey: HashPair]
         
+		init(pairs: [HashKey: HashPair]) {
+			self.pairs = pairs
+		}
+		
         func type() -> ObjectType {
             .hash_obj
         }
