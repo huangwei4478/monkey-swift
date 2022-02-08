@@ -491,6 +491,18 @@ triangle
 			return
 		}
 	}
+	
+	func testLinkList01() {
+		let input = #"""
+class Linklist{}
+let node = Linklist()
+node.value = 100
+node.value
+"""#
+		
+		let evaluated = testEval(input: input)
+		let _ = testIntegerObject(object: evaluated, expected: 100)
+	}
     
     private func testEval(input: String) -> Object {
         let lexer = Lexer(input: input)
