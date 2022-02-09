@@ -249,6 +249,20 @@ public struct Ast {
             return token.literal
         }
     }
+	
+	struct NullLiteral: Expression {
+		let token: Token				// the .NULL token
+		
+		func expressionNode() {}
+		
+		func tokenLiteral() -> String {
+			return token.literal
+		}
+		
+		func string() -> String {
+			return token.literal
+		}
+	}
     
     struct BlockStatement: Statement {
         let token: Token                    // the { token

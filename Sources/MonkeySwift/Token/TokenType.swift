@@ -58,6 +58,7 @@ public enum TokenType: String {
     case LET = "LET"
     case TRUE = "TRUE"
     case FALSE = "FALSE"
+	case NULL = "NULL"
     case IF = "IF"
     case ELSE = "ELSE"
     case RETURN = "RETURN"
@@ -70,6 +71,7 @@ public enum TokenType: String {
         "let": .LET,
         "true": .TRUE,
         "false": .FALSE,
+		"null": .NULL,
         "if": .IF,
         "else": .ELSE,
         "return": .RETURN,

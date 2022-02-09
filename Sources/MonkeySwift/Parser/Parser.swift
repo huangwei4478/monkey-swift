@@ -76,6 +76,7 @@ final class Parser {
         self.registerPrefix(tokenType: .MINUS, fn: parsePrefixExpression)
         self.registerPrefix(tokenType: .TRUE, fn: parseBoolean)
         self.registerPrefix(tokenType: .FALSE, fn: parseBoolean)
+		self.registerPrefix(tokenType: .NULL, fn: parseNullLiteral)
         self.registerPrefix(tokenType: .LPAREN, fn: parseGroupedExpression)
         self.registerPrefix(tokenType: .IF, fn: parseIfExpression)
 		self.registerPrefix(tokenType: .WHILE, fn: parseWhileExpression)
@@ -408,6 +409,10 @@ final class Parser {
     private func parseBoolean() -> Expression {
         return Ast.Boolean(token: curToken, value: curTokenIs(.TRUE))
     }
+	
+	private func parseNullLiteral() -> Expression {
+		return Ast.NullLiteral(token: curToken)
+	}
     
     private func parseGroupedExpression() -> Expression {
         nextToken()

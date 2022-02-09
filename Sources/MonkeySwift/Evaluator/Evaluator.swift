@@ -125,6 +125,9 @@ struct Evaluator {
 		
         case let node as Ast.Boolean:
             return nativeBoolToBooleanObject(input: node.value)
+			
+		case _ as Ast.NullLiteral:
+			return Object_t.Null()
             
         case let node as Ast.PrefixExpression:
             guard let right = eval(node.right, environment) else { return nil }
