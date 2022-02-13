@@ -35,9 +35,106 @@ SUBCOMMANDS:
   See 'MonkeySwift help <subcommand>' for detailed help.
 ```
 
-
-
 supported syntax: 
+
+```javascript
+// leetcode 206, reverse a link list
+// https://leetcode-cn.com/problems/reverse-linked-list/
+class ListNode{}
+
+function ListNodeFactory(value, next) {
+	let node = ListNode();
+	node.value = value;
+	node.next = next;
+	return node;
+}
+
+let linklist = ListNodeFactory(1, ListNodeFactory(2, ListNodeFactory(3, ListNodeFactory(4, null))))
+
+function reverseLinkList(head) {
+	if (head == null) { return null; }
+
+	let prev = null;
+	let curr = head;
+
+	while (curr != null) {
+		let next = curr.next;
+		curr.next = prev;
+		prev = curr;
+		curr = next;
+	}
+
+	return prev;
+}
+
+function printLinkList(head) {
+	let curr = head;
+	while (curr != null) {
+		puts(curr.value);
+		curr = curr.next;
+	}
+}
+
+puts("original link list")
+printLinkList(linklist)
+puts("--------------------")
+puts("reverse a link list")
+printLinkList(reverseLinkList(linklist))
+
+/*
+output:
+
+original link list
+1
+2
+3
+4
+--------------------
+reverse a link list
+4
+3
+2
+1
+null
+
+*/
+
+```
+
+```javascript
+// [easy] leetcode 704, binary search
+// https://leetcode-cn.com/problems/binary-search
+
+let nums = [-1,0,3,5,9,12];
+let target = 9;
+let expectedOutput = 4;
+
+function binarySearch(array, target) {
+	let n = len(array);
+
+	// find target in [l ... r)
+	let l = 0;
+	let r = n;
+	let mid = 0;
+	while (l < r) {						// when l == r, [l ... r) is an empty set
+		mid = (l + r) / 2;
+		if (nums[mid] == target) {
+			return mid;
+		}
+
+		if (target > nums[mid]) {
+			l = mid + 1;				// target is in [mid + 1 ... r)
+		} else {
+			r = mid;					// target is in [l ... mid)
+		}
+	}
+
+	return -1;
+}
+
+puts(binarySearch(nums, target) == expectedOutput);   // output 'True'
+
+```
 
 ```javascript
 // Leetcode 1, twoSum.mk

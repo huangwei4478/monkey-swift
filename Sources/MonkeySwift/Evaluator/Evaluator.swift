@@ -104,7 +104,7 @@ struct Evaluator {
 			}
 			
 			guard let instance = left as? Object_t.Instance else {
-				return Object_t.Error(message: "only instances have properties")
+				return Object_t.Error(message: "only instances have properties, got=\(type(of: left))")
 			}
 			
 			return instance.get(token: node.token)
@@ -116,7 +116,7 @@ struct Evaluator {
 			}
 			
 			guard let instance = left as? Object_t.Instance else {
-				return Object_t.Error(message: "only instances have properties")
+				return Object_t.Error(message: "only instances have properties, got=\(type(of: left))")
 			}
 			
 			guard let value = eval(node.value, environment) else { return nil }

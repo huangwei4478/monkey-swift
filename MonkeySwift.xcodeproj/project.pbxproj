@@ -158,14 +158,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0E50BAAE27A6E219004F3F56 /* test-recursive.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = "test-recursive.mk"; sourceTree = "<group>"; };
-		0E50BAAF27A7E3B0004F3F56 /* test-function-definition */ = {isa = PBXFileReference; lastKnownFileType = text; path = "test-function-definition"; sourceTree = "<group>"; };
-		0E8BC54B278AD51B00FC7065 /* twoSum.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = twoSum.mk; sourceTree = "<group>"; };
-		0E8BC54C278AD51B00FC7065 /* fibonacci.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = fibonacci.mk; sourceTree = "<group>"; };
-		0E8BC54D278AD51B00FC7065 /* adder.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = adder.mk; sourceTree = "<group>"; };
-		0E8BC54E278AD51B00FC7065 /* helloworld.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = helloworld.mk; sourceTree = "<group>"; };
-		0E8BC54F278AD51B00FC7065 /* array_and_dictionary.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = array_and_dictionary.mk; sourceTree = "<group>"; };
-		0E8BC550278AD51B00FC7065 /* mapper.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = mapper.mk; sourceTree = "<group>"; };
 		0EB1D587278A9D9D00DD0EA9 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		0EB1D589278A9D9D00DD0EA9 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		0EB1D58C278A9D9E00DD0EA9 /* OpCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpCode.swift; sourceTree = "<group>"; };
@@ -188,7 +180,17 @@
 		0EB1D5B3278A9DDF00DD0EA9 /* ParserTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserTest.swift; sourceTree = "<group>"; };
 		0EB1D5B4278A9DDF00DD0EA9 /* CompileTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompileTest.swift; sourceTree = "<group>"; };
 		0EB1D5CA278AA56400DD0EA9 /* MonkeyScript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonkeyScript.swift; sourceTree = "<group>"; };
-		0ED69FD627A53075008B5D77 /* max.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = max.mk; sourceTree = "<group>"; };
+		0EC44E9827B94B1400A4DC7C /* test-function-definition */ = {isa = PBXFileReference; lastKnownFileType = text; path = "test-function-definition"; sourceTree = "<group>"; };
+		0EC44E9927B94B1400A4DC7C /* twoSum.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = twoSum.mk; sourceTree = "<group>"; };
+		0EC44E9A27B94B1400A4DC7C /* array_and_dictionary.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = array_and_dictionary.mk; sourceTree = "<group>"; };
+		0EC44E9B27B94B1500A4DC7C /* mapper.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = mapper.mk; sourceTree = "<group>"; };
+		0EC44E9C27B94B1500A4DC7C /* test-recursive.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = "test-recursive.mk"; sourceTree = "<group>"; };
+		0EC44E9D27B94B1500A4DC7C /* fibonacci.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = fibonacci.mk; sourceTree = "<group>"; };
+		0EC44E9E27B94B1500A4DC7C /* adder.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = adder.mk; sourceTree = "<group>"; };
+		0EC44E9F27B94B1500A4DC7C /* leetcode-206-reverse-link-list.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = "leetcode-206-reverse-link-list.mk"; sourceTree = "<group>"; };
+		0EC44EA027B94B1500A4DC7C /* helloworld.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = helloworld.mk; sourceTree = "<group>"; };
+		0EC44EA127B94B1500A4DC7C /* max.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = max.mk; sourceTree = "<group>"; };
+		0EC44EA227B94B1500A4DC7C /* leetcode-704-binary-search.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = "leetcode-704-binary-search.mk"; sourceTree = "<group>"; };
 		"MonkeySwift::MonkeySwift::Product" /* MonkeySwift */ = {isa = PBXFileReference; lastKnownFileType = text; path = MonkeySwift; sourceTree = BUILT_PRODUCTS_DIR; };
 		"MonkeySwift::MonkeySwiftTests::Product" /* MonkeySwiftTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = MonkeySwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_17 /* BashCompletionsGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BashCompletionsGenerator.swift; sourceTree = "<group>"; };
@@ -276,15 +278,17 @@
 		0E8BC54A278AD51B00FC7065 /* Scripts */ = {
 			isa = PBXGroup;
 			children = (
-				0E8BC54B278AD51B00FC7065 /* twoSum.mk */,
-				0E50BAAF27A7E3B0004F3F56 /* test-function-definition */,
-				0E50BAAE27A6E219004F3F56 /* test-recursive.mk */,
-				0E8BC54C278AD51B00FC7065 /* fibonacci.mk */,
-				0E8BC54D278AD51B00FC7065 /* adder.mk */,
-				0E8BC54E278AD51B00FC7065 /* helloworld.mk */,
-				0E8BC54F278AD51B00FC7065 /* array_and_dictionary.mk */,
-				0E8BC550278AD51B00FC7065 /* mapper.mk */,
-				0ED69FD627A53075008B5D77 /* max.mk */,
+				0EC44E9E27B94B1500A4DC7C /* adder.mk */,
+				0EC44E9A27B94B1400A4DC7C /* array_and_dictionary.mk */,
+				0EC44E9D27B94B1500A4DC7C /* fibonacci.mk */,
+				0EC44EA027B94B1500A4DC7C /* helloworld.mk */,
+				0EC44E9F27B94B1500A4DC7C /* leetcode-206-reverse-link-list.mk */,
+				0EC44EA227B94B1500A4DC7C /* leetcode-704-binary-search.mk */,
+				0EC44E9B27B94B1500A4DC7C /* mapper.mk */,
+				0EC44EA127B94B1500A4DC7C /* max.mk */,
+				0EC44E9827B94B1400A4DC7C /* test-function-definition */,
+				0EC44E9C27B94B1500A4DC7C /* test-recursive.mk */,
+				0EC44E9927B94B1400A4DC7C /* twoSum.mk */,
 			);
 			path = Scripts;
 			sourceTree = "<group>";
